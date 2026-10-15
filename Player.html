@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FAMILY-DEMON | Player</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090909;color:#fff;font-family:Arial,sans-serif}
+header{padding:20px;background:#111;border-bottom:2px solid #ff2638}
+h1{margin:0;color:#ff2638;font-size:23px}
+header p{color:#999;font-size:12px;margin-bottom:0}
+main{max-width:650px;margin:auto;padding:16px}
+.card{background:#151515;border:1px solid #333;border-radius:12px;padding:18px;margin-bottom:15px}
+h2{font-size:17px;margin-top:0}
+input{width:100%;padding:13px;border:1px solid #444;border-radius:8px;background:#080808;color:white;margin:8px 0 12px}
+button{border:0;border-radius:8px;padding:12px;background:#ff2638;color:white;font-weight:bold;cursor:pointer}
+.full{width:100%}
+.secondary{background:#303030;margin:3px}
+.notice{font-size:12px;line-height:1.7;color:#ffc5ca;background:#241518;padding:12px;border-radius:8px;margin-bottom:15px}
+.hidden{display:none}
+.info{font-size:13px;line-height:2;color:#ccc;overflow-wrap:anywhere}
+.status{font-weight:bold;color:#8dffae}
+footer{text-align:center;color:#666;font-size:11px;padding:20px}
+</style>
+</head>
+<body>
+<header>
+<h1>🔥 FAMILY-DEMON</h1>
+<p>PLAYER ACCESS PANEL</p>
+</header>
+<main>
+<div class="notice">
+โหมดทดลอง: หน้านี้อ่านคีย์จากพื้นที่จัดเก็บของเบราว์เซอร์เท่านั้น
+ยังไม่ใช่ระบบออนไลน์ และยังใช้คีย์ข้ามเครื่องไม่ได้
+</div>
+
+<section id="login" class="card">
+<h2>เข้าสู่ระบบผู้เล่น</h2>
+<label for="key">กรอกคีย์ของคุณ</label>
+<input id="key" placeholder="DEMON-XXXX-XXXX" autocomplete="off">
+<button class="full" onclick="login()">เข้าสู่ระบบ</button>
+<p id="error" style="color:#ff6471;font-size:13px"></p>
+</section>
+
+<section id="dashboard" class="hidden">
+<div class="card">
+<h2>สถานะบัญชี</h2>
+<div class="info">
+คีย์: <span id="keyValue"></span><br>
+สถานะ: <span id="status" class="status"></span><br>
+ระยะเวลา: <span id="duration"></span><br>
+วันหมดอายุ: <span id="expiry"></span><br>
+อุปกรณ์: <span id="device"></span>
+</div>
+</div>
+
+<div class="card">
+<h2>เมนูผู้เล่น</h2>
+<button class="secondary" onclick="showInfo()">ข้อมูลบัญชี</button>
+<button class="secondary" onclick="showHistory()">ประวัติการเข้า</button>
+<button class="secondary" onclick="refreshStatus()">ตรวจสอบคีย์</button>
+<button class="secondary" onclick="logout()">ออกจากระบบ</button>
+<div id="extra" class="info" style="margin-top:12px"></div>
+</div>
+</section>
+</main>
+<footer>FAMILY-DEMON · PLAYER DEMO</footer>
+
+<script>
+const STORE="family_demon_admin_demo_v1";
+const SESSION="family_demon_player_key";
+let currentKey=null;
+
+function getKeys(){
+ try{
+  const data=JSON.parse(localStorage.getItem(STORE)||"[]");
+  return Array.isArray(data)?data:[];
+ }catch(e){return []}
+}
+function getDevice(){
+ const ua=navigator.userAgent;
+ if(/Android/i.test(ua))return "Android";
+ if(/iPhone|iPad|iPod/i.test(ua))return "iOS";
+ if(/Windows/i.test(ua))return "Windows";
+ if(/Mac OS/i.test(ua))return "macOS";
+ return "อุปกรณ์ที่ไม่ทราบชนิด";
+}
+function fmt(t){
+ return t?new Date(t).toLocaleString("th-TH"):"ยังไม่เริ่มนับเวลา";
+}
+function login(){
+ const value=document.getElementById("key").value.trim().toUpperCase();
+ const keys=getKeys();
+ const item=keys.find(k=>k.key.toUpperCase()===value);
+ if(!item){
+  document.getElementById("error").textContent="ไม่พบคีย์นี้ในพื้นที่จัดเก็บของเบราว์เซอร์เดียวกัน";
+  return;
+ }
+ if(item.status==="suspended"){
+  document.getElementById("error").textContent="คีย์นี้ถูกระงับ";
+  return;
+ }
+ if(item.expiresAt&&Date.now()>item.expiresAt){
+  document.getElementById("error").textContent="คีย์นี้หมดอายุแล้ว";
+  return;
+ }
+ if(!item.activatedAt){
+  item.activatedAt=Date.now();
+  item.expiresAt=Date.now()+Number(item.days)*86400000;
+  const index=keys.findIndex(k=>k.id===item.id);
+  keys[index]=item;
+  localStorage.setItem(STORE,JSON.stringify(keys));
+ }
+ currentKey=item.key;
+ sessionStorage.setItem(SESSION,currentKey);
+ const history=JSON.parse(localStorage.getItem("family_demon_player_history")||"[]");
+ history.unshift({key:currentKey,time:Date.now(),device:getDevice()});
+ localStorage.setItem("family_demon_player_history",JSON.stringify(history.slice(0,30)));
+ document.getElementById("error").textContent="";
+ render();
+}
+function render(){
+ const value=currentKey||sessionStorage.getItem(SESSION);
+ if(!value)return;
+ const item=getKeys().find(k=>k.key===value);
+ if(!item){
+  logout();
+  alert("ไม่พบคีย์ในเบราว์เซอร์นี้");
+  return;
+ }
+ if(item.status==="suspended"||(item.expiresAt&&Date.now()>item.expiresAt)){
+  logout();
+  alert("คีย์ถูกระงับหรือหมดอายุแล้ว");
+  return;
+ }
+ currentKey=value;
+ document.getElementById("login").classList.add("hidden");
+ document.getElementById("dashboard").classList.remove("hidden");
+ document.getElementById("keyValue").textContent=item.key;
+ document.getElementById("status").textContent="พร้อมใช้งาน";
+ document.getElementById("duration").textContent=item.days+" วัน";
+ document.getElementById("expiry").textContent=fmt(item.expiresAt);
+ document.getElementById("device").textContent=getDevice();
+}
+function refreshStatus(){render();alert("ตรวจสอบข้อมูลทดลองแล้ว")}
+function showInfo(){
+ const item=getKeys().find(k=>k.key===currentKey);
+ document.getElementById("extra").textContent=item?
+ "ชื่อลูกค้า: "+item.customer+" | จำนวนอุปกรณ์ที่กำหนด: "+item.deviceLimit:
+ "ไม่พบข้อมูล";
+}
+function showHistory(){
+ try{
+  const h=JSON.parse(localStorage.getItem("family_demon_player_history")||"[]");
+  document.getElementById("extra").textContent=h.length?
+   h.map(x=>fmt(x.time)+" — "+x.device).join(" | "):
+   "ยังไม่มีประวัติ";
+ }catch(e){document.getElementById("extra").textContent="อ่านประวัติไม่ได้"}
+}
+function logout(){
+ currentKey=null;
+ sessionStorage.removeItem(SESSION);
+ document.getElementById("dashboard").classList.add("hidden");
+ document.getElementById("login").classList.remove("hidden");
+ document.getElementById("key").value="";
+ document.getElementById("extra").textContent="";
+}
+const saved=sessionStorage.getItem(SESSION);
+if(saved){currentKey=saved;render()}
+</script>
+</body>
+</html>
