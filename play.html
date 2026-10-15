@@ -8,743 +8,502 @@
 
 <style>
 :root{
- --bg:#0b0809;
- --panel:#171113;
- --red:#ff253f;
- --muted:#a99a9c;
- --green:#39d98a;
- --border:#382326;
+  --bg:#0b0809;
+  --panel:#171113;
+  --red:#ff253f;
+  --text:#fff;
+  --muted:#a99a9c;
+  --green:#36e59b;
+  --border:#382025;
 }
 *{box-sizing:border-box}
 body{
- margin:0;
- background:radial-gradient(ellipse at top,#310d15,transparent 55%),var(--bg);
- color:white;
- font-family:system-ui,sans-serif;
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,"Noto Sans Thai",sans-serif;
+  min-height:100vh;
 }
 button,input{font:inherit}
 button{
- border:1px solid #65212d;
- border-radius:12px;
- padding:13px;
- background:#291419;
- color:white;
- font-weight:750;
- cursor:pointer;
+  border:0;cursor:pointer;color:white;
+  transition:transform .18s,filter .18s,box-shadow .18s;
 }
-button:disabled{opacity:.5}
-input:not([type=checkbox]){
- width:100%;
- padding:14px;
- border-radius:10px;
- border:1px solid var(--border);
- background:#0d090a;
- color:white;
+button:active{transform:scale(.97);filter:brightness(1.2)}
+button:disabled{opacity:.45;cursor:not-allowed}
+header{
+  padding:23px 16px;text-align:center;
+  background:linear-gradient(135deg,#280811,#100607);
+  border-bottom:1px solid var(--border);
 }
+.logo{font-weight:900;font-size:25px;letter-spacing:2px}
+.logo span{color:var(--red)}
+.subtitle{font-size:11px;color:var(--muted);margin-top:7px;letter-spacing:2px}
+main{width:min(460px,100%);margin:auto;padding:18px 14px 35px}
+.card{
+  background:linear-gradient(145deg,#1b1215,#120d0f);
+  border:1px solid var(--border);
+  border-radius:17px;padding:19px;margin-bottom:15px;
+  box-shadow:0 8px 25px #0005;
+}
+h2{font-size:17px;margin:0 0 16px}
+p{font-size:13px;line-height:1.7;color:var(--muted)}
+label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}
+input{
+  width:100%;padding:14px;border-radius:10px;
+  background:#0d090a;color:white;
+  border:1px solid #493038;outline:none;
+}
+input:focus{border-color:var(--red);box-shadow:0 0 0 2px #ff253f22}
+.btn{
+  width:100%;padding:13px;border-radius:10px;
+  font-weight:bold;margin-top:12px;
+  background:linear-gradient(100deg,#b90e28,#ff253f);
+}
+.btn.secondary{background:#28161b;border:1px solid #59303a}
+.btn.green{background:#087e52}
+.status{
+  padding:11px;border-radius:9px;background:#0d090a;
+  font-size:12px;line-height:1.7;overflow-wrap:anywhere;
+}
+.ok{color:var(--green)}
+.bad{color:#ff6175}
+.muted{color:var(--muted)}
 .hidden{display:none!important}
-.wrap{max-width:600px;margin:auto;padding:17px}
-.logo{font-size:25px;font-weight:950;color:var(--red);letter-spacing:1px}
-.muted{font-size:12px;color:var(--muted);line-height:1.6}
-.card,.box{
- background:var(--panel);
- border:1px solid var(--border);
- border-radius:16px;
- padding:18px;
- margin:14px 0;
+.page{animation:enter .28s ease both}
+@keyframes enter{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
 }
-h2{font-size:16px;margin:0 0 13px}
-label{display:block;margin:14px 0 7px;font-size:13px}
-.login{min-height:100vh;display:grid;place-items:center;padding:20px}
-.box{width:100%;max-width:420px;padding:24px}
-.center{text-align:center}
-.primary{background:var(--red);border-color:var(--red);width:100%;margin-top:12px}
-.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.badge{font-size:11px;padding:5px 9px;border-radius:20px;background:#352125}
-.green{color:var(--green)}
-.notice{
- margin-top:12px;padding:12px;border:1px solid var(--border);
- border-radius:10px;font-size:13px;line-height:1.7;overflow-wrap:anywhere
+.row{
+  display:flex;justify-content:space-between;gap:12px;
+  padding:11px 0;border-bottom:1px solid #ffffff0b;
+  font-size:12px;
 }
-.feature{
- display:flex;align-items:center;justify-content:space-between;
- gap:12px;padding:15px 0;border-bottom:1px solid var(--border)
+.row:last-child{border-bottom:0}
+.row span:first-child{color:var(--muted)}
+.row span:last-child{text-align:right;overflow-wrap:anywhere}
+.switchrow{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:13px 0;border-bottom:1px solid #ffffff0b;
+  font-size:13px;
 }
-.feature b{display:block;font-size:14px}
-.feature .muted{margin-top:4px}
 .switch{
- position:relative;width:48px;height:27px;flex-shrink:0;margin:0
+  appearance:none;width:43px;height:24px;background:#49343a;
+  border-radius:20px;position:relative;cursor:pointer;
+  transition:background .2s;flex-shrink:0;
 }
-.switch input{display:none}
-.slider{
- position:absolute;inset:0;background:#494044;border-radius:30px;cursor:pointer
+.switch:before{
+  content:"";position:absolute;width:18px;height:18px;
+  background:white;left:3px;top:3px;border-radius:50%;
+  transition:transform .2s;
 }
-.slider:before{
- content:"";position:absolute;width:21px;height:21px;left:3px;top:3px;
- background:white;border-radius:50%;transition:.2s
-}
-.switch input:checked+.slider{background:#d00025}
-.switch input:checked+.slider:before{transform:translateX(21px)}
-.run{
- width:100%;background:#143a29;border-color:#246b48;margin-top:10px
-}
+.switch:checked{background:var(--red)}
+.switch:checked:before{transform:translateX(19px)}
 .spinner{
- width:32px;height:32px;border:4px solid #493037;border-top-color:var(--red);
- border-radius:50%;animation:spin .7s linear infinite;margin:14px auto
+  display:inline-block;width:15px;height:15px;
+  border:2px solid #ffffff55;border-top-color:white;
+  border-radius:50%;animation:spin .7s linear infinite;
+  vertical-align:middle;margin-right:7px;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
-.statusbox{
- padding:13px;border-radius:10px;background:#103322;
- border:1px solid #236647;color:var(--green);margin-top:12px;font-size:13px
+.progress{
+  height:5px;background:#392027;border-radius:10px;
+  overflow:hidden;margin-top:13px;
 }
-.profile{
- background:#0d090a;border:1px solid var(--border);border-radius:10px;
- padding:12px;font-size:11px;white-space:pre-wrap;overflow-wrap:anywhere;
- max-height:280px;overflow:auto;color:#ffc0ca
+.progress div{
+  height:100%;width:0;background:var(--red);
+  transition:width .2s linear;
 }
-.smallbtn{width:100%;margin-top:8px}
+footer{text-align:center;font-size:11px;color:#75676a;padding:10px}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important}
+}
 </style>
 </head>
-
 <body>
 
-<!-- LOGIN -->
-<section id="login" class="login">
- <div class="box">
-  <div class="center">
-   <div class="logo">FAMILY-DEMON</div>
-   <p class="muted">PLAYER CONTROL SYSTEM</p>
-  </div>
+<header>
+  <div class="logo">FAMILY<span>-DEMON</span></div>
+  <div class="subtitle">PLAYER CONTROL PANEL</div>
+</header>
 
-  <label for="key">คีย์เข้าใช้งาน</label>
-  <input id="key" placeholder="กรอกคีย์ของคุณ" autocomplete="off">
-
-  <button class="primary" id="loginBtn">เข้าสู่ระบบ</button>
-  <div id="loginMsg" class="notice hidden"></div>
-
-  <p class="muted">
-   ระบบตัวอย่างนี้ตรวจคีย์จาก localStorage ในเบราว์เซอร์เดียวกัน
-   ไม่ใช่ระบบยืนยันคีย์ผ่านเซิร์ฟเวอร์ส่วนกลาง
-  </p>
- </div>
-</section>
-
-<!-- PERMISSION -->
-<section id="permission" class="hidden">
- <main class="wrap">
-  <div class="logo">FAMILY-DEMON</div>
-
-  <div class="card">
-   <h2>📱 การอนุญาตเข้าถึงข้อมูล</h2>
-
-   <p class="muted">
-    Android และเบราว์เซอร์มีข้อจำกัดในการเข้าถึงพื้นที่จัดเก็บข้อมูล
-    เว็บไซต์ไม่สามารถปลดล็อกหรือเข้าถึงไฟล์ส่วนตัวทั้งหมดของแอปอื่น
-    รวมถึงไฟล์ภายใน Free Fire ได้โดยอัตโนมัติ
-   </p>
-
-   <button id="permissionBtn" class="primary">
-    ยืนยันและดำเนินการต่อ
-   </button>
-
-   <button id="folderBtn" class="smallbtn">
-    อนุญาตเลือกโฟลเดอร์ที่รองรับ
-   </button>
-
-   <div id="permissionMsg" class="notice">
-    เมื่อดำเนินการต่อ ระบบจะตรวจสอบข้อมูลอุปกรณ์เท่าที่เบราว์เซอร์เปิดเผย
-    และขอความยินยอมก่อนตรวจสอบ IP ผ่านบริการภายนอก
-   </div>
-
-   <button id="logout1" style="width:100%;margin-top:8px">
-    ออกจากระบบ
-   </button>
-  </div>
- </main>
-</section>
-
-<!-- DASHBOARD -->
-<section id="dashboard" class="hidden">
- <main class="wrap">
-
-  <header class="row">
-   <div>
-    <div class="logo">FAMILY-DEMON</div>
-    <div class="muted">PLAYER DASHBOARD</div>
-   </div>
-   <span class="badge green">● เข้าสู่ระบบแล้ว</span>
-  </header>
-
-  <!-- ACCOUNT -->
-  <div class="card">
-   <h2>ข้อมูลบัญชี</h2>
-   <div class="muted">คีย์ของคุณ</div>
-   <div id="accountKey" style="font-weight:800;overflow-wrap:anywhere">-</div>
-   <p class="muted">อุปกรณ์: <span id="device">-</span></p>
-   <p class="muted">ระบบปฏิบัติการ: <span id="os">-</span></p>
-   <p class="muted">วันหมดอายุ: <span id="expiry">-</span></p>
-   <p class="muted">IP Address: <span id="ip">ยังไม่ได้ตรวจสอบ</span></p>
-   <p class="muted">รุ่นอุปกรณ์: <span id="model">ระบุได้เท่าที่เบราว์เซอร์เปิดเผย</span></p>
-  </div>
-
-  <!-- ORIGINAL FEATURES -->
-  <div class="card">
-   <h2>ฟังก์ชันผู้เล่น</h2>
-   <p class="muted">คงฟังก์ชันเดิมไว้</p>
-
-   <div class="feature">
-    <div>
-     <b>🎯 ดูดหัว 90%</b>
-     <div class="muted">โหมดจำลองหน้าจอ ไม่ควบคุมเกมจริง</div>
+<main>
+  <section id="loginPage" class="page">
+    <div class="card">
+      <h2>เข้าสู่ระบบ</h2>
+      <label for="keyInput">ACCESS KEY</label>
+      <input id="keyInput" placeholder="กรอกคีย์ของคุณ"
+        autocomplete="off" autocapitalize="characters">
+      <button id="loginBtn" class="btn">เข้าสู่ระบบ</button>
+      <div id="loginStatus" class="status hidden" style="margin-top:12px"></div>
     </div>
-    <label class="switch">
-     <input type="checkbox" class="featureSwitch" value="aim">
-     <span class="slider"></span>
-    </label>
-   </div>
+  </section>
 
-   <div class="feature">
-    <div>
-     <b>🛡️ กันแบน</b>
-     <div class="muted">โหมดแสดงผล ไม่สามารถรับประกันการป้องกันแบน</div>
+  <section id="permissionPage" class="page hidden">
+    <div class="card">
+      <h2>สิทธิ์เข้าถึงไฟล์เกม</h2>
+      <p>กรุณาเลือกโฟลเดอร์ DATA ของเกม เพื่อดำเนินการต่อ</p>
+      <div id="permissionStatus" class="status">
+        กรุณาตรวจสอบสิทธิ์การเข้าถึง
+      </div>
+      <button id="chooseFolderBtn" class="btn">เลือกโฟลเดอร์ DATA</button>
+      <button id="continueBtn" class="btn green" disabled>ดำเนินการต่อ</button>
+      <button class="btn secondary logoutBtn">ออกจากระบบ</button>
     </div>
-    <label class="switch">
-     <input type="checkbox" class="featureSwitch" value="ban">
-     <span class="slider"></span>
-    </label>
-   </div>
+  </section>
 
-   <div class="feature">
-    <div>
-     <b>⚫ กันดำ</b>
-     <div class="muted">โหมดจำลองหน้าจอ</div>
+  <section id="playerPage" class="page hidden">
+    <div class="card">
+      <h2>ข้อมูลบัญชี</h2>
+      <div class="row"><span>คีย์</span><span id="accountKey">—</span></div>
+      <div class="row"><span>สถานะ</span><span class="ok">เข้าสู่ระบบแล้ว</span></div>
+      <div class="row"><span>ระบบปฏิบัติการ</span><span id="osInfo">—</span></div>
+      <div class="row"><span>อุปกรณ์</span><span id="deviceInfo">—</span></div>
+      <div class="row"><span>เบราว์เซอร์</span><span id="browserInfo">—</span></div>
+      <div class="row"><span>IP Address</span><span id="ipInfo">กำลังตรวจสอบ</span></div>
+      <div class="row"><span>สิทธิ์ DATA</span><span id="folderInfo">ยังไม่เลือก</span></div>
     </div>
-    <label class="switch">
-     <input type="checkbox" class="featureSwitch" value="black">
-     <span class="slider"></span>
-    </label>
-   </div>
 
-   <!-- NEW DRAG FEATURE -->
-   <div class="feature">
-    <div>
-     <b>🔥 ลากง่าย</b>
-     <div class="muted">เปิดหรือปิดโปรไฟล์ในหน้าเว็บ</div>
+    <div class="card">
+      <h2>ตั้งค่าฟังก์ชัน</h2>
+      <div class="switchrow">
+        <span>ดูดหัว 90%</span>
+        <input class="switch featureSwitch" type="checkbox">
+      </div>
+      <div class="switchrow">
+        <span>กันแบน</span>
+        <input class="switch featureSwitch" type="checkbox">
+      </div>
+      <div class="switchrow">
+        <span>กันดำ</span>
+        <input class="switch featureSwitch" type="checkbox">
+      </div>
+
+      <button id="runBtn" class="btn">RUN</button>
+      <div id="runStatus" class="status hidden" style="margin-top:12px"></div>
+      <div class="progress"><div id="progressBar"></div></div>
+
+      <button id="gameBtn" class="btn secondary">เปิด Free Fire</button>
+      <button id="refreshBtn" class="btn secondary">รีเฟรชข้อมูล</button>
+      <button class="btn secondary logoutBtn">ออกจากระบบ</button>
     </div>
-    <label class="switch">
-     <input type="checkbox" id="dragToggle">
-     <span class="slider"></span>
-    </label>
-   </div>
+  </section>
 
-   <div class="feature">
-    <div>
-     <b>⚙️ ใช้โปรไฟล์ X / Y</b>
-     <div class="muted">จัดการค่าที่กำหนดไว้ใน JSON</div>
-    </div>
-    <label class="switch">
-     <input type="checkbox" id="xyToggle" checked>
-     <span class="slider"></span>
-    </label>
-   </div>
-
-   <div class="feature">
-    <div>
-     <b>🚀 โหมดประสิทธิภาพ</b>
-     <div class="muted">สถานะโปรไฟล์ภายในเว็บ</div>
-    </div>
-    <label class="switch">
-     <input type="checkbox" id="performanceToggle" checked>
-     <span class="slider"></span>
-    </label>
-   </div>
-
-   <div id="selected" class="notice">ยังไม่ได้เปิดฟังก์ชัน</div>
-
-   <button id="profileBtn" class="smallbtn">
-    ดูโปรไฟล์ลากง่าย
-   </button>
-
-   <pre id="profileOutput" class="profile hidden"></pre>
-
-   <button id="run" class="run">▶ รันฟังก์ชันที่เปิดไว้</button>
-
-   <div id="loading" class="hidden center">
-    <div class="spinner"></div>
-    <div>กำลังตรวจสอบ...</div>
-    <div id="countdown" class="muted">3</div>
-   </div>
-
-   <div id="runResult" class="hidden"></div>
-  </div>
-
-  <!-- GAME -->
-  <div class="card">
-   <h2>เข้าเกม</h2>
-   <p class="muted">
-    ปุ่มนี้จะลองเปิดแอป Free Fire หากอุปกรณ์รองรับ
-   </p>
-   <button id="gameBtn" class="primary">🎮 เข้าเกม Free Fire</button>
-   <div id="gameStatus" class="notice">พร้อมเปิดเกม</div>
-  </div>
-
-  <button id="logout2" style="width:100%;background:#65101d">
-   ออกจากระบบ
-  </button>
-
-  <p class="muted center">FAMILY-DEMON · PLAYER DEMO</p>
- </main>
-</section>
+  <footer>FAMILY-DEMON</footer>
+</main>
 
 <script>
 "use strict";
 
-const $ = id => document.getElementById(id);
+const API_BASE = "";
 const STORE = "family_demon_admin_demo_v1";
-const LOG_STORE = "family_demon_player_logs_v1";
-const SESSION_STORE = "family_demon_player_session_v1";
+const DB_NAME = "family_demon_player_db";
+const DB_STORE = "permissions";
+const PERMISSION_KEY = "freefire_data_folder";
 
 let currentKey = "";
-let currentKeyItem = null;
-let currentDeviceInfo = null;
-let folderPermission = "ยังไม่ได้เลือก";
+let folderHandle = null;
+let folderAuthorized = false;
 
-function getKeys(){
- try{
-  const value = JSON.parse(localStorage.getItem(STORE) || "[]");
-  return Array.isArray(value) ? value : [];
- }catch{
-  return [];
- }
-}
+const $ = id => document.getElementById(id);
 
-function show(id){
- $(id).classList.remove("hidden");
-}
-
-function hide(id){
- $(id).classList.add("hidden");
-}
-
-function loginError(message){
- $("loginMsg").textContent = message;
- $("loginMsg").className = "notice";
-}
-
-function getOS(){
- const ua = navigator.userAgent;
-
- if(/Android/i.test(ua)) return "Android";
- if(/iPhone|iPad|iPod/i.test(ua)) return "iOS";
- if(/Windows/i.test(ua)) return "Windows";
- if(/Mac OS X|Macintosh/i.test(ua)) return "macOS";
- if(/Linux/i.test(ua)) return "Linux";
-
- return "อุปกรณ์อื่น";
-}
-
-function getDevice(){
- const ua = navigator.userAgent;
-
- if(/OPPO|CPH\d+/i.test(ua)) return "OPPO (ตรวจพบจาก User-Agent)";
- if(/Samsung|SM-[A-Z0-9]+/i.test(ua)) return "Samsung (ตรวจพบจาก User-Agent)";
- if(/Xiaomi|Redmi|POCO/i.test(ua)) return "Xiaomi/Redmi/POCO (ตรวจพบจาก User-Agent)";
- if(/vivo/i.test(ua)) return "vivo (ตรวจพบจาก User-Agent)";
- if(/Huawei/i.test(ua)) return "Huawei (ตรวจพบจาก User-Agent)";
- if(/Pixel/i.test(ua)) return "Google Pixel (ตรวจพบจาก User-Agent)";
- if(/Android/i.test(ua)) return "Android (ไม่ทราบรุ่นแน่ชัด)";
- if(/iPhone/i.test(ua)) return "iPhone";
- if(/iPad/i.test(ua)) return "iPad";
-
- return "ไม่สามารถระบุรุ่นได้";
-}
-
-function getModel(){
- const ua = navigator.userAgent;
-
- const match = ua.match(/\b(CPH\d+|SM-[A-Z0-9]+|RMX\d+|V\d{4}|Pixel\s?[A-Za-z0-9]+)\b/i);
-
- return match
-  ? match[0]
-  : "เบราว์เซอร์ไม่เปิดเผยรุ่นอุปกรณ์";
-}
-
-function getDeviceInfo(){
- return {
-  device: getDevice(),
-  os: getOS(),
-  model: getModel(),
-  userAgent: navigator.userAgent,
-  language: navigator.language || "",
-  platform: navigator.platform || "",
-  screen: screen.width + "x" + screen.height,
-  time: new Date().toISOString()
- };
-}
-
-function getLogs(){
- try{
-  const data = JSON.parse(localStorage.getItem(LOG_STORE) || "[]");
-  return Array.isArray(data) ? data : [];
- }catch{
-  return [];
- }
-}
-
-function saveLoginLog(info){
- /*
-  บันทึกใน localStorage ของอุปกรณ์นี้เท่านั้น
-  แอดมินคนละเครื่องจะยังไม่เห็นจนกว่าจะมี backend
- */
- const logs = getLogs();
-
- logs.push({
-  key: currentKey,
-  device: info.device,
-  os: info.os,
-  model: info.model,
-  userAgent: info.userAgent,
-  ip: info.ip || null,
-  time: new Date().toISOString(),
-  folderPermission
- });
-
- try{
-  localStorage.setItem(LOG_STORE, JSON.stringify(logs.slice(-100)));
- }catch(error){
-  console.warn("ไม่สามารถบันทึกประวัติในเครื่องได้", error);
- }
-}
-
-async function lookupIP(){
- /*
-  IP จะถูกส่งคำขอไปยังบริการภายนอก
-  ต้องได้รับความยินยอมจากผู้ใช้ก่อน
- */
- try{
-  const response = await fetch("https://api.ipify.org?format=json", {
-   method: "GET",
-   cache: "no-store"
+function showPage(id){
+  ["loginPage","permissionPage","playerPage"].forEach(page=>{
+    $(page).classList.toggle("hidden",page!==id);
   });
+}
 
-  if(!response.ok) throw new Error("IP service unavailable");
+function message(id,text,type=""){
+  const el=$(id);
+  el.textContent=text;
+  el.className="status";
+  if(type)el.classList.add(type);
+}
 
-  const data = await response.json();
+function getLocalKeys(){
+  try{
+    const value=JSON.parse(localStorage.getItem(STORE)||"[]");
+    return Array.isArray(value)?value:[];
+  }catch{return []}
+}
 
-  if(typeof data.ip === "string"){
-   return data.ip.slice(0, 64);
-  }
- }catch(error){
-  console.warn("ตรวจสอบ IP ไม่สำเร็จ", error);
- }
+function checkLocalKey(key){
+  const item=getLocalKeys().find(x=>
+    String(x.key||"").trim().toUpperCase()===key.toUpperCase()
+  );
+  if(!item)return{ok:false,error:"ไม่พบคีย์ในระบบ"};
+  if(item.status==="suspended")return{ok:false,error:"คีย์ถูกระงับการใช้งาน"};
+  if(item.status==="expired")return{ok:false,error:"คีย์หมดอายุแล้ว"};
+  if(item.expiresAt&&Date.now()>Number(item.expiresAt))
+    return{ok:false,error:"คีย์หมดอายุแล้ว"};
+  if(item.status&&item.status!=="active")
+    return{ok:false,error:"คีย์ไม่สามารถใช้งานได้"};
+  return{ok:true,item};
+}
 
- return "ตรวจสอบไม่ได้";
+function openDB(){
+  return new Promise((resolve,reject)=>{
+    const req=indexedDB.open(DB_NAME,1);
+    req.onupgradeneeded=()=>req.result.createObjectStore(DB_STORE);
+    req.onsuccess=()=>resolve(req.result);
+    req.onerror=()=>reject(req.error);
+  });
+}
+
+async function saveHandle(handle){
+  const db=await openDB();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(DB_STORE,"readwrite");
+    tx.objectStore(DB_STORE).put(handle,PERMISSION_KEY);
+    tx.oncomplete=()=>resolve();
+    tx.onerror=()=>reject(tx.error);
+  });
+}
+
+async function loadHandle(){
+  const db=await openDB();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(DB_STORE,"readonly");
+    const req=tx.objectStore(DB_STORE).get(PERMISSION_KEY);
+    req.onsuccess=()=>resolve(req.result||null);
+    req.onerror=()=>reject(req.error);
+  });
+}
+
+async function checkFolderPermission(handle,request=false){
+  if(!handle)return false;
+  try{
+    let permission=await handle.queryPermission({mode:"read"});
+    if(permission!=="granted"&&request){
+      permission=await handle.requestPermission({mode:"read"});
+    }
+    return permission==="granted";
+  }catch{return false}
+}
+
+async function restorePermission(){
+  try{
+    folderHandle=await loadHandle();
+    folderAuthorized=await checkFolderPermission(folderHandle,false);
+    if(folderAuthorized){
+      $("folderInfo").textContent="อนุญาตแล้ว";
+      message("permissionStatus","สิทธิ์การเข้าถึงพร้อมใช้งาน","ok");
+    }
+    return folderAuthorized;
+  }catch{return false}
 }
 
 async function login(){
- const key = $("key").value.trim().toUpperCase();
+  const key=$("keyInput").value.trim();
+  if(!key){
+    message("loginStatus","กรุณากรอกคีย์","bad");
+    return;
+  }
 
- if(!key) return loginError("กรุณากรอกคีย์");
+  const btn=$("loginBtn");
+  btn.disabled=true;
+  btn.innerHTML='<span class="spinner"></span>กำลังตรวจสอบ';
+  $("loginStatus").classList.remove("hidden");
 
- const item = getKeys().find(
-  x => String(x.key || "").toUpperCase() === key
- );
+  try{
+    let result;
 
- if(!item) return loginError("ไม่พบคีย์ในเบราว์เซอร์นี้");
- if(item.status === "suspended") return loginError("คีย์นี้ถูกระงับ");
+    if(API_BASE){
+      const response=await fetch(API_BASE+"/api/keys/verify",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({key})
+      });
+      if(!response.ok)throw new Error("ตรวจสอบคีย์ไม่สำเร็จ");
+      result=await response.json();
+    }else{
+      result=checkLocalKey(key);
+    }
 
- if(item.expiresAt && Date.now() >= Number(item.expiresAt)){
-  return loginError("คีย์หมดอายุแล้ว");
- }
+    if(!result.ok){
+      message("loginStatus",result.error||"ไม่สามารถเข้าสู่ระบบได้","bad");
+      return;
+    }
 
- currentKey = key;
- currentKeyItem = item;
- currentDeviceInfo = getDeviceInfo();
+    currentKey=key;
+    $("accountKey").textContent=key;
 
- $("accountKey").textContent = key;
- $("device").textContent = currentDeviceInfo.device;
- $("os").textContent = currentDeviceInfo.os;
- $("model").textContent = currentDeviceInfo.model;
- $("expiry").textContent = item.expiresAt
-  ? new Date(Number(item.expiresAt)).toLocaleString("th-TH")
-  : "ไม่ระบุ";
-
- $("ip").textContent = "รอความยินยอมจากผู้ใช้";
-
- hide("login");
- show("permission");
+    const alreadyAuthorized=await restorePermission();
+    if(alreadyAuthorized){
+      showPage("playerPage");
+      await collectDeviceInfo();
+    }else{
+      showPage("permissionPage");
+    }
+  }catch(error){
+    message("loginStatus","ไม่สามารถเชื่อมต่อระบบตรวจสอบคีย์ได้","bad");
+  }finally{
+    btn.disabled=false;
+    btn.textContent="เข้าสู่ระบบ";
+  }
 }
 
-$("loginBtn").addEventListener("click", login);
-
-$("key").addEventListener("keydown", event => {
- if(event.key === "Enter") login();
+$("loginBtn").addEventListener("click",login);
+$("keyInput").addEventListener("keydown",e=>{
+  if(e.key==="Enter")login();
 });
 
-/*
-  ขอเลือกโฟลเดอร์เฉพาะเมื่อเบราว์เซอร์รองรับ
-  เว็บไม่สามารถข้ามข้อจำกัดของ Android หรือเปิดโฟลเดอร์เกม
-  ที่ระบบปฏิบัติการไม่อนุญาตได้
- */
-$("folderBtn").addEventListener("click", async () => {
- if(!window.showDirectoryPicker){
-  $("permissionMsg").textContent =
-   "เบราว์เซอร์นี้ไม่รองรับการเลือกโฟลเดอร์โดยตรง " +
-   "และเว็บไม่สามารถขอสิทธิ์เข้าถึงพื้นที่จัดเก็บทั้งหมดของมือถือได้";
-  return;
- }
+$("chooseFolderBtn").addEventListener("click",async()=>{
+  if(!window.showDirectoryPicker){
+    message("permissionStatus",
+      "เบราว์เซอร์นี้ไม่รองรับการเลือกโฟลเดอร์ กรุณาใช้เบราว์เซอร์ที่รองรับ","bad");
+    return;
+  }
 
- try{
-  const directory = await window.showDirectoryPicker({
-   mode: "read"
+  try{
+    const handle=await window.showDirectoryPicker({mode:"read"});
+    const granted=await checkFolderPermission(handle,true);
+
+    if(!granted){
+      message("permissionStatus","ยังไม่ได้รับสิทธิ์เข้าถึงโฟลเดอร์","bad");
+      return;
+    }
+
+    folderHandle=handle;
+    folderAuthorized=true;
+    await saveHandle(handle);
+
+    $("folderInfo").textContent="อนุญาตแล้ว";
+    $("continueBtn").disabled=false;
+    message("permissionStatus","อนุญาตเข้าถึงโฟลเดอร์แล้ว","ok");
+  }catch(error){
+    if(error.name!=="AbortError"){
+      message("permissionStatus","ไม่สามารถเข้าถึงโฟลเดอร์นี้ได้","bad");
+    }
+  }
+});
+
+$("continueBtn").addEventListener("click",async()=>{
+  if(!folderAuthorized){
+    message("permissionStatus","กรุณาอนุญาตเข้าถึงโฟลเดอร์ก่อน","bad");
+    return;
+  }
+
+  const granted=await checkFolderPermission(folderHandle,false);
+  if(!granted){
+    folderAuthorized=false;
+    $("continueBtn").disabled=true;
+    message("permissionStatus","สิทธิ์ถูกยกเลิก กรุณาอนุญาตใหม่","bad");
+    return;
+  }
+
+  showPage("playerPage");
+  await collectDeviceInfo();
+});
+
+function detectOS(){
+  const ua=navigator.userAgent;
+  if(/Android/i.test(ua))return"Android";
+  if(/iPhone|iPad|iPod/i.test(ua))return"iOS";
+  if(/Windows/i.test(ua))return"Windows";
+  if(/Mac OS/i.test(ua))return"macOS";
+  return"ไม่สามารถระบุได้";
+}
+
+function detectBrowser(){
+  const ua=navigator.userAgent;
+  if(/Edg\//i.test(ua))return"Microsoft Edge";
+  if(/OPR\//i.test(ua))return"Opera";
+  if(/Chrome\//i.test(ua))return"Chrome";
+  if(/Firefox\//i.test(ua))return"Firefox";
+  if(/Safari\//i.test(ua))return"Safari";
+  return"ไม่สามารถระบุได้";
+}
+
+function detectDevice(){
+  const ua=navigator.userAgent;
+  if(/OPPO/i.test(ua))return"OPPO";
+  if(/Samsung/i.test(ua))return"Samsung";
+  if(/Xiaomi|Redmi|POCO/i.test(ua))return"Xiaomi / Redmi / POCO";
+  if(/vivo/i.test(ua))return"vivo";
+  if(/HUAWEI/i.test(ua))return"Huawei";
+  if(/iPhone/i.test(ua))return"iPhone";
+  if(/Android/i.test(ua))return"อุปกรณ์ Android";
+  return"อุปกรณ์ที่เชื่อมต่อ";
+}
+
+async function collectDeviceInfo(){
+  $("osInfo").textContent=detectOS();
+  $("deviceInfo").textContent=detectDevice();
+  $("browserInfo").textContent=detectBrowser();
+
+  try{
+    const response=await fetch("https://api.ipify.org?format=json");
+    if(!response.ok)throw new Error();
+    const data=await response.json();
+    $("ipInfo").textContent=data.ip||"ไม่สามารถตรวจสอบได้";
+  }catch{
+    $("ipInfo").textContent="ไม่สามารถตรวจสอบได้";
+  }
+
+  if(API_BASE){
+    try{
+      await fetch(API_BASE+"/api/players/login",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          key:currentKey,
+          os:detectOS(),
+          device:detectDevice(),
+          browser:detectBrowser()
+        })
+      });
+    }catch{
+      console.error("ไม่สามารถบันทึกประวัติการเข้าสู่ระบบได้");
+    }
+  }
+}
+
+$("refreshBtn").addEventListener("click",collectDeviceInfo);
+
+$("runBtn").addEventListener("click",()=>{
+  const btn=$("runBtn");
+  const status=$("runStatus");
+  const bar=$("progressBar");
+
+  btn.disabled=true;
+  status.classList.remove("hidden");
+  status.textContent="กำลังดำเนินการ";
+  bar.style.width="0%";
+
+  let progress=0;
+  const timer=setInterval(()=>{
+    progress+=10;
+    bar.style.width=progress+"%";
+
+    if(progress>=100){
+      clearInterval(timer);
+      btn.disabled=false;
+      status.textContent="การประมวลผลหน้าจอเสร็จสิ้น";
+    }
+  },300);
+});
+
+$("gameBtn").addEventListener("click",()=>{
+  window.location.href=
+    "intent://#Intent;package=com.dts.freefireth;scheme=freefire;end";
+});
+
+document.querySelectorAll(".featureSwitch").forEach(toggle=>{
+  toggle.addEventListener("change",()=>{
+    toggle.setAttribute("aria-checked",String(toggle.checked));
   });
-
-  folderPermission = "ผู้ใช้เลือกโฟลเดอร์แล้ว: " + directory.name;
-
-  $("permissionMsg").textContent =
-   "เลือกโฟลเดอร์แล้ว: " + directory.name +
-   " ทั้งนี้ สิทธิ์นี้ใช้ได้เฉพาะโฟลเดอร์ที่ผู้ใช้เลือกและสิ่งที่เบราว์เซอร์อนุญาต";
-
- }catch(error){
-  if(error.name !== "AbortError"){
-   $("permissionMsg").textContent =
-    "ไม่สามารถเลือกโฟลเดอร์ได้: " + error.message;
-  }
- }
 });
 
-$("permissionBtn").addEventListener("click", async () => {
- const accepted = confirm(
-  "ระบบจะตรวจข้อมูลอุปกรณ์เท่าที่เบราว์เซอร์เปิดเผย " +
-  "และส่งคำขอไปยังบริการภายนอกเพื่อตรวจสอบ IP Address " +
-  "ยินยอมดำเนินการหรือไม่?"
- );
-
- if(!accepted) return;
-
- $("permissionBtn").disabled = true;
- $("permissionMsg").textContent = "กำลังตรวจสอบข้อมูลอุปกรณ์...";
-
- currentDeviceInfo = getDeviceInfo();
-
- $("device").textContent = currentDeviceInfo.device;
- $("os").textContent = currentDeviceInfo.os;
- $("model").textContent = currentDeviceInfo.model;
-
- $("permissionMsg").textContent = "กำลังตรวจสอบ IP Address...";
-
- const ip = await lookupIP();
-
- currentDeviceInfo.ip = ip;
- $("ip").textContent = ip;
-
- saveLoginLog(currentDeviceInfo);
-
- try{
-  localStorage.setItem(SESSION_STORE, JSON.stringify({
-   key: currentKey,
-   device: currentDeviceInfo,
-   loginAt: new Date().toISOString()
-  }));
- }catch(error){
-  console.warn("บันทึกเซสชันไม่สำเร็จ", error);
- }
-
- $("permissionMsg").textContent =
-  "ตรวจสอบข้อมูลเสร็จแล้ว\n" +
-  "สถานะโฟลเดอร์: " + folderPermission + "\n" +
-  "IP: " + ip + "\n" +
-  "หมายเหตุ: ข้อมูลถูกบันทึกในเบราว์เซอร์เครื่องนี้";
-
- $("permissionBtn").disabled = false;
-
- hide("permission");
- show("dashboard");
+document.querySelectorAll(".logoutBtn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    currentKey="";
+    folderHandle=null;
+    folderAuthorized=false;
+    $("keyInput").value="";
+    $("continueBtn").disabled=true;
+    showPage("loginPage");
+  });
 });
-
-/* โปรไฟล์ JSON ที่ผู้ใช้ให้ไว้ */
-const dragProfile = {
- package: "Myproject",
- profile: "full_red_xy_detailed",
-
- axis: {
-  x: {
-   sensitivity: 92,
-   acceleration: 85,
-   micro_adjust: 70,
-   max_speed: 100,
-   deadzone: 2,
-   curve: "linear_aggressive"
-  },
-  y: {
-   sensitivity: 78,
-   acceleration: 70,
-   micro_adjust: 60,
-   max_speed: 90,
-   deadzone: 3,
-   curve: "progressive_bias"
-  }
- },
-
- input: {
-  response: "fast",
-  sample_rate: "high",
-  smoothing: "off",
-  jitter_reduction: "low",
-  latency: "low"
- },
-
- stability: {
-  vertical: 65,
-  horizontal: 55,
-  recoil_compensation: "medium",
-  drag_control: "high"
- },
-
- performance: {
-  fps_mode: "performance",
-  frame_pacing: "stable",
-  vsync: false,
-  thermal_limit: "balanced"
- },
-
- behavior: {
-  flick_boost: "high",
-  tracking_speed: "fast",
-  snap_intensity: "medium_high",
-  precision_mode: false
- }
-};
-
-$("profileBtn").addEventListener("click", () => {
- $("profileOutput").textContent = JSON.stringify(dragProfile, null, 2);
- $("profileOutput").classList.toggle("hidden");
-});
-
-const names = {
- aim: "ดูดหัว 90%",
- ban: "กันแบน",
- black: "กันดำ",
- drag: "ลากง่าย",
- xy: "โปรไฟล์ X / Y",
- performance: "โหมดประสิทธิภาพ"
-};
-
-function selectedFeatures(){
- const result = [
-  ...document.querySelectorAll(".featureSwitch:checked")
- ].map(input => names[input.value]);
-
- if($("dragToggle").checked) result.push(names.drag);
- if($("xyToggle").checked && $("dragToggle").checked) result.push(names.xy);
- if($("performanceToggle").checked) result.push(names.performance);
-
- return result;
-}
-
-function updateSelected(){
- const list = selectedFeatures();
-
- $("selected").textContent = list.length
-  ? "เปิดอยู่: " + list.join(" · ")
-  : "ยังไม่ได้เปิดฟังก์ชัน";
-
- hide("runResult");
-}
-
-document.querySelectorAll(".featureSwitch").forEach(input => {
- input.addEventListener("change", updateSelected);
-});
-
-["dragToggle", "xyToggle", "performanceToggle"].forEach(id => {
- $(id).addEventListener("change", updateSelected);
-});
-
-/* RUN: ตรวจสถานะโปรไฟล์และแสดงผลหลัง 3 วินาที */
-$("run").addEventListener("click", () => {
- const list = selectedFeatures();
-
- if(!list.length){
-  $("selected").textContent = "กรุณาเปิดอย่างน้อย 1 ฟังก์ชัน";
-  return;
- }
-
- const button = $("run");
- button.disabled = true;
-
- show("loading");
- hide("runResult");
-
- let seconds = 3;
- $("countdown").textContent = seconds;
-
- const timer = setInterval(() => {
-  seconds--;
-  $("countdown").textContent = seconds;
-
-  if(seconds <= 0){
-   clearInterval(timer);
-
-   hide("loading");
-   show("runResult");
-
-   $("runResult").className = "statusbox";
-   $("runResult").textContent =
-    "✓ ตรวจสอบหน้าเว็บเสร็จแล้ว: " + list.join(" · ") +
-    "\nโปรไฟล์ JSON ถูกเก็บไว้ในหน้าเว็บ แต่ไม่ได้เปลี่ยนค่าภายในเกมโดยตรง";
-
-   button.disabled = false;
-  }
- }, 1000);
-});
-
-/* เปิดเกม */
-$("gameBtn").addEventListener("click", () => {
- $("gameStatus").textContent = "กำลังลองเปิด Free Fire...";
-
- window.location.href =
-  "intent://#Intent;package=com.dts.freefireth;scheme=freefire;end";
-
- setTimeout(() => {
-  $("gameStatus").textContent =
-   "หากเกมไม่เปิด ให้เปิดเกมจากโทรศัพท์โดยตรง";
- }, 1500);
-});
-
-/* ออกจากระบบ */
-function logout(){
- $("key").value = "";
-
- document.querySelectorAll(".featureSwitch").forEach(input => {
-  input.checked = false;
- });
-
- $("dragToggle").checked = false;
- $("xyToggle").checked = true;
- $("performanceToggle").checked = true;
-
- currentKey = "";
- currentKeyItem = null;
- currentDeviceInfo = null;
-
- hide("dashboard");
- hide("permission");
- show("login");
-
- $("loginMsg").textContent = "";
- $("loginMsg").className = "notice hidden";
-
- $("selected").textContent = "ยังไม่ได้เปิดฟังก์ชัน";
-
- $("run").disabled = false;
- $("permissionBtn").disabled = false;
-
- hide("loading");
- hide("runResult");
- hide("profileOutput");
-}
-
-$("logout1").addEventListener("click", logout);
-$("logout2").addEventListener("click", logout);
 </script>
 </body>
 </html>
