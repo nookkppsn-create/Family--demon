@@ -6,17 +6,17 @@
 <meta name="theme-color" content="#100607">
 <title>FAMILY-DEMON | PLAYER</title>
 <style>
-:root{--bg:#0b0809;--panel:#171113;--red:#ff253f;--text:#fff;--muted:#a99a9c;--green:#39d98a;--border:#382326}
+:root{--bg:#0b0809;--panel:#171113;--red:#ff253f;--muted:#a99a9c;--green:#39d98a;--border:#382326}
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at top,#310d15,transparent 55%),var(--bg);color:var(--text);font-family:system-ui,sans-serif}
+body{margin:0;background:radial-gradient(ellipse at top,#310d15,transparent 55%),var(--bg);color:white;font-family:system-ui,sans-serif}
 button,input{font:inherit}
 button{border:1px solid #65212d;border-radius:12px;padding:13px;background:#291419;color:white;font-weight:750;cursor:pointer}
 button:disabled{opacity:.5}
-input{width:100%;padding:14px;border-radius:10px;border:1px solid var(--border);background:#0d090a;color:white}
+input:not([type=checkbox]){width:100%;padding:14px;border-radius:10px;border:1px solid var(--border);background:#0d090a;color:white}
 .hidden{display:none!important}
 .wrap{max-width:650px;margin:auto;padding:17px}
 .logo{font-size:25px;font-weight:950;color:var(--red);letter-spacing:1px}
-.muted{font-size:12px;color:var(--muted)}
+.muted{font-size:12px;color:var(--muted);line-height:1.6}
 .card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:17px;margin:14px 0}
 h2{font-size:16px;margin:0 0 13px}
 label{display:block;margin:14px 0 7px;font-size:13px}
@@ -24,25 +24,31 @@ label{display:block;margin:14px 0 7px;font-size:13px}
 .box{width:100%;max-width:420px;padding:24px;background:var(--panel);border:1px solid var(--border);border-radius:20px}
 .center{text-align:center}
 .primary{background:var(--red);border-color:var(--red);width:100%;margin-top:12px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.feature{min-height:90px;text-align:left;background:linear-gradient(145deg,#30151b,#130e0f)}
-.feature b{display:block;margin-bottom:8px}
 .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .badge{font-size:11px;padding:5px 9px;border-radius:20px;background:#352125}
 .green{color:var(--green)}
 .red{color:#ff7c8b}
-.notice{margin-top:12px;padding:12px;border:1px solid var(--border);border-radius:10px;font-size:13px;overflow-wrap:anywhere}
+.notice{margin-top:12px;padding:12px;border:1px solid var(--border);border-radius:10px;font-size:13px;line-height:1.7;overflow-wrap:anywhere}
+.feature{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 0;border-bottom:1px solid var(--border)}
+.feature:last-of-type{border-bottom:0}
+.feature b{display:block;font-size:14px}
+.feature .muted{margin-top:4px}
+.switch{position:relative;width:48px;height:27px;flex-shrink:0;margin:0}
+.switch input{display:none}
+.slider{position:absolute;inset:0;background:#494044;border-radius:30px;cursor:pointer;transition:.2s}
+.slider:before{content:"";position:absolute;width:21px;height:21px;left:3px;top:3px;background:white;border-radius:50%;transition:.2s}
+.switch input:checked+.slider{background:#d00025}
+.switch input:checked+.slider:before{transform:translateX(21px)}
 .run{width:100%;background:#143a29;border-color:#246b48;margin-top:10px}
-.spinner{width:35px;height:35px;border:4px solid #493037;border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:14px auto}
+.game{width:100%;margin-top:10px;background:linear-gradient(100deg,#ff253f,#8a0017);border-color:#ff253f;font-size:16px}
+.spinner{width:32px;height:32px;border:4px solid #493037;border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:14px auto}
 @keyframes spin{to{transform:rotate(360deg)}}
-.statusbox{padding:13px;border-radius:10px;background:#103322;border:1px solid #236647;color:var(--green);margin-top:12px}
-input[type=checkbox]{width:auto;accent-color:var(--red)}
-@media(max-width:380px){.wrap{padding:11px}.grid{gap:7px}.logo{font-size:22px}}
+.statusbox{padding:13px;border-radius:10px;background:#103322;border:1px solid #236647;color:var(--green);margin-top:12px;font-size:13px}
+@media(max-width:380px){.wrap{padding:11px}.logo{font-size:22px}}
 </style>
 </head>
 <body>
 
-<!-- 1. เข้าสู่ระบบ -->
 <section id="login" class="login">
  <div class="box">
   <div class="center">
@@ -53,35 +59,27 @@ input[type=checkbox]{width:auto;accent-color:var(--red)}
   <input id="key" placeholder="กรอกคีย์ของคุณ" autocomplete="off">
   <button class="primary" id="loginBtn">เข้าสู่ระบบ</button>
   <div id="loginMsg" class="notice hidden"></div>
-  <p class="muted">ระบบทดลองต้องใช้คีย์ที่สร้างในแอดมินบนข้อมูลเบราว์เซอร์เดียวกัน</p>
+  <p class="muted">ต้องใช้คีย์ที่มีอยู่ในระบบแอดมินที่เชื่อมต่อกัน</p>
  </div>
 </section>
 
-<!-- 2. ขออนุญาตเลือกไฟล์ -->
 <section id="permission" class="hidden">
  <main class="wrap">
   <div class="logo">FAMILY-DEMON</div>
   <div class="card">
-   <h2>📱 การอนุญาตเข้าถึงไฟล์</h2>
-   <p class="muted">เลือกไฟล์ที่ต้องการให้หน้าเว็บเข้าถึง การเลือกนี้ไม่ใช่สิทธิ์เข้าถึงไฟล์ทั้งหมดของ Android</p>
-   <button id="chooseFiles" class="primary">เลือกไฟล์จากโทรศัพท์</button>
-   <input id="files" type="file" multiple class="hidden">
-   <div id="fileResult" class="notice">ยังไม่ได้เลือกไฟล์</div>
-   <label><input type="checkbox" id="agree"> ฉันเข้าใจและยินยอมให้เว็บเข้าถึงไฟล์ที่เลือก</label>
-   <button id="continue" class="primary" disabled>ยืนยันและไปต่อ</button>
+   <h2>📱 การอนุญาตเข้าถึงข้อมูล</h2>
+   <p class="muted">หน้านี้ไม่ใช้การเลือกไฟล์ เว็บจะไม่สามารถขอสิทธิ์เข้าถึงไฟล์ทั้งหมดของ Android ได้โดยตรง หากต้องการสิทธิ์ระดับระบบ ต้องใช้แอป Android ที่รองรับ</p>
+   <button id="permissionBtn" class="primary">ยืนยันและดำเนินการต่อ</button>
+   <div id="permissionMsg" class="notice">กรุณาอ่านรายละเอียดก่อนดำเนินการ</div>
    <button id="logout1" style="width:100%;margin-top:8px">ออกจากระบบ</button>
   </div>
  </main>
 </section>
 
-<!-- 3. หน้าฟังก์ชัน -->
 <section id="dashboard" class="hidden">
  <main class="wrap">
   <header class="row">
-   <div>
-    <div class="logo">FAMILY-DEMON</div>
-    <div class="muted">PLAYER DASHBOARD</div>
-   </div>
+   <div><div class="logo">FAMILY-DEMON</div><div class="muted">PLAYER DASHBOARD</div></div>
    <span class="badge green">● เข้าสู่ระบบแล้ว</span>
   </header>
 
@@ -94,33 +92,40 @@ input[type=checkbox]{width:auto;accent-color:var(--red)}
   </div>
 
   <div class="card">
-   <h2>เลือกฟังก์ชัน</h2>
-   <div class="grid">
-    <button class="feature" data-f="aim">
-     <b>🎯 ดูดหัว 90%</b><span class="muted">ระบบช่วยเล็ง · เมนูทดลอง</span>
-    </button>
-    <button class="feature" data-f="ban">
-     <b>🛡️ กันแบน</b><span class="muted">สถานะการป้องกัน · เมนูทดลอง</span>
-    </button>
-    <button class="feature" data-f="black">
-     <b>⚫ กันดำ</b><span class="muted">การแสดงผล · เมนูทดลอง</span>
-    </button>
+   <h2>ฟังก์ชันผู้เล่น</h2>
+   <p class="muted">เปิดหรือปิดแต่ละรายการได้จากสวิตช์ด้านขวา สามารถเปิดพร้อมกันหลายรายการได้</p>
+
+   <div class="feature">
+    <div><b>🎯 ดูดหัว 90%</b><div class="muted">เมนูช่วยเล็ง · โหมดหน้าจอทดลอง</div></div>
+    <label class="switch"><input type="checkbox" class="featureSwitch" value="aim"><span class="slider"></span></label>
    </div>
-   <div id="selected" class="notice">เลือกฟังก์ชันที่ต้องการ</div>
-   <button id="toggle" class="primary" disabled>เปิดฟังก์ชัน</button>
-   <button id="run" class="run" disabled>▶ รันฟังก์ชัน</button>
+
+   <div class="feature">
+    <div><b>🛡️ กันแบน</b><div class="muted">เมนูสถานะ · ไม่รับประกันการป้องกันแบน</div></div>
+    <label class="switch"><input type="checkbox" class="featureSwitch" value="ban"><span class="slider"></span></label>
+   </div>
+
+   <div class="feature">
+    <div><b>⚫ กันดำ</b><div class="muted">เมนูการแสดงผล · โหมดหน้าจอทดลอง</div></div>
+    <label class="switch"><input type="checkbox" class="featureSwitch" value="black"><span class="slider"></span></label>
+   </div>
+
+   <div id="selected" class="notice">ยังไม่ได้เปิดฟังก์ชัน</div>
+   <button id="run" class="run">▶ รันฟังก์ชันที่เปิดไว้</button>
+
    <div id="loading" class="hidden center">
     <div class="spinner"></div>
     <div>กำลังตรวจสอบ...</div>
-    <div class="muted">โปรดรอสักครู่</div>
+    <div id="countdown" class="muted">3</div>
    </div>
    <div id="runResult" class="hidden"></div>
   </div>
 
   <div class="card">
-   <h2>สถานะระบบ</h2>
-   <p class="muted">สถานะสีเขียวหมายถึงการทดสอบหน้าเว็บสำเร็จ ไม่ได้ยืนยันว่าฟังก์ชันทำงานในเกมจริง</p>
-   <div id="systemStatus" class="notice">พร้อมทดสอบ</div>
+   <h2>เข้าเกม</h2>
+   <p class="muted">กดปุ่มเพื่อพยายามเปิด Free Fire ที่ติดตั้งในโทรศัพท์ ฟังก์ชันบนหน้าเว็บนี้ไม่ได้ถูกนำเข้าไปทำงานภายในเกม</p>
+   <button id="gameBtn" class="game">🎮 เข้าเกม Free Fire</button>
+   <div id="gameStatus" class="notice">พร้อมเปิดเกม</div>
   </div>
 
   <button id="logout2" style="width:100%;background:#65101d">ออกจากระบบ</button>
@@ -132,12 +137,12 @@ input[type=checkbox]{width:auto;accent-color:var(--red)}
 "use strict";
 const $=id=>document.getElementById(id);
 const STORE="family_demon_admin_demo_v1";
-let currentKey="", selected="", enabled=false, chosenFiles=false;
+let currentKey="";
 
-function keys(){
+function getKeys(){
  try{
-  const a=JSON.parse(localStorage.getItem(STORE)||"[]");
-  return Array.isArray(a)?a:[];
+  const data=JSON.parse(localStorage.getItem(STORE)||"[]");
+  return Array.isArray(data)?data:[];
  }catch(e){return []}
 }
 function device(){
@@ -149,92 +154,95 @@ function device(){
 }
 function show(id){$(id).classList.remove("hidden")}
 function hide(id){$(id).classList.add("hidden")}
-function loginError(t){
- $("loginMsg").textContent=t;
+function loginError(message){
+ $("loginMsg").textContent=message;
  $("loginMsg").className="notice red";
 }
 function login(){
  const key=$("key").value.trim().toUpperCase();
  if(!key)return loginError("กรุณากรอกคีย์");
- const k=keys().find(x=>x.key===key);
- if(!k)return loginError("ไม่พบคีย์ในข้อมูลเบราว์เซอร์นี้");
- if(k.status==="suspended")return loginError("คีย์ถูกระงับ");
- if(k.activatedAt&&k.expiresAt&&Date.now()>=k.expiresAt)
+ const item=getKeys().find(x=>String(x.key||"").toUpperCase()===key);
+ if(!item)return loginError("ไม่พบคีย์ในข้อมูลเบราว์เซอร์นี้");
+ if(item.status==="suspended")return loginError("此คีย์ถูกระงับ");
+ if(item.activatedAt&&item.expiresAt&&Date.now()>=Number(item.expiresAt))
   return loginError("คีย์หมดอายุแล้ว");
 
  currentKey=key;
  $("accountKey").textContent=key;
  $("device").textContent=device();
- $("expiry").textContent=k.expiresAt?
-  new Date(k.expiresAt).toLocaleString("th-TH"):"ยังไม่เริ่มนับอายุ";
+ $("expiry").textContent=item.expiresAt?
+  new Date(Number(item.expiresAt)).toLocaleString("th-TH"):"ไม่ระบุ";
  hide("login");show("permission");
 }
 $("loginBtn").onclick=login;
 $("key").addEventListener("keydown",e=>{if(e.key==="Enter")login()});
 
-$("chooseFiles").onclick=()=>$("files").click();
-$("files").onchange=()=>{
- const list=[...$("files").files];
- chosenFiles=list.length>0;
- $("fileResult").textContent=chosenFiles?
-  "เลือกแล้ว "+list.length+" ไฟล์: "+list.map(f=>f.name).join(", "):
-  "ยังไม่ได้เลือกไฟล์";
- updatePermission();
-};
-$("agree").onchange=updatePermission;
-function updatePermission(){
- $("continue").disabled=!(chosenFiles&&$("agree").checked);
-}
-$("continue").onclick=()=>{
+$("permissionBtn").onclick=()=>{
+ const ok=confirm("หน้าเว็บไม่สามารถขอสิทธิ์เข้าถึงไฟล์ทั้งหมดของ Android ได้โดยตรง ต้องการเข้าสู่หน้า Player ต่อหรือไม่?");
+ if(!ok)return;
+ $("permissionMsg").textContent="ยืนยันแล้ว";
  hide("permission");show("dashboard");
- $("systemStatus").textContent="หน้าเว็บพร้อมทำงาน";
 };
+
+function selectedFeatures(){
+ const names={aim:"ดูดหัว 90%",ban:"กันแบน",black:"กันดำ"};
+ return [...document.querySelectorAll(".featureSwitch:checked")].map(x=>names[x.value]);
+}
+document.querySelectorAll(".featureSwitch").forEach(input=>{
+ input.addEventListener("change",()=>{
+  const list=selectedFeatures();
+  $("selected").textContent=list.length?
+   "เปิดอยู่: "+list.join(" · "):"ยังไม่ได้เปิดฟังก์ชัน";
+  hide("runResult");
+ });
+});
+
+$("run").onclick=()=>{
+ const list=selectedFeatures();
+ if(!list.length){
+  $("selected").textContent="กรุณาเปิดฟังก์ชันอย่างน้อย 1 รายการ";
+  return;
+ }
+ $("run").disabled=true;
+ show("loading");hide("runResult");
+ let seconds=3;
+ $("countdown").textContent=seconds;
+ $("systemStatus")?.textContent;
+ const timer=setInterval(()=>{
+  seconds--;
+  $("countdown").textContent=seconds;
+  if(seconds<=0){
+   clearInterval(timer);
+   hide("loading");show("runResult");
+   $("runResult").className="statusbox";
+   $("runResult").textContent="✓ ทดสอบหน้าเว็บสำเร็จ: "+list.join(" · ");
+   $("run").disabled=false;
+  }
+ },1000);
+};
+
+$("gameBtn").onclick=()=>{
+ $("gameStatus").textContent="กำลังพยายามเปิด Free Fire...";
+ const intent="intent://#Intent;package=com.dts.freefireth;scheme=freefire;end";
+ window.location.href=intent;
+ setTimeout(()=>{
+  $("gameStatus").textContent="ถ้าเกมไม่เปิด อุปกรณ์หรือเบราว์เซอร์อาจไม่รองรับการเปิดผ่านลิงก์นี้";
+ },1500);
+};
+
 function logout(){
- currentKey="";selected="";enabled=false;
- $("key").value="";$("agree").checked=false;
- $("files").value="";chosenFiles=false;
+ currentKey="";
+ $("key").value="";
+ document.querySelectorAll(".featureSwitch").forEach(x=>x.checked=false);
  hide("dashboard");hide("permission");show("login");
- $("toggle").textContent="เปิดฟังก์ชัน";
- $("toggle").disabled=true;$("run").disabled=true;
- $("selected").textContent="เลือกฟังก์ชันที่ต้องการ";
- hide("runResult");
+ $("loginMsg").textContent="";
+ $("loginMsg").className="notice hidden";
+ $("selected").textContent="ยังไม่ได้เปิดฟังก์ชัน";
+ $("run").disabled=false;
+ hide("loading");hide("runResult");
 }
 $("logout1").onclick=logout;
 $("logout2").onclick=logout;
-
-document.querySelectorAll("[data-f]").forEach(btn=>{
- btn.onclick=()=>{
-  selected=btn.dataset.f;enabled=false;
-  document.querySelectorAll("[data-f]").forEach(b=>{
-   b.style.borderColor=b===btn?"#ff253f":"#65212d";
-  });
-  $("selected").textContent="เลือกแล้ว: "+btn.querySelector("b").textContent;
-  $("toggle").disabled=false;$("run").disabled=true;
-  $("toggle").textContent="เปิดฟังก์ชัน";
-  hide("runResult");
- };
-});
-$("toggle").onclick=()=>{
- enabled=!enabled;
- $("toggle").textContent=enabled?"ปิดฟังก์ชัน":"เปิดฟังก์ชัน";
- $("run").disabled=!enabled;
- $("selected").textContent=enabled?
-  "เปิดเมนูแล้ว · พร้อมทดสอบ":"ปิดเมนูแล้ว";
- hide("runResult");
-};
-$("run").onclick=()=>{
- if(!selected||!enabled)return;
- $("run").disabled=true;show("loading");hide("runResult");
- $("systemStatus").textContent="กำลังตรวจสอบ...";
- setTimeout(()=>{
-  hide("loading");show("runResult");
-  $("runResult").className="statusbox";
-  $("runResult").textContent="✓ ทดสอบหน้าเว็บสำเร็จ — เมนูพร้อมใช้งาน";
-  $("systemStatus").textContent="✓ ใช้งานได้ในโหมดทดลอง";
-  $("systemStatus").className="statusbox";
-  $("run").disabled=false;
- },3000);
-};
 </script>
 </body>
 </html>
