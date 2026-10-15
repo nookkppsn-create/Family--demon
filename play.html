@@ -2,474 +2,290 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#100607">
-<title>FAMILY-DEMON | Player</title>
+<title>FAMILY-DEMON | PLAYER</title>
 
 <style>
 :root{
-  --bg:#0b0809;
-  --panel:#171113;
-  --panel2:#211719;
-  --red:#ff253f;
-  --text:#f6eeee;
-  --muted:#a99a9c;
-  --green:#39d98a;
-  --yellow:#ffca62;
-  --border:#382326;
+ --bg:#0b0809;
+ --panel:#171113;
+ --red:#ff253f;
+ --text:#f6eeee;
+ --muted:#a99a9c;
+ --green:#39d98a;
+ --border:#382326;
 }
 *{box-sizing:border-box}
 body{
-  margin:0;
-  background:radial-gradient(ellipse at top,#310d15 0,transparent 50%),var(--bg);
-  color:var(--text);
-  font-family:system-ui,sans-serif;
+ margin:0;background:radial-gradient(ellipse at top,#310d15,transparent 55%),var(--bg);
+ color:var(--text);font-family:system-ui,sans-serif;
 }
 button,input{font:inherit}
 button{
-  cursor:pointer;
-  border:0;
-  border-radius:10px;
-  padding:12px 15px;
-  background:var(--red);
-  color:white;
-  font-weight:750;
+ border:1px solid #65212d;border-radius:12px;
+ padding:13px;background:#291419;color:white;
+ font-weight:750;cursor:pointer;
 }
+button:active{transform:scale(.98)}
 input{
-  width:100%;
-  padding:13px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:#0e0a0b;
-  color:white;
-  outline:none;
+ width:100%;padding:14px;border-radius:10px;
+ border:1px solid var(--border);background:#0d090a;color:white;
 }
-input:focus{border-color:var(--red)}
 .hidden{display:none!important}
-.muted{color:var(--muted);font-size:13px}
-.logo{
-  font-size:27px;
-  font-weight:950;
-  letter-spacing:1px;
-  color:var(--red);
+.wrap{max-width:650px;margin:auto;padding:18px}
+.logo{font-size:27px;font-weight:950;color:var(--red);letter-spacing:1px}
+.muted{font-size:12px;color:var(--muted)}
+.card{
+ background:var(--panel);border:1px solid var(--border);
+ border-radius:16px;padding:17px;margin:14px 0;
 }
+h2{font-size:16px;margin:0 0 14px}
+label{display:block;margin:14px 0 7px;font-size:13px}
 .login{
-  min-height:100vh;
-  display:grid;
-  place-items:center;
-  padding:20px;
+ min-height:100vh;display:grid;place-items:center;padding:20px;
 }
-.login-card{
-  width:100%;
-  max-width:420px;
-  padding:25px;
-  border:1px solid var(--border);
-  background:var(--panel);
-  border-radius:20px;
-  box-shadow:0 0 40px #ff253f12;
+.loginbox{
+ width:100%;max-width:420px;padding:25px;
+ background:var(--panel);border:1px solid var(--border);
+ border-radius:20px;
 }
 .center{text-align:center}
-.subtitle{margin:8px 0 24px;color:var(--muted);font-size:12px}
-label{display:block;margin:14px 0 7px;font-size:13px}
-.btn-block{width:100%;margin-top:15px}
+.primary{background:var(--red);border-color:var(--red);width:100%;margin-top:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.feature{
+ min-height:100px;text-align:left;padding:14px;
+ background:linear-gradient(145deg,#261317,#130e0f);
+}
+.feature b{display:block;font-size:15px;margin-bottom:9px}
+.status{color:var(--green);font-size:12px}
 .notice{
-  padding:12px;
-  border:1px solid var(--border);
-  background:var(--panel2);
-  border-radius:10px;
-  margin-top:13px;
-  font-size:13px;
-  overflow-wrap:anywhere;
+ margin-top:12px;padding:12px;border-radius:10px;
+ border:1px solid var(--border);font-size:13px;overflow-wrap:anywhere;
 }
-.notice.error{border-color:#8e2435;color:#ff9ba7}
-.notice.success{border-color:#236647;color:#8ef0bb}
-.demo{
-  display:inline-block;
-  margin-top:15px;
-  color:var(--yellow);
-  border:1px solid #725522;
-  border-radius:8px;
-  padding:6px 9px;
-  font-size:11px;
-}
-.app{max-width:900px;margin:auto;padding:18px}
-.header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  flex-wrap:wrap;
-  padding:15px 0 20px;
-}
-.badge{
-  display:inline-block;
-  border-radius:30px;
-  padding:6px 10px;
-  font-size:12px;
-  background:#342125;
-}
-.badge.online{background:#103c2a;color:var(--green)}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
-}
-.card{
-  padding:17px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:14px;
-  margin-bottom:13px;
-  min-width:0;
-}
-.card h2{font-size:17px;margin:0 0 13px}
-.value{font-size:19px;font-weight:850;overflow-wrap:anywhere}
-.menu{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px;
-}
-.menu button{
-  min-height:65px;
-  background:#241518;
-  border:1px solid #503038;
-}
-.menu button:active{background:#50151f}
-.secondary{
-  background:#342125;
-  border:1px solid #503038;
-}
-.danger{background:#690e1c;border:1px solid #a51b31}
-.history-item{
-  padding:12px 0;
-  border-bottom:1px solid var(--border);
-  font-size:13px;
-}
-.history-item:last-child{border-bottom:0}
-.footer{text-align:center;padding:20px;color:var(--muted);font-size:12px}
-@media(max-width:500px){
-  .app{padding:12px}
-  .grid{gap:8px}
-  .card{padding:13px}
-  .logo{font-size:23px}
+.danger{background:#65101d}
+@media(max-width:380px){
+ .wrap{padding:12px}.grid{gap:7px}.logo{font-size:23px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- หน้ากรอกคีย์ -->
+<!-- LOGIN -->
 <section id="loginScreen" class="login">
-  <div class="login-card">
-    <div class="center">
-      <div class="logo">FAMILY-DEMON</div>
-      <div class="subtitle">PLAYER CONTROL PANEL</div>
-    </div>
-
-    <label for="playerKey">คีย์เข้าใช้งาน</label>
-    <input id="playerKey" placeholder="DEMON-XXXX-XXXX"
-      autocomplete="off" autocapitalize="characters">
-
-    <button id="loginBtn" class="btn-block">ตรวจสอบคีย์ทดลอง</button>
-
-    <div id="loginMessage" class="notice hidden"></div>
-
-    <div class="center">
-      <span class="demo">DEMO MODE</span>
-    </div>
-
-    <p class="muted">
-      เวอร์ชันทดลองนี้ตรวจสอบคีย์จากข้อมูลในเบราว์เซอร์เครื่องเดียวกัน
-      ยังไม่ใช่ระบบตรวจสอบคีย์ออนไลน์
-    </p>
+ <div class="loginbox">
+  <div class="center">
+   <div class="logo">FAMILY-DEMON</div>
+   <p class="muted">PLAYER CONTROL SYSTEM</p>
   </div>
+
+  <label for="keyInput">คีย์เข้าใช้งาน</label>
+  <input id="keyInput" placeholder="กรอกคีย์ของคุณ"
+   autocomplete="off" autocapitalize="characters">
+
+  <button id="loginBtn" class="primary">เข้าสู่ระบบ</button>
+  <div id="loginMsg" class="notice hidden"></div>
+
+  <p class="muted">
+   ระบบคีย์ตัวอย่างนี้อ่านข้อมูลจากเบราว์เซอร์เครื่องเดียวกัน
+   ยังไม่ได้เชื่อมต่อแอดมินออนไลน์
+  </p>
+ </div>
 </section>
 
-<!-- หน้าหลักผู้เล่น -->
+<!-- PLAYER -->
 <section id="playerScreen" class="hidden">
-  <div class="app">
-    <header class="header">
-      <div>
-        <div class="logo">FAMILY-DEMON</div>
-        <div class="muted">PLAYER DASHBOARD</div>
-      </div>
-      <span class="badge online">● โหมดทดลอง</span>
-    </header>
+ <main class="wrap">
+  <header style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+   <div>
+    <div class="logo">FAMILY-DEMON</div>
+    <div class="muted">PLAYER DASHBOARD</div>
+   </div>
+   <span class="status">● ONLINE LOCAL</span>
+  </header>
 
-    <div class="card">
-      <h2>ข้อมูลบัญชี</h2>
-      <div class="muted">คีย์ของคุณ</div>
-      <div id="accountKey" class="value">-</div>
-      <br>
-      <div class="grid">
-        <div>
-          <div class="muted">สถานะคีย์</div>
-          <div id="accountStatus" class="value green">พร้อมใช้งาน</div>
-        </div>
-        <div>
-          <div class="muted">วันหมดอายุ</div>
-          <div id="accountExpiry" class="value">-</div>
-        </div>
-        <div>
-          <div class="muted">อุปกรณ์นี้</div>
-          <div id="deviceInfo" class="value">-</div>
-        </div>
-        <div>
-          <div class="muted">สถานะการเชื่อมต่อ</div>
-          <div class="value green">ในเครื่อง</div>
-        </div>
-      </div>
-    </div>
+  <section class="card">
+   <h2>ข้อมูลบัญชี</h2>
+   <div class="muted">คีย์ของคุณ</div>
+   <div id="accountKey" style="font-size:18px;font-weight:800;overflow-wrap:anywhere">-</div>
+   <p class="muted">สถานะ: <span class="status">เข้าสู่ระบบแล้ว</span></p>
+   <p class="muted">อุปกรณ์: <span id="device">-</span></p>
+   <p class="muted">วันหมดอายุ: <span id="expiry">-</span></p>
+  </section>
 
-    <div class="card">
-      <h2>เมนูผู้เล่น</h2>
-      <div class="menu">
-        <button data-action="profile">👤 ข้อมูลผู้เล่น</button>
-        <button data-action="history">📋 ประวัติใช้งาน</button>
-        <button data-action="device">📱 ข้อมูลอุปกรณ์</button>
-        <button data-action="status">🔎 ตรวจสอบสถานะคีย์</button>
-      </div>
-      <div id="actionResult" class="notice hidden"></div>
-    </div>
+  <section class="card">
+   <h2>ฟังก์ชันผู้เล่น</h2>
+   <div class="grid">
+    <button class="feature" data-feature="aim">
+     <b>🎯 ดูดหัว 90%</b>
+     <span class="muted">สถานะเมนู</span>
+    </button>
+    <button class="feature" data-feature="ban">
+     <b>🛡️ กันแบน</b>
+     <span class="muted">สถานะเมนู</span>
+    </button>
+    <button class="feature" data-feature="black">
+     <b>⚫ กันดำ</b>
+     <span class="muted">สถานะเมนู</span>
+    </button>
+    <button class="feature" id="fileBtn">
+     <b>📁 เลือกไฟล์</b>
+     <span class="muted">เลือกไฟล์ที่เว็บเข้าถึงได้</span>
+    </button>
+   </div>
+   <div id="featureMsg" class="notice hidden"></div>
+  </section>
 
-    <div class="card">
-      <h2>ข้อมูลระบบ</h2>
-      <p class="muted">
-        หน้านี้เป็นต้นแบบหน้าผู้เล่น เมนูเป็นการแสดงข้อมูลทดลองเท่านั้น
-        ยังไม่มีระบบเชื่อมต่อฐานข้อมูลกลางหรือคำสั่งที่ทำงานภายในเกม
-      </p>
-      <button id="logoutBtn" class="danger">ออกจากระบบ</button>
-    </div>
+  <section class="card">
+   <h2>สิทธิ์ไฟล์</h2>
+   <p class="muted">
+    เว็บนี้ไม่สามารถขอสิทธิ์เข้าถึงไฟล์ทั้งหมดของ Android โดยตรง
+    ปุ่มด้านล่างจะเปิดตัวเลือกไฟล์ หากเบราว์เซอร์รองรับ
+   </p>
+   <button id="pickBtn" class="primary">เลือกไฟล์จากโทรศัพท์</button>
+   <input id="fileInput" type="file" multiple class="hidden">
+   <div id="fileMsg" class="notice hidden"></div>
+  </section>
 
-    <div class="footer">FAMILY-DEMON · PLAYER DEMO</div>
-  </div>
+  <section class="card">
+   <h2>ประวัติการใช้งาน</h2>
+   <div id="history" class="muted">ยังไม่มีประวัติ</div>
+  </section>
+
+  <button id="logoutBtn" class="danger" style="width:100%">ออกจากระบบ</button>
+  <p class="muted center">FAMILY-DEMON · PLAYER</p>
+ </main>
 </section>
 
 <script>
 "use strict";
 
-const STORE="family_demon_admin_demo_v1";
-const HISTORY="family_demon_player_history_v1";
-
+const KEY_STORE="family_demon_admin_demo_v1";
+const HISTORY_STORE="family_demon_player_history_v1";
 const $=id=>document.getElementById(id);
-
 let currentKey=null;
 
-function getKeys(){
-  try{
-    const data=JSON.parse(localStorage.getItem(STORE)||"[]");
-    return Array.isArray(data)?data:[];
-  }catch(e){
-    return [];
-  }
-}
-
-function getHistory(){
-  try{
-    const data=JSON.parse(localStorage.getItem(HISTORY)||"[]");
-    return Array.isArray(data)?data:[];
-  }catch(e){
-    return [];
-  }
-}
-
-function saveHistory(items){
-  localStorage.setItem(HISTORY,JSON.stringify(items.slice(0,50)));
-}
-
-function addHistory(text){
-  const items=getHistory();
-  items.unshift({
-    action:text,
-    time:new Date().toISOString()
-  });
-  saveHistory(items);
-}
-
-function getStatus(k){
-  if(k.status==="suspended")return "suspended";
-  if(k.activatedAt&&k.expiresAt&&Date.now()>=k.expiresAt)return "expired";
-  return "active";
-}
-
-function showLoginError(text){
-  $("loginMessage").textContent=text;
-  $("loginMessage").className="notice error";
-}
-
-function formatDate(value){
-  if(!value)return "ยังไม่เริ่มใช้งาน";
-  return new Date(value).toLocaleString("th-TH");
+function readKeys(){
+ try{
+  const x=JSON.parse(localStorage.getItem(KEY_STORE)||"[]");
+  return Array.isArray(x)?x:[];
+ }catch(e){return []}
 }
 
 function deviceName(){
-  const ua=navigator.userAgent||"";
-  if(/Android/i.test(ua))return "Android";
-  if(/iPhone|iPad|iPod/i.test(ua))return "iOS";
-  if(/Windows/i.test(ua))return "Windows";
-  if(/Mac OS/i.test(ua))return "macOS";
-  return "ไม่ทราบระบบ";
+ const ua=navigator.userAgent;
+ if(/Android/i.test(ua))return "Android";
+ if(/iPhone|iPad|iPod/i.test(ua))return "iOS";
+ if(/Windows/i.test(ua))return "Windows";
+ return "อุปกรณ์อื่น";
 }
 
-function refreshAccount(){
-  if(!currentKey)return false;
+function sayLogin(text,error=true){
+ $("loginMsg").textContent=text;
+ $("loginMsg").className="notice";
+ $("loginMsg").style.color=error?"#ff9ba7":"#39d98a";
+}
 
-  const k=getKeys().find(item=>item.key===currentKey);
+function record(text){
+ try{
+  let h=JSON.parse(localStorage.getItem(HISTORY_STORE)||"[]");
+  if(!Array.isArray(h))h=[];
+  h.unshift({text,time:new Date().toLocaleString("th-TH")});
+  localStorage.setItem(HISTORY_STORE,JSON.stringify(h.slice(0,20)));
+  showHistory();
+ }catch(e){}
+}
 
-  if(!k){
-    logout("ไม่พบคีย์ในข้อมูลทดลอง");
-    return false;
+function showHistory(){
+ try{
+  const h=JSON.parse(localStorage.getItem(HISTORY_STORE)||"[]");
+  $("history").replaceChildren();
+  if(!h.length){
+   $("history").textContent="ยังไม่มีประวัติ";
+   return;
   }
-
-  const s=getStatus(k);
-
-  if(s==="suspended"){
-    logout("คีย์นี้ถูกระงับการใช้งาน");
-    return false;
-  }
-
-  if(s==="expired"){
-    logout("คีย์นี้หมดอายุแล้ว");
-    return false;
-  }
-
-  $("accountKey").textContent=k.key;
-  $("accountStatus").textContent="พร้อมใช้งาน";
-  $("accountExpiry").textContent=k.expiresAt
-    ?formatDate(k.expiresAt)
-    :"ยังไม่เริ่มนับอายุ";
-  $("deviceInfo").textContent=deviceName();
-
-  return true;
+  h.forEach(item=>{
+   const p=document.createElement("p");
+   p.textContent=item.time+" — "+item.text;
+   $("history").appendChild(p);
+  });
+ }catch(e){}
 }
 
 function login(){
-  const key=$("playerKey").value.trim().toUpperCase();
+ const key=$("keyInput").value.trim().toUpperCase();
+ if(!key){sayLogin("กรุณากรอกคีย์");return}
 
-  if(!key){
-    showLoginError("กรุณากรอกคีย์");
-    return;
-  }
+ const k=readKeys().find(x=>x.key===key);
+ if(!k){sayLogin("ไม่พบคีย์ กรุณาตรวจสอบคีย์หรือสร้างคีย์ในแอดมิน");return}
+ if(k.status==="suspended"){sayLogin("คีย์นี้ถูกระงับ");return}
 
-  const k=getKeys().find(item=>item.key===key);
+ if(k.activatedAt&&k.expiresAt&&Date.now()>=k.expiresAt){
+  sayLogin("คีย์หมดอายุแล้ว");return;
+ }
 
-  if(!k){
-    showLoginError(
-      "ไม่พบคีย์นี้ในเบราว์เซอร์เครื่องนี้ กรุณาสร้างคีย์ทดลองในหน้าแอดมินก่อน"
-    );
-    return;
-  }
+ if(!k.activatedAt){
+  k.activatedAt=Date.now();
+  k.expiresAt=Date.now()+Number(k.duration||7)*86400000;
+  const all=readKeys();
+  const i=all.findIndex(x=>x.key===key);
+  if(i>=0){all[i]=k;localStorage.setItem(KEY_STORE,JSON.stringify(all))}
+ }
 
-  const s=getStatus(k);
-
-  if(s==="suspended"){
-    showLoginError("คีย์ถูกระงับ ไม่สามารถเข้าใช้งานได้");
-    return;
-  }
-
-  if(s==="expired"){
-    showLoginError("คีย์หมดอายุแล้ว");
-    return;
-  }
-
-  if(!k.activatedAt){
-    k.activatedAt=Date.now();
-    k.expiresAt=Date.now()+Number(k.duration||7)*86400000;
-
-    const all=getKeys();
-    const index=all.findIndex(item=>item.key===key);
-
-    if(index!==-1){
-      all[index]=k;
-      localStorage.setItem(STORE,JSON.stringify(all));
-    }
-  }
-
-  currentKey=key;
-  sessionStorage.setItem("family_demon_player_key",key);
-
-  $("loginScreen").classList.add("hidden");
-  $("playerScreen").classList.remove("hidden");
-
-  addHistory("เข้าสู่ระบบด้วยคีย์ "+key);
-  refreshAccount();
-}
-
-function logout(reason){
-  if(currentKey)addHistory("ออกจากระบบ");
-
-  currentKey=null;
-  sessionStorage.removeItem("family_demon_player_key");
-
-  $("playerScreen").classList.add("hidden");
-  $("loginScreen").classList.remove("hidden");
-
-  $("loginMessage").textContent=reason||"ออกจากระบบแล้ว";
-  $("loginMessage").className="notice";
+ currentKey=key;
+ $("accountKey").textContent=key;
+ $("device").textContent=deviceName();
+ $("expiry").textContent=k.expiresAt?
+  new Date(k.expiresAt).toLocaleString("th-TH"):"ไม่ระบุ";
+ $("loginScreen").classList.add("hidden");
+ $("playerScreen").classList.remove("hidden");
+ record("เข้าสู่ระบบ");
 }
 
 $("loginBtn").addEventListener("click",login);
+$("keyInput").addEventListener("keydown",e=>{if(e.key==="Enter")login()});
 
-$("playerKey").addEventListener("keydown",e=>{
-  if(e.key==="Enter")login();
+document.querySelectorAll("[data-feature]").forEach(btn=>{
+ btn.addEventListener("click",()=>{
+  const names={
+   aim:"ดูดหัว 90%",
+   ban:"กันแบน",
+   black:"กันดำ"
+  };
+  $("featureMsg").textContent=
+   names[btn.dataset.feature]+
+   ": เมนูแสดงผลเท่านั้น ยังไม่ได้เชื่อมกับเกม";
+  $("featureMsg").classList.remove("hidden");
+  record("เปิดเมนู "+names[btn.dataset.feature]);
+ });
 });
 
-$("logoutBtn").addEventListener("click",()=>logout("ออกจากระบบแล้ว"));
-
-document.querySelectorAll("[data-action]").forEach(button=>{
-  button.addEventListener("click",()=>{
-    if(!refreshAccount())return;
-
-    const result=$("actionResult");
-    const action=button.dataset.action;
-
-    if(action==="profile"){
-      result.textContent="คีย์ผู้เล่น: "+currentKey+
-        " | ระบบ: "+deviceName();
-    }
-
-    if(action==="device"){
-      result.textContent="ระบบปฏิบัติการ: "+deviceName()+
-        " | เบราว์เซอร์นี้ไม่ได้เปิดเผยรุ่นโทรศัพท์อย่างแม่นยำเสมอไป";
-    }
-
-    if(action==="status"){
-      result.textContent="สถานะคีย์: พร้อมใช้งาน (ข้อมูลทดลองในเครื่อง)";
-    }
-
-    if(action==="history"){
-      const items=getHistory();
-      result.replaceChildren();
-
-      if(!items.length){
-        result.textContent="ยังไม่มีประวัติการใช้งาน";
-      }else{
-        items.forEach(item=>{
-          const div=document.createElement("div");
-          div.className="history-item";
-          div.textContent=item.action+" — "+
-            new Date(item.time).toLocaleString("th-TH");
-          result.appendChild(div);
-        });
-      }
-    }
-
-    result.classList.remove("hidden");
-  });
-});
-
-/* ตรวจสอบสถานะคีย์เป็นระยะในหน้าเดียวกัน */
-setInterval(()=>{
-  if(currentKey)refreshAccount();
-},5000);
-
-/* กู้คืนเซสชันทดลองเมื่อเปิดหน้าเดิม */
-const saved=sessionStorage.getItem("family_demon_player_key");
-
-if(saved){
-  $("playerKey").value=saved;
-  login();
+function chooseFiles(){
+ $("fileInput").click();
 }
+$("fileBtn").addEventListener("click",chooseFiles);
+$("pickBtn").addEventListener("click",chooseFiles);
+
+$("fileInput").addEventListener("change",()=>{
+ const files=[...$("fileInput").files];
+ $("fileMsg").classList.remove("hidden");
+ $("fileMsg").textContent=files.length?
+  "เลือกแล้ว "+files.length+" ไฟล์: "+files.map(f=>f.name).join(", "):
+  "ยังไม่ได้เลือกไฟล์";
+ if(files.length)record("เลือกไฟล์ "+files.length+" รายการ");
+});
+
+$("logoutBtn").addEventListener("click",()=>{
+ currentKey=null;
+ $("playerScreen").classList.add("hidden");
+ $("loginScreen").classList.remove("hidden");
+ $("keyInput").value="";
+ $("loginMsg").textContent="ออกจากระบบแล้ว";
+ $("loginMsg").className="notice";
+});
+
+showHistory();
 </script>
 </body>
 </html>
