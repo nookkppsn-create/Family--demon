@@ -2,215 +2,225 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FAMILY-DEMON | Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#100607">
+<title>FAMILY-DEMON | ADMIN</title>
 <style>
-:root{--bg:#090909;--panel:#151515;--red:#ff2638;--text:#f5f5f5;--muted:#999;--line:#303030}
+:root{--bg:#0b0809;--panel:#171113;--red:#ff253f;--text:#fff;--muted:#a99a9c;--green:#42e6a4}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
-header{background:#111;border-bottom:2px solid var(--red);padding:20px 16px}
-h1{font-size:24px;margin:0;color:var(--red);letter-spacing:1px}
-header p{margin:6px 0 0;color:var(--muted);font-size:12px}
-main{max-width:900px;margin:auto;padding:16px}
-.notice{background:#241518;border:1px solid #71303a;border-radius:10px;padding:12px;font-size:12px;color:#ffc5ca;line-height:1.6;margin-bottom:16px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
-.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px}
-.stat span{display:block;color:var(--muted);font-size:12px}
+body{margin:0;background:var(--bg);color:var(--text);font:15px Arial,sans-serif}
+header{padding:20px;background:#150b0d;border-bottom:1px solid #492027}
+header h1{margin:0;color:var(--red);letter-spacing:2px;font-size:23px}
+header p{color:var(--muted);font-size:12px;margin:7px 0 0}
+main{max-width:1000px;margin:auto;padding:16px}
+.card{background:var(--panel);border:1px solid #332025;border-radius:15px;padding:17px;margin-bottom:15px}
+h2{font-size:17px;margin:0 0 15px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{background:#100b0d;padding:15px;border-radius:10px}
+.stat small{color:var(--muted)}
 .stat strong{display:block;font-size:25px;margin-top:8px}
-h2{font-size:16px;margin:0 0 14px}
-.card{margin-bottom:16px}
-input,select{width:100%;padding:12px;background:#0b0b0b;color:white;border:1px solid #393939;border-radius:8px;margin:5px 0 12px;font-size:14px}
-label{font-size:12px;color:#ccc}
-button{border:0;border-radius:8px;padding:11px 13px;font-weight:bold;cursor:pointer;margin:3px}
-.primary{background:var(--red);color:white}
-.secondary{background:#303030;color:white}
-.danger{background:#501820;color:#ffb7be}
-.full{width:100%;margin:5px 0}
-.list{display:grid;gap:10px}
-.keyitem{border:1px solid #333;border-radius:10px;padding:13px;background:#101010;overflow-wrap:anywhere}
+input,select{width:100%;padding:12px;margin:5px 0 12px;border:1px solid #493039;border-radius:9px;background:#0e0a0b;color:white;outline:none}
+label{font-size:13px;color:#d8cacc}
+button{border:0;border-radius:9px;padding:11px 13px;background:var(--red);color:white;font-weight:bold;cursor:pointer;transition:.18s}
+button:active{transform:scale(.96)}
+.secondary{background:#332329}
+.green{background:#126b4c}
+.danger{background:#67202b}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row>*{flex:1}
+.key{border:1px solid #3a252b;border-radius:11px;padding:13px;margin-top:10px;background:#100b0d}
 .keytop{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
-.keycode{font-weight:bold;color:#ff5867;overflow-wrap:anywhere}
-.badge{font-size:11px;padding:5px 8px;border-radius:20px;background:#333}
-.active{color:#8dffae}.suspended{color:#ff8c96}
-.details{font-size:12px;color:#aaa;line-height:1.8;margin:10px 0}
-.actions{display:flex;flex-wrap:wrap;gap:4px}
-.empty{text-align:center;color:#888;padding:24px}
-footer{text-align:center;color:#666;font-size:11px;padding:25px}
-@media(max-width:430px){.stats{gap:6px}.stat{padding:10px}.stat strong{font-size:21px}.stat span{font-size:11px}}
+.keycode{font-weight:bold;letter-spacing:1px;overflow-wrap:anywhere}
+.badge{font-size:11px;padding:5px 8px;border-radius:20px;background:#193b2e;color:var(--green)}
+.badge.off{background:#452027;color:#ff8795}
+.meta{color:var(--muted);font-size:12px;line-height:1.8;margin:10px 0}
+.key .row button{margin-top:5px}
+.note{color:var(--muted);font-size:12px;line-height:1.6}
+#message{font-size:13px;color:var(--green);margin-top:8px}
+@media(max-width:500px){.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:span 2}}
 </style>
 </head>
 <body>
 <header>
-<h1>🔥 FAMILY-DEMON</h1>
-<p>ADMIN CONTROL PANEL · KEY MANAGEMENT</p>
+  <h1>FAMILY-DEMON</h1>
+  <p>ADMIN CONTROL PANEL · KEY MANAGEMENT</p>
 </header>
-
 <main>
-<div class="notice">
-<strong>โหมดทดลองในเครื่อง</strong><br>
-ข้อมูลชุดนี้เก็บในเบราว์เซอร์ของเครื่องนี้เท่านั้น ยังไม่เชื่อมฐานข้อมูลออนไลน์ และไม่ควรใช้จัดการคีย์จริงจนกว่าจะติดตั้งระบบล็อกอินและสิทธิ์ผู้ดูแลที่ปลอดภัย
-</div>
+  <section class="card">
+    <h2>ภาพรวมระบบ</h2>
+    <div class="stats">
+      <div class="stat"><small>คีย์ทั้งหมด</small><strong id="total">0</strong></div>
+      <div class="stat"><small>พร้อมใช้งาน</small><strong id="active">0</strong></div>
+      <div class="stat"><small>ถูกระงับ</small><strong id="suspended">0</strong></div>
+    </div>
+  </section>
 
-<section class="stats">
-<div class="stat"><span>คีย์ทั้งหมด</span><strong id="total">0</strong></div>
-<div class="stat"><span>ใช้งานได้</span><strong id="activeCount">0</strong></div>
-<div class="stat"><span>ถูกระงับ</span><strong id="suspendedCount">0</strong></div>
-</section>
+  <section class="card">
+    <h2>สร้างคีย์ใหม่</h2>
+    <label>ชื่อลูกค้า / หมายเหตุ</label>
+    <input id="customer" placeholder="เช่น ลูกค้าหมายเลข 01">
+    <div class="row">
+      <div>
+        <label>อายุคีย์</label>
+        <select id="days">
+          <option value="1">1 วัน</option>
+          <option value="3">3 วัน</option>
+          <option value="7" selected>7 วัน</option>
+          <option value="30">30 วัน</option>
+          <option value="90">90 วัน</option>
+          <option value="365">365 วัน</option>
+        </select>
+      </div>
+      <div>
+        <label>จำนวนอุปกรณ์</label>
+        <select id="deviceLimit">
+          <option>1</option><option>2</option><option>3</option>
+          <option>5</option><option>10</option>
+        </select>
+      </div>
+    </div>
+    <button onclick="createKey()">＋ สร้างคีย์</button>
+    <button class="secondary" onclick="exportJSON()">ส่งออก JSON</button>
+    <div id="message"></div>
+  </section>
 
-<section class="card">
-<h2>＋ สร้างคีย์ผู้เล่น</h2>
-<label for="customer">ชื่อลูกค้า / หมายเหตุ</label>
-<input id="customer" placeholder="เช่น ลูกค้า 001">
-<label for="duration">ระยะเวลาคีย์</label>
-<select id="duration">
-<option value="1">1 วัน</option>
-<option value="3">3 วัน</option>
-<option value="7" selected>7 วัน</option>
-<option value="30">30 วัน</option>
-<option value="90">90 วัน</option>
-<option value="365">365 วัน</option>
-</select>
-<label for="deviceLimit">จำนวนอุปกรณ์ที่อนุญาต (สำหรับบันทึกในโหมดทดลอง)</label>
-<select id="deviceLimit">
-<option>1</option><option>2</option><option>3</option><option>5</option><option>10</option>
-</select>
-<button class="primary full" onclick="createKey()">สร้างคีย์ใหม่</button>
-<div id="newKeyResult"></div>
-</section>
+  <section class="card">
+    <h2>จัดการคีย์</h2>
+    <input id="search" placeholder="ค้นหาคีย์หรือชื่อลูกค้า..." oninput="render()">
+    <div class="row">
+      <button class="secondary" onclick="filter='all';render()">ทั้งหมด</button>
+      <button class="secondary" onclick="filter='active';render()">พร้อมใช้งาน</button>
+      <button class="secondary" onclick="filter='suspended';render()">ถูกระงับ</button>
+    </div>
+    <div id="keys"></div>
+  </section>
 
-<section class="card">
-<h2>⌕ ค้นหาคีย์</h2>
-<input id="search" placeholder="ค้นหาคีย์หรือชื่อลูกค้า..." oninput="render()">
-<div class="actions">
-<button class="secondary" onclick="exportBackup()">ส่งออกข้อมูลสำรอง JSON</button>
-<button class="secondary" onclick="exportCSV()">ส่งออก CSV</button>
-<button class="danger" onclick="clearAll()">ล้างคีย์ทั้งหมด</button>
-</div>
-</section>
+  <section class="card">
+    <h2>ผู้เล่น</h2>
+    <p class="note">ข้อมูลผู้เล่นจะแสดงเมื่อเชื่อมฐานข้อมูลออนไลน์และให้ PLAYER ส่งข้อมูลการเข้าใช้มายังระบบกลาง</p>
+    <div id="players" class="note">ยังไม่มีข้อมูลผู้เล่นที่เชื่อมต่อกับระบบกลาง</div>
+  </section>
 
-<section class="card">
-<h2>☠ รายการคีย์</h2>
-<div id="keyList" class="list"></div>
-</section>
+  <section class="card">
+    <button class="danger" onclick="clearAll()">ลบคีย์ทั้งหมด</button>
+    <p class="note">คำเตือน: ข้อมูลในเวอร์ชันนี้จัดเก็บในเบราว์เซอร์เครื่องนี้เท่านั้น ยังไม่ซิงก์ข้ามอุปกรณ์</p>
+  </section>
 </main>
 
-<footer>FAMILY-DEMON · LOCAL DEMO · NOT FOR PRODUCTION</footer>
-
 <script>
-const STORE="family_demon_admin_demo_v1";
-let keys=load();
+const STORE='family_demon_admin_demo_v1';
+let filter='all';
 
 function load(){
- try{
-  const x=JSON.parse(localStorage.getItem(STORE)||"[]");
-  return Array.isArray(x)?x:[];
- }catch(e){return []}
+  try{
+    const data=JSON.parse(localStorage.getItem(STORE)||'[]');
+    return Array.isArray(data)?data:[];
+  }catch{return []}
 }
-function save(){localStorage.setItem(STORE,JSON.stringify(keys));render()}
-function makeKey(){
- const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
- const part=()=>Array.from({length:4},()=>chars[Math.floor(Math.random()*chars.length)]).join("");
- let k;
- do{k="DEMON-"+part()+"-"+part()}while(keys.some(x=>x.key===k));
- return k;
+function save(data){localStorage.setItem(STORE,JSON.stringify(data))}
+function makeCode(){
+  const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const bytes=new Uint8Array(8);
+  crypto.getRandomValues(bytes);
+  const s=Array.from(bytes,b=>chars[b%chars.length]);
+  return 'DEMON-'+s.slice(0,4).join('')+'-'+s.slice(4).join('');
+}
+function status(k){
+  if(k.status==='suspended')return 'suspended';
+  if(k.expiresAt&&Date.now()>k.expiresAt)return 'expired';
+  return 'active';
 }
 function createKey(){
- const customer=document.getElementById("customer").value.trim();
- const days=Number(document.getElementById("duration").value);
- const deviceLimit=Number(document.getElementById("deviceLimit").value);
- const key=makeKey();
- keys.unshift({
-  id:Date.now().toString(36)+Math.random().toString(36).slice(2,7),
-  key,customer:customer||"ไม่ระบุ",days,deviceLimit,
-  status:"active",createdAt:Date.now(),activatedAt:null,
-  expiresAt:null,lastSeen:null
- });
- save();
- document.getElementById("newKeyResult").innerHTML=
-  '<div class="keyitem"><div style="color:#aaa;font-size:12px">คีย์ที่สร้างแล้ว — คัดลอกเก็บไว้</div><p class="keycode" id="createdKey"></p><button class="primary" onclick="copyKey()">คัดลอกคีย์</button></div>';
- document.getElementById("createdKey").textContent=key;
- document.getElementById("customer").value="";
-}
-function copyKey(){
- const value=document.getElementById("createdKey")?.textContent;
- if(!value)return;
- if(navigator.clipboard&&navigator.clipboard.writeText){
-  navigator.clipboard.writeText(value).then(()=>alert("คัดลอกคีย์แล้ว")).catch(()=>prompt("คัดลอกคีย์นี้",value));
- }else prompt("คัดลอกคีย์นี้",value);
-}
-function statusText(k){
- if(k.status==="suspended")return "ถูกระงับ";
- if(k.expiresAt&&Date.now()>k.expiresAt)return "หมดอายุ";
- return "พร้อมใช้งาน";
-}
-function dateText(t){return t?new Date(t).toLocaleString("th-TH"):"ยังไม่เริ่มนับเวลา"}
-function escapeHTML(s){
- return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const data=load();
+  let key=makeCode();
+  while(data.some(x=>x.key===key))key=makeCode();
+  data.unshift({
+    id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),
+    key,
+    customer:document.getElementById('customer').value.trim(),
+    days:Number(document.getElementById('days').value),
+    deviceLimit:Number(document.getElementById('deviceLimit').value),
+    status:'active',
+    createdAt:Date.now(),
+    activatedAt:null,
+    expiresAt:null,
+    lastSeen:null,
+    devices:[]
+  });
+  save(data);
+  document.getElementById('message').textContent='สร้างคีย์สำเร็จ: '+key;
+  document.getElementById('customer').value='';
+  render();
 }
 function render(){
- const q=(document.getElementById("search")?.value||"").toLowerCase();
- const filtered=keys.filter(k=>(k.key+" "+k.customer).toLowerCase().includes(q));
- document.getElementById("total").textContent=keys.length;
- document.getElementById("activeCount").textContent=keys.filter(k=>statusText(k)==="พร้อมใช้งาน").length;
- document.getElementById("suspendedCount").textContent=keys.filter(k=>k.status==="suspended").length;
- const box=document.getElementById("keyList");
- if(!filtered.length){box.innerHTML='<div class="empty">ยังไม่มีคีย์ที่ตรงกับการค้นหา</div>';return}
- box.innerHTML=filtered.map(k=>{
-  const st=statusText(k);
-  return `<div class="keyitem">
-   <div class="keytop"><span class="keycode">${escapeHTML(k.key)}</span><span class="badge ${st==="พร้อมใช้งาน"?"active":"suspended"}">${st}</span></div>
-   <div class="details">
-   ลูกค้า: ${escapeHTML(k.customer)}<br>
-   ระยะเวลา: ${k.days} วัน · อุปกรณ์ที่กำหนด: ${k.deviceLimit}<br>
-   สร้างเมื่อ: ${dateText(k.createdAt)}<br>
-   เริ่มใช้งาน: ${dateText(k.activatedAt)}<br>
-   หมดอายุ: ${k.expiresAt?dateText(k.expiresAt):"เริ่มนับเมื่อระบบผู้เล่นเปิดใช้งานจริง"}
-   </div>
-   <div class="actions">
-   <button class="secondary" onclick="copyExisting('${k.id}')">คัดลอก</button>
-   <button class="secondary" onclick="toggleKey('${k.id}')">${k.status==="suspended"?"เปิดใช้งาน":"ระงับคีย์"}</button>
-   <button class="secondary" onclick="extendKey('${k.id}')">เพิ่ม 7 วัน</button>
-   <button class="danger" onclick="deleteKey('${k.id}')">ลบ</button>
-   </div>
-  </div>`;
- }).join("");
+  const data=load();
+  const q=document.getElementById('search').value.toLowerCase();
+  const active=data.filter(k=>status(k)==='active').length;
+  document.getElementById('total').textContent=data.length;
+  document.getElementById('active').textContent=active;
+  document.getElementById('suspended').textContent=data.filter(k=>status(k)==='suspended').length;
+
+  const shown=data.filter(k=>{
+    const s=status(k);
+    return (filter==='all'||filter===s)&&
+      (String(k.key).toLowerCase().includes(q)||String(k.customer||'').toLowerCase().includes(q));
+  });
+  document.getElementById('keys').innerHTML=shown.map(k=>{
+    const s=status(k);
+    const label=s==='active'?'พร้อมใช้งาน':s==='suspended'?'ถูกระงับ':'หมดอายุ';
+    return `<div class="key">
+      <div class="keytop"><span class="keycode">${esc(k.key)}</span>
+      <span class="badge ${s!=='active'?'off':''}">${label}</span></div>
+      <div class="meta">
+        ลูกค้า: ${esc(k.customer||'-')}<br>
+        อายุคีย์: ${k.days} วัน · อุปกรณ์สูงสุด: ${k.deviceLimit}<br>
+        สร้างเมื่อ: ${new Date(k.createdAt).toLocaleString('th-TH')}<br>
+        เริ่มนับวัน: ${k.activatedAt?new Date(k.activatedAt).toLocaleString('th-TH'):'เมื่อใช้งานครั้งแรก'}<br>
+        หมดอายุ: ${k.expiresAt?new Date(k.expiresAt).toLocaleString('th-TH'):'ยังไม่เริ่มนับ'}
+      </div>
+      <div class="row">
+        <button class="secondary" onclick="copyKey('${k.key}')">คัดลอก</button>
+        <button class="${s==='suspended'?'green':'secondary'}" onclick="toggleKey('${k.id}')">${s==='suspended'?'เปิดใช้งาน':'ระงับคีย์'}</button>
+        <button class="secondary" onclick="extendKey('${k.id}')">เพิ่ม 7 วัน</button>
+        <button class="danger" onclick="deleteKey('${k.id}')">ลบ</button>
+      </div>
+    </div>`;
+  }).join('')||'<p class="note">ไม่พบคีย์</p>';
 }
-function copyExisting(id){
- const k=keys.find(x=>x.id===id);if(!k)return;
- if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(k.key).then(()=>alert("คัดลอกแล้ว")).catch(()=>prompt("คัดลอกคีย์",k.key));
- else prompt("คัดลอกคีย์",k.key);
+function esc(s){
+  return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+async function copyKey(key){
+  try{await navigator.clipboard.writeText(key);alert('คัดลอกคีย์แล้ว')}
+  catch{prompt('คัดลอกคีย์นี้',key)}
 }
 function toggleKey(id){
- const k=keys.find(x=>x.id===id);if(!k)return;
- k.status=k.status==="suspended"?"active":"suspended";save();
+  const data=load(),k=data.find(x=>x.id===id);if(!k)return;
+  k.status=status(k)==='suspended'?'active':'suspended';
+  save(data);render();
 }
 function extendKey(id){
- const k=keys.find(x=>x.id===id);if(!k)return;
- if(k.expiresAt)k.expiresAt=Math.max(Date.now(),k.expiresAt)+7*86400000;
- else k.days+=7;
- save();alert("ปรับระยะเวลาในข้อมูลทดลองแล้ว");
+  const data=load(),k=data.find(x=>x.id===id);if(!k)return;
+  if(k.expiresAt){
+    k.expiresAt=Math.max(k.expiresAt,Date.now())+7*86400000;
+  }else{
+    k.days=Number(k.days||0)+7;
+  }
+  save(data);render();alert('ปรับระยะเวลาคีย์แล้ว');
 }
 function deleteKey(id){
- if(!confirm("ยืนยันลบคีย์นี้?"))return;
- keys=keys.filter(x=>x.id!==id);save();
-}
-function exportBackup(){
- const blob=new Blob([JSON.stringify(keys,null,2)],{type:"application/json"});
- downloadBlob(blob,"family-demon-backup.json");
-}
-function exportCSV(){
- const rows=[["key","customer","status","days","deviceLimit","createdAt","activatedAt","expiresAt"],
- ...keys.map(k=>[k.key,k.customer,statusText(k),k.days,k.deviceLimit,k.createdAt,k.activatedAt||"",k.expiresAt||""])];
- const csv=rows.map(r=>r.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\r\n");
- downloadBlob(new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"}),"family-demon-keys.csv");
-}
-function downloadBlob(blob,name){
- const url=URL.createObjectURL(blob),a=document.createElement("a");
- a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  if(!confirm('ยืนยันลบคีย์นี้หรือไม่?'))return;
+  save(load().filter(k=>k.id!==id));render();
 }
 function clearAll(){
- if(!confirm("ลบคีย์ทั้งหมดจากเบราว์เซอร์นี้ใช่ไหม?"))return;
- keys=[];save();document.getElementById("newKeyResult").innerHTML="";
+  if(!confirm('ยืนยันลบคีย์ทั้งหมด? การลบนี้ย้อนกลับไม่ได้'))return;
+  save([]);render();
+}
+function exportJSON(){
+  const blob=new Blob([JSON.stringify(load(),null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download='family-demon-keys.json';a.click();
+  URL.revokeObjectURL(a.href);
 }
 render();
 </script>
