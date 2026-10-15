@@ -61,231 +61,690 @@ label{display:block;margin:14px 0 7px;font-size:13px}
 .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .badge{font-size:11px;padding:5px 9px;border-radius:20px;background:#352125}
 .green{color:var(--green)}
-.notice{margin-top:12px;padding:12px;border:1px solid var(--border);border-radius:10px;font-size:13px;line-height:1.7;overflow-wrap:anywhere}
-.feature{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 0;border-bottom:1px solid var(--border)}
+.notice{
+ margin-top:12px;padding:12px;border:1px solid var(--border);
+ border-radius:10px;font-size:13px;line-height:1.7;overflow-wrap:anywhere
+}
+.feature{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:12px;padding:15px 0;border-bottom:1px solid var(--border)
+}
 .feature b{display:block;font-size:14px}
 .feature .muted{margin-top:4px}
-.switch{position:relative;width:48px;height:27px;flex-shrink:0;margin:0}
+.switch{
+ position:relative;width:48px;height:27px;flex-shrink:0;margin:0
+}
 .switch input{display:none}
-.slider{position:absolute;inset:0;background:#494044;border-radius:30px;cursor:pointer}
-.slider:before{content:"";position:absolute;width:21px;height:21px;left:3px;top:3px;background:white;border-radius:50%;transition:.2s}
+.slider{
+ position:absolute;inset:0;background:#494044;border-radius:30px;cursor:pointer
+}
+.slider:before{
+ content:"";position:absolute;width:21px;height:21px;left:3px;top:3px;
+ background:white;border-radius:50%;transition:.2s
+}
 .switch input:checked+.slider{background:#d00025}
 .switch input:checked+.slider:before{transform:translateX(21px)}
-.run{width:100%;background:#143a29;border-color:#246b48;margin-top:10px}
-.spinner{width:32px;height:32px;border:4px solid #493037;border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin:14px auto}
+.run{
+ width:100%;background:#143a29;border-color:#246b48;margin-top:10px
+}
+.spinner{
+ width:32px;height:32px;border:4px solid #493037;border-top-color:var(--red);
+ border-radius:50%;animation:spin .7s linear infinite;margin:14px auto
+}
 @keyframes spin{to{transform:rotate(360deg)}}
-.statusbox{padding:13px;border-radius:10px;background:#103322;border:1px solid #236647;color:var(--green);margin-top:12px;font-size:13px}
+.statusbox{
+ padding:13px;border-radius:10px;background:#103322;
+ border:1px solid #236647;color:var(--green);margin-top:12px;font-size:13px
+}
+.profile{
+ background:#0d090a;border:1px solid var(--border);border-radius:10px;
+ padding:12px;font-size:11px;white-space:pre-wrap;overflow-wrap:anywhere;
+ max-height:280px;overflow:auto;color:#ffc0ca
+}
+.smallbtn{width:100%;margin-top:8px}
 </style>
 </head>
 
 <body>
+
+<!-- LOGIN -->
 <section id="login" class="login">
  <div class="box">
   <div class="center">
    <div class="logo">FAMILY-DEMON</div>
    <p class="muted">PLAYER CONTROL SYSTEM</p>
   </div>
+
   <label for="key">คีย์เข้าใช้งาน</label>
   <input id="key" placeholder="กรอกคีย์ของคุณ" autocomplete="off">
+
   <button class="primary" id="loginBtn">เข้าสู่ระบบ</button>
   <div id="loginMsg" class="notice hidden"></div>
-  <p class="muted">ระบบตัวอย่างนี้ตรวจคีย์ที่บันทึกไว้ในเบราว์เซอร์เดียวกันเท่านั้น</p>
+
+  <p class="muted">
+   ระบบตัวอย่างนี้ตรวจคีย์จาก localStorage ในเบราว์เซอร์เดียวกัน
+   ไม่ใช่ระบบยืนยันคีย์ผ่านเซิร์ฟเวอร์ส่วนกลาง
+  </p>
  </div>
 </section>
 
+<!-- PERMISSION -->
 <section id="permission" class="hidden">
  <main class="wrap">
   <div class="logo">FAMILY-DEMON</div>
+
   <div class="card">
    <h2>📱 การอนุญาตเข้าถึงข้อมูล</h2>
-   <p class="muted">เว็บไซต์ไม่สามารถขอสิทธิ์เข้าถึงไฟล์ทั้งหมดของ Android ได้โดยตรง</p>
-   <button id="permissionBtn" class="primary">ยืนยันและดำเนินการต่อ</button>
-   <div id="permissionMsg" class="notice">กรุณาอ่านรายละเอียดก่อนดำเนินการ</div>
-   <button id="logout1" style="width:100%;margin-top:8px">ออกจากระบบ</button>
+
+   <p class="muted">
+    Android และเบราว์เซอร์มีข้อจำกัดในการเข้าถึงพื้นที่จัดเก็บข้อมูล
+    เว็บไซต์ไม่สามารถปลดล็อกหรือเข้าถึงไฟล์ส่วนตัวทั้งหมดของแอปอื่น
+    รวมถึงไฟล์ภายใน Free Fire ได้โดยอัตโนมัติ
+   </p>
+
+   <button id="permissionBtn" class="primary">
+    ยืนยันและดำเนินการต่อ
+   </button>
+
+   <button id="folderBtn" class="smallbtn">
+    อนุญาตเลือกโฟลเดอร์ที่รองรับ
+   </button>
+
+   <div id="permissionMsg" class="notice">
+    เมื่อดำเนินการต่อ ระบบจะตรวจสอบข้อมูลอุปกรณ์เท่าที่เบราว์เซอร์เปิดเผย
+    และขอความยินยอมก่อนตรวจสอบ IP ผ่านบริการภายนอก
+   </div>
+
+   <button id="logout1" style="width:100%;margin-top:8px">
+    ออกจากระบบ
+   </button>
   </div>
  </main>
 </section>
 
+<!-- DASHBOARD -->
 <section id="dashboard" class="hidden">
  <main class="wrap">
+
   <header class="row">
-   <div><div class="logo">FAMILY-DEMON</div><div class="muted">PLAYER DASHBOARD</div></div>
+   <div>
+    <div class="logo">FAMILY-DEMON</div>
+    <div class="muted">PLAYER DASHBOARD</div>
+   </div>
    <span class="badge green">● เข้าสู่ระบบแล้ว</span>
   </header>
 
+  <!-- ACCOUNT -->
   <div class="card">
    <h2>ข้อมูลบัญชี</h2>
    <div class="muted">คีย์ของคุณ</div>
    <div id="accountKey" style="font-weight:800;overflow-wrap:anywhere">-</div>
    <p class="muted">อุปกรณ์: <span id="device">-</span></p>
+   <p class="muted">ระบบปฏิบัติการ: <span id="os">-</span></p>
    <p class="muted">วันหมดอายุ: <span id="expiry">-</span></p>
+   <p class="muted">IP Address: <span id="ip">ยังไม่ได้ตรวจสอบ</span></p>
+   <p class="muted">รุ่นอุปกรณ์: <span id="model">ระบุได้เท่าที่เบราว์เซอร์เปิดเผย</span></p>
   </div>
 
+  <!-- ORIGINAL FEATURES -->
   <div class="card">
    <h2>ฟังก์ชันผู้เล่น</h2>
-   <p class="muted">เลือกฟังก์ชันเพื่อทดสอบหน้าจอ</p>
+   <p class="muted">คงฟังก์ชันเดิมไว้</p>
 
    <div class="feature">
-    <div><b>🎯 ดูดหัว 90%</b><div class="muted">โหมดจำลองหน้าจอ ไม่ควบคุมเกมจริง</div></div>
-    <label class="switch"><input type="checkbox" class="featureSwitch" value="aim"><span class="slider"></span></label>
+    <div>
+     <b>🎯 ดูดหัว 90%</b>
+     <div class="muted">โหมดจำลองหน้าจอ ไม่ควบคุมเกมจริง</div>
+    </div>
+    <label class="switch">
+     <input type="checkbox" class="featureSwitch" value="aim">
+     <span class="slider"></span>
+    </label>
    </div>
 
    <div class="feature">
-    <div><b>🛡️ กันแบน</b><div class="muted">แสดงเมนูจำลอง ไม่รับประกันการป้องกันแบน</div></div>
-    <label class="switch"><input type="checkbox" class="featureSwitch" value="ban"><span class="slider"></span></label>
+    <div>
+     <b>🛡️ กันแบน</b>
+     <div class="muted">โหมดแสดงผล ไม่สามารถรับประกันการป้องกันแบน</div>
+    </div>
+    <label class="switch">
+     <input type="checkbox" class="featureSwitch" value="ban">
+     <span class="slider"></span>
+    </label>
    </div>
 
    <div class="feature">
-    <div><b>⚫ กันดำ</b><div class="muted">โหมดจำลองหน้าจอ</div></div>
-    <label class="switch"><input type="checkbox" class="featureSwitch" value="black"><span class="slider"></span></label>
+    <div>
+     <b>⚫ กันดำ</b>
+     <div class="muted">โหมดจำลองหน้าจอ</div>
+    </div>
+    <label class="switch">
+     <input type="checkbox" class="featureSwitch" value="black">
+     <span class="slider"></span>
+    </label>
+   </div>
+
+   <!-- NEW DRAG FEATURE -->
+   <div class="feature">
+    <div>
+     <b>🔥 ลากง่าย</b>
+     <div class="muted">เปิดหรือปิดโปรไฟล์ในหน้าเว็บ</div>
+    </div>
+    <label class="switch">
+     <input type="checkbox" id="dragToggle">
+     <span class="slider"></span>
+    </label>
+   </div>
+
+   <div class="feature">
+    <div>
+     <b>⚙️ ใช้โปรไฟล์ X / Y</b>
+     <div class="muted">จัดการค่าที่กำหนดไว้ใน JSON</div>
+    </div>
+    <label class="switch">
+     <input type="checkbox" id="xyToggle" checked>
+     <span class="slider"></span>
+    </label>
+   </div>
+
+   <div class="feature">
+    <div>
+     <b>🚀 โหมดประสิทธิภาพ</b>
+     <div class="muted">สถานะโปรไฟล์ภายในเว็บ</div>
+    </div>
+    <label class="switch">
+     <input type="checkbox" id="performanceToggle" checked>
+     <span class="slider"></span>
+    </label>
    </div>
 
    <div id="selected" class="notice">ยังไม่ได้เปิดฟังก์ชัน</div>
+
+   <button id="profileBtn" class="smallbtn">
+    ดูโปรไฟล์ลากง่าย
+   </button>
+
+   <pre id="profileOutput" class="profile hidden"></pre>
+
    <button id="run" class="run">▶ รันฟังก์ชันที่เปิดไว้</button>
+
    <div id="loading" class="hidden center">
     <div class="spinner"></div>
     <div>กำลังตรวจสอบ...</div>
     <div id="countdown" class="muted">3</div>
    </div>
+
    <div id="runResult" class="hidden"></div>
   </div>
 
+  <!-- GAME -->
   <div class="card">
    <h2>เข้าเกม</h2>
-   <p class="muted">ปุ่มนี้จะลองเปิดแอป Free Fire หากอุปกรณ์รองรับ</p>
+   <p class="muted">
+    ปุ่มนี้จะลองเปิดแอป Free Fire หากอุปกรณ์รองรับ
+   </p>
    <button id="gameBtn" class="primary">🎮 เข้าเกม Free Fire</button>
    <div id="gameStatus" class="notice">พร้อมเปิดเกม</div>
   </div>
 
-  <button id="logout2" style="width:100%;background:#65101d">ออกจากระบบ</button>
+  <button id="logout2" style="width:100%;background:#65101d">
+   ออกจากระบบ
+  </button>
+
   <p class="muted center">FAMILY-DEMON · PLAYER DEMO</p>
  </main>
 </section>
 
 <script>
 "use strict";
-const $=id=>document.getElementById(id);
-const STORE="family_demon_admin_demo_v1";
+
+const $ = id => document.getElementById(id);
+const STORE = "family_demon_admin_demo_v1";
+const LOG_STORE = "family_demon_player_logs_v1";
+const SESSION_STORE = "family_demon_player_session_v1";
+
+let currentKey = "";
+let currentKeyItem = null;
+let currentDeviceInfo = null;
+let folderPermission = "ยังไม่ได้เลือก";
 
 function getKeys(){
  try{
-  const value=JSON.parse(localStorage.getItem(STORE)||"[]");
-  return Array.isArray(value)?value:[];
- }catch{return []}
+  const value = JSON.parse(localStorage.getItem(STORE) || "[]");
+  return Array.isArray(value) ? value : [];
+ }catch{
+  return [];
+ }
 }
-function show(id){$(id).classList.remove("hidden")}
-function hide(id){$(id).classList.add("hidden")}
+
+function show(id){
+ $(id).classList.remove("hidden");
+}
+
+function hide(id){
+ $(id).classList.add("hidden");
+}
 
 function loginError(message){
- $("loginMsg").textContent=message;
- $("loginMsg").className="notice";
+ $("loginMsg").textContent = message;
+ $("loginMsg").className = "notice";
 }
-function getDevice(){
- const ua=navigator.userAgent;
- if(/Android/i.test(ua))return "Android";
- if(/iPhone|iPad|iPod/i.test(ua))return "iOS";
- if(/Windows/i.test(ua))return "Windows";
+
+function getOS(){
+ const ua = navigator.userAgent;
+
+ if(/Android/i.test(ua)) return "Android";
+ if(/iPhone|iPad|iPod/i.test(ua)) return "iOS";
+ if(/Windows/i.test(ua)) return "Windows";
+ if(/Mac OS X|Macintosh/i.test(ua)) return "macOS";
+ if(/Linux/i.test(ua)) return "Linux";
+
  return "อุปกรณ์อื่น";
 }
-function login(){
- const key=$("key").value.trim().toUpperCase();
- if(!key)return loginError("กรุณากรอกคีย์");
 
- const item=getKeys().find(x=>String(x.key||"").toUpperCase()===key);
- if(!item)return loginError("ไม่พบคีย์ในเบราว์เซอร์นี้");
- if(item.status==="suspended")return loginError("คีย์นี้ถูกระงับ");
+function getDevice(){
+ const ua = navigator.userAgent;
 
- if(item.expiresAt&&Date.now()>=Number(item.expiresAt))
+ if(/OPPO|CPH\d+/i.test(ua)) return "OPPO (ตรวจพบจาก User-Agent)";
+ if(/Samsung|SM-[A-Z0-9]+/i.test(ua)) return "Samsung (ตรวจพบจาก User-Agent)";
+ if(/Xiaomi|Redmi|POCO/i.test(ua)) return "Xiaomi/Redmi/POCO (ตรวจพบจาก User-Agent)";
+ if(/vivo/i.test(ua)) return "vivo (ตรวจพบจาก User-Agent)";
+ if(/Huawei/i.test(ua)) return "Huawei (ตรวจพบจาก User-Agent)";
+ if(/Pixel/i.test(ua)) return "Google Pixel (ตรวจพบจาก User-Agent)";
+ if(/Android/i.test(ua)) return "Android (ไม่ทราบรุ่นแน่ชัด)";
+ if(/iPhone/i.test(ua)) return "iPhone";
+ if(/iPad/i.test(ua)) return "iPad";
+
+ return "ไม่สามารถระบุรุ่นได้";
+}
+
+function getModel(){
+ const ua = navigator.userAgent;
+
+ const match = ua.match(/\b(CPH\d+|SM-[A-Z0-9]+|RMX\d+|V\d{4}|Pixel\s?[A-Za-z0-9]+)\b/i);
+
+ return match
+  ? match[0]
+  : "เบราว์เซอร์ไม่เปิดเผยรุ่นอุปกรณ์";
+}
+
+function getDeviceInfo(){
+ return {
+  device: getDevice(),
+  os: getOS(),
+  model: getModel(),
+  userAgent: navigator.userAgent,
+  language: navigator.language || "",
+  platform: navigator.platform || "",
+  screen: screen.width + "x" + screen.height,
+  time: new Date().toISOString()
+ };
+}
+
+function getLogs(){
+ try{
+  const data = JSON.parse(localStorage.getItem(LOG_STORE) || "[]");
+  return Array.isArray(data) ? data : [];
+ }catch{
+  return [];
+ }
+}
+
+function saveLoginLog(info){
+ /*
+  บันทึกใน localStorage ของอุปกรณ์นี้เท่านั้น
+  แอดมินคนละเครื่องจะยังไม่เห็นจนกว่าจะมี backend
+ */
+ const logs = getLogs();
+
+ logs.push({
+  key: currentKey,
+  device: info.device,
+  os: info.os,
+  model: info.model,
+  userAgent: info.userAgent,
+  ip: info.ip || null,
+  time: new Date().toISOString(),
+  folderPermission
+ });
+
+ try{
+  localStorage.setItem(LOG_STORE, JSON.stringify(logs.slice(-100)));
+ }catch(error){
+  console.warn("ไม่สามารถบันทึกประวัติในเครื่องได้", error);
+ }
+}
+
+async function lookupIP(){
+ /*
+  IP จะถูกส่งคำขอไปยังบริการภายนอก
+  ต้องได้รับความยินยอมจากผู้ใช้ก่อน
+ */
+ try{
+  const response = await fetch("https://api.ipify.org?format=json", {
+   method: "GET",
+   cache: "no-store"
+  });
+
+  if(!response.ok) throw new Error("IP service unavailable");
+
+  const data = await response.json();
+
+  if(typeof data.ip === "string"){
+   return data.ip.slice(0, 64);
+  }
+ }catch(error){
+  console.warn("ตรวจสอบ IP ไม่สำเร็จ", error);
+ }
+
+ return "ตรวจสอบไม่ได้";
+}
+
+async function login(){
+ const key = $("key").value.trim().toUpperCase();
+
+ if(!key) return loginError("กรุณากรอกคีย์");
+
+ const item = getKeys().find(
+  x => String(x.key || "").toUpperCase() === key
+ );
+
+ if(!item) return loginError("ไม่พบคีย์ในเบราว์เซอร์นี้");
+ if(item.status === "suspended") return loginError("คีย์นี้ถูกระงับ");
+
+ if(item.expiresAt && Date.now() >= Number(item.expiresAt)){
   return loginError("คีย์หมดอายุแล้ว");
+ }
 
- $("accountKey").textContent=key;
- $("device").textContent=getDevice();
- $("expiry").textContent=item.expiresAt?
-  new Date(Number(item.expiresAt)).toLocaleString("th-TH"):"ไม่ระบุ";
+ currentKey = key;
+ currentKeyItem = item;
+ currentDeviceInfo = getDeviceInfo();
+
+ $("accountKey").textContent = key;
+ $("device").textContent = currentDeviceInfo.device;
+ $("os").textContent = currentDeviceInfo.os;
+ $("model").textContent = currentDeviceInfo.model;
+ $("expiry").textContent = item.expiresAt
+  ? new Date(Number(item.expiresAt)).toLocaleString("th-TH")
+  : "ไม่ระบุ";
+
+ $("ip").textContent = "รอความยินยอมจากผู้ใช้";
 
  hide("login");
  show("permission");
 }
-$("loginBtn").addEventListener("click",login);
-$("key").addEventListener("keydown",e=>{
- if(e.key==="Enter")login();
+
+$("loginBtn").addEventListener("click", login);
+
+$("key").addEventListener("keydown", event => {
+ if(event.key === "Enter") login();
 });
 
-$("permissionBtn").addEventListener("click",()=>{
- if(!confirm("ยืนยันเข้าสู่หน้า Player ตัวอย่างหรือไม่?"))return;
- $("permissionMsg").textContent="ยืนยันแล้ว";
+/*
+  ขอเลือกโฟลเดอร์เฉพาะเมื่อเบราว์เซอร์รองรับ
+  เว็บไม่สามารถข้ามข้อจำกัดของ Android หรือเปิดโฟลเดอร์เกม
+  ที่ระบบปฏิบัติการไม่อนุญาตได้
+ */
+$("folderBtn").addEventListener("click", async () => {
+ if(!window.showDirectoryPicker){
+  $("permissionMsg").textContent =
+   "เบราว์เซอร์นี้ไม่รองรับการเลือกโฟลเดอร์โดยตรง " +
+   "และเว็บไม่สามารถขอสิทธิ์เข้าถึงพื้นที่จัดเก็บทั้งหมดของมือถือได้";
+  return;
+ }
+
+ try{
+  const directory = await window.showDirectoryPicker({
+   mode: "read"
+  });
+
+  folderPermission = "ผู้ใช้เลือกโฟลเดอร์แล้ว: " + directory.name;
+
+  $("permissionMsg").textContent =
+   "เลือกโฟลเดอร์แล้ว: " + directory.name +
+   " ทั้งนี้ สิทธิ์นี้ใช้ได้เฉพาะโฟลเดอร์ที่ผู้ใช้เลือกและสิ่งที่เบราว์เซอร์อนุญาต";
+
+ }catch(error){
+  if(error.name !== "AbortError"){
+   $("permissionMsg").textContent =
+    "ไม่สามารถเลือกโฟลเดอร์ได้: " + error.message;
+  }
+ }
+});
+
+$("permissionBtn").addEventListener("click", async () => {
+ const accepted = confirm(
+  "ระบบจะตรวจข้อมูลอุปกรณ์เท่าที่เบราว์เซอร์เปิดเผย " +
+  "และส่งคำขอไปยังบริการภายนอกเพื่อตรวจสอบ IP Address " +
+  "ยินยอมดำเนินการหรือไม่?"
+ );
+
+ if(!accepted) return;
+
+ $("permissionBtn").disabled = true;
+ $("permissionMsg").textContent = "กำลังตรวจสอบข้อมูลอุปกรณ์...";
+
+ currentDeviceInfo = getDeviceInfo();
+
+ $("device").textContent = currentDeviceInfo.device;
+ $("os").textContent = currentDeviceInfo.os;
+ $("model").textContent = currentDeviceInfo.model;
+
+ $("permissionMsg").textContent = "กำลังตรวจสอบ IP Address...";
+
+ const ip = await lookupIP();
+
+ currentDeviceInfo.ip = ip;
+ $("ip").textContent = ip;
+
+ saveLoginLog(currentDeviceInfo);
+
+ try{
+  localStorage.setItem(SESSION_STORE, JSON.stringify({
+   key: currentKey,
+   device: currentDeviceInfo,
+   loginAt: new Date().toISOString()
+  }));
+ }catch(error){
+  console.warn("บันทึกเซสชันไม่สำเร็จ", error);
+ }
+
+ $("permissionMsg").textContent =
+  "ตรวจสอบข้อมูลเสร็จแล้ว\n" +
+  "สถานะโฟลเดอร์: " + folderPermission + "\n" +
+  "IP: " + ip + "\n" +
+  "หมายเหตุ: ข้อมูลถูกบันทึกในเบราว์เซอร์เครื่องนี้";
+
+ $("permissionBtn").disabled = false;
+
  hide("permission");
  show("dashboard");
 });
 
-function selectedFeatures(){
- const names={aim:"ดูดหัว 90%",ban:"กันแบน",black:"กันดำ"};
- return [...document.querySelectorAll(".featureSwitch:checked")]
-  .map(input=>names[input.value]);
-}
-document.querySelectorAll(".featureSwitch").forEach(input=>{
- input.addEventListener("change",()=>{
-  const list=selectedFeatures();
-  $("selected").textContent=list.length?
-   "เปิดอยู่: "+list.join(" · "):"ยังไม่ได้เปิดฟังก์ชัน";
-  hide("runResult");
- });
+/* โปรไฟล์ JSON ที่ผู้ใช้ให้ไว้ */
+const dragProfile = {
+ package: "Myproject",
+ profile: "full_red_xy_detailed",
+
+ axis: {
+  x: {
+   sensitivity: 92,
+   acceleration: 85,
+   micro_adjust: 70,
+   max_speed: 100,
+   deadzone: 2,
+   curve: "linear_aggressive"
+  },
+  y: {
+   sensitivity: 78,
+   acceleration: 70,
+   micro_adjust: 60,
+   max_speed: 90,
+   deadzone: 3,
+   curve: "progressive_bias"
+  }
+ },
+
+ input: {
+  response: "fast",
+  sample_rate: "high",
+  smoothing: "off",
+  jitter_reduction: "low",
+  latency: "low"
+ },
+
+ stability: {
+  vertical: 65,
+  horizontal: 55,
+  recoil_compensation: "medium",
+  drag_control: "high"
+ },
+
+ performance: {
+  fps_mode: "performance",
+  frame_pacing: "stable",
+  vsync: false,
+  thermal_limit: "balanced"
+ },
+
+ behavior: {
+  flick_boost: "high",
+  tracking_speed: "fast",
+  snap_intensity: "medium_high",
+  precision_mode: false
+ }
+};
+
+$("profileBtn").addEventListener("click", () => {
+ $("profileOutput").textContent = JSON.stringify(dragProfile, null, 2);
+ $("profileOutput").classList.toggle("hidden");
 });
 
-$("run").addEventListener("click",()=>{
- const list=selectedFeatures();
+const names = {
+ aim: "ดูดหัว 90%",
+ ban: "กันแบน",
+ black: "กันดำ",
+ drag: "ลากง่าย",
+ xy: "โปรไฟล์ X / Y",
+ performance: "โหมดประสิทธิภาพ"
+};
+
+function selectedFeatures(){
+ const result = [
+  ...document.querySelectorAll(".featureSwitch:checked")
+ ].map(input => names[input.value]);
+
+ if($("dragToggle").checked) result.push(names.drag);
+ if($("xyToggle").checked && $("dragToggle").checked) result.push(names.xy);
+ if($("performanceToggle").checked) result.push(names.performance);
+
+ return result;
+}
+
+function updateSelected(){
+ const list = selectedFeatures();
+
+ $("selected").textContent = list.length
+  ? "เปิดอยู่: " + list.join(" · ")
+  : "ยังไม่ได้เปิดฟังก์ชัน";
+
+ hide("runResult");
+}
+
+document.querySelectorAll(".featureSwitch").forEach(input => {
+ input.addEventListener("change", updateSelected);
+});
+
+["dragToggle", "xyToggle", "performanceToggle"].forEach(id => {
+ $(id).addEventListener("change", updateSelected);
+});
+
+/* RUN: ตรวจสถานะโปรไฟล์และแสดงผลหลัง 3 วินาที */
+$("run").addEventListener("click", () => {
+ const list = selectedFeatures();
+
  if(!list.length){
-  $("selected").textContent="กรุณาเปิดอย่างน้อย 1 ฟังก์ชัน";
+  $("selected").textContent = "กรุณาเปิดอย่างน้อย 1 ฟังก์ชัน";
   return;
  }
 
- const button=$("run");
- button.disabled=true;
+ const button = $("run");
+ button.disabled = true;
+
  show("loading");
  hide("runResult");
 
- let seconds=3;
- $("countdown").textContent=seconds;
+ let seconds = 3;
+ $("countdown").textContent = seconds;
 
- const timer=setInterval(()=>{
+ const timer = setInterval(() => {
   seconds--;
-  $("countdown").textContent=seconds;
+  $("countdown").textContent = seconds;
 
-  if(seconds<=0){
+  if(seconds <= 0){
    clearInterval(timer);
+
    hide("loading");
    show("runResult");
-   $("runResult").className="statusbox";
-   $("runResult").textContent="✓ ทดสอบหน้าจอสำเร็จ: "+list.join(" · ");
-   button.disabled=false;
+
+   $("runResult").className = "statusbox";
+   $("runResult").textContent =
+    "✓ ตรวจสอบหน้าเว็บเสร็จแล้ว: " + list.join(" · ") +
+    "\nโปรไฟล์ JSON ถูกเก็บไว้ในหน้าเว็บ แต่ไม่ได้เปลี่ยนค่าภายในเกมโดยตรง";
+
+   button.disabled = false;
   }
- },1000);
+ }, 1000);
 });
 
-$("gameBtn").addEventListener("click",()=>{
- $("gameStatus").textContent="กำลังลองเปิด Free Fire...";
- window.location.href="intent://#Intent;package=com.dts.freefireth;scheme=freefire;end";
+/* เปิดเกม */
+$("gameBtn").addEventListener("click", () => {
+ $("gameStatus").textContent = "กำลังลองเปิด Free Fire...";
 
- setTimeout(()=>{
-  $("gameStatus").textContent="หากเกมไม่เปิด ให้เปิดเกมจากโทรศัพท์โดยตรง";
- },1500);
+ window.location.href =
+  "intent://#Intent;package=com.dts.freefireth;scheme=freefire;end";
+
+ setTimeout(() => {
+  $("gameStatus").textContent =
+   "หากเกมไม่เปิด ให้เปิดเกมจากโทรศัพท์โดยตรง";
+ }, 1500);
 });
 
+/* ออกจากระบบ */
 function logout(){
- $("key").value="";
- document.querySelectorAll(".featureSwitch").forEach(input=>input.checked=false);
+ $("key").value = "";
+
+ document.querySelectorAll(".featureSwitch").forEach(input => {
+  input.checked = false;
+ });
+
+ $("dragToggle").checked = false;
+ $("xyToggle").checked = true;
+ $("performanceToggle").checked = true;
+
+ currentKey = "";
+ currentKeyItem = null;
+ currentDeviceInfo = null;
+
  hide("dashboard");
  hide("permission");
  show("login");
- $("loginMsg").textContent="";
- $("loginMsg").className="notice hidden";
- $("selected").textContent="ยังไม่ได้เปิดฟังก์ชัน";
- $("run").disabled=false;
+
+ $("loginMsg").textContent = "";
+ $("loginMsg").className = "notice hidden";
+
+ $("selected").textContent = "ยังไม่ได้เปิดฟังก์ชัน";
+
+ $("run").disabled = false;
+ $("permissionBtn").disabled = false;
+
  hide("loading");
  hide("runResult");
+ hide("profileOutput");
 }
-$("logout1").addEventListener("click",logout);
-$("logout2").addEventListener("click",logout);
+
+$("logout1").addEventListener("click", logout);
+$("logout2").addEventListener("click", logout);
 </script>
 </body>
 </html>
