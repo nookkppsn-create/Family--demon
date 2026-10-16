@@ -2,469 +2,694 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#100607">
-<title>FAMILY-DEMON | PLAYER PRO</title>
+<title>FAMILY-DEMON</title>
 
 <style>
-:root{
-  --bg:#090708;
-  --panel:#171113;
-  --panel2:#201317;
-  --red:#ff253f;
-  --text:#fff;
-  --muted:#a99a9c;
-  --green:#36e59b;
-  --border:#382025;
+:root {
+  --bg: #0b0809;
+  --panel: #191114;
+  --red: #ff2545;
+  --line: #47202a;
+  --text: #ffffff;
+  --muted: #b9aeb1;
+  --green: #45e39a;
 }
-*{box-sizing:border-box}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:Arial,"Noto Sans Thai",sans-serif;min-height:100vh
+
+* {
+  box-sizing: border-box;
 }
-button,input{font:inherit}
-button{border:0;cursor:pointer;color:white;transition:.18s}
-button:active{transform:scale(.98);filter:brightness(1.2)}
-button:disabled{opacity:.45;cursor:not-allowed}
-header{
-  padding:24px 16px;text-align:center;
-  background:linear-gradient(135deg,#350914,#100607 75%);
-  border-bottom:1px solid var(--border)
+
+body {
+  margin: 0;
+  padding: 18px 14px 30px;
+  background: radial-gradient(ellipse at top, #35101a, var(--bg) 55%);
+  color: var(--text);
+  font-family: Arial, sans-serif;
 }
-.logo{font-weight:900;font-size:26px;letter-spacing:2px}
-.logo span{color:var(--red)}
-.subtitle{font-size:10px;color:var(--muted);margin-top:8px;letter-spacing:3px}
-main{width:min(480px,100%);margin:auto;padding:18px 14px 35px}
-.card{
-  background:linear-gradient(145deg,#1b1215,#120d0f);
-  border:1px solid var(--border);border-radius:17px;
-  padding:18px;margin-bottom:15px;box-shadow:0 8px 25px #0005
+
+.container {
+  max-width: 500px;
+  margin: auto;
 }
-h2{font-size:16px;margin:0 0 15px}
-p{font-size:12px;line-height:1.8;color:var(--muted)}
-label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}
-input:not(.switch){
-  width:100%;padding:14px;border-radius:10px;background:#0d090a;
-  color:white;border:1px solid #493038;outline:none
+
+.header {
+  text-align: center;
+  margin-bottom: 22px;
 }
-input:focus{border-color:var(--red)}
-.btn{
-  width:100%;padding:13px;border-radius:10px;font-weight:bold;
-  margin-top:11px;background:linear-gradient(100deg,#b90e28,#ff253f)
+
+.logo {
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--red);
+  border-radius: 18px;
+  color: var(--red);
+  font-size: 25px;
+  font-weight: 900;
+  box-shadow: 0 0 25px #ff254530;
 }
-.btn.secondary{background:#28161b;border:1px solid #59303a}
-.btn.green{background:#087e52}
-.hidden{display:none!important}
-.page{animation:enter .25s ease both}
-@keyframes enter{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
-.status{
-  padding:11px;border-radius:9px;background:#0d090a;
-  font-size:12px;line-height:1.7;overflow-wrap:anywhere;white-space:pre-line
+
+.header h1 {
+  font-size: 23px;
+  letter-spacing: 2px;
+  margin: 12px 0 4px;
 }
-.ok{color:var(--green)}
-.bad{color:#ff6175}
-.muted{color:var(--muted)}
-.row{
-  display:flex;justify-content:space-between;gap:12px;
-  padding:11px 0;border-bottom:1px solid #ffffff0b;font-size:12px
+
+.header p {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 2px;
 }
-.row:last-child{border-bottom:0}
-.row span:first-child{color:var(--muted)}
-.row span:last-child{text-align:right;overflow-wrap:anywhere}
-.switchrow{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:13px 0;border-bottom:1px solid #ffffff0b;font-size:13px
+
+.card {
+  background: linear-gradient(145deg, #201419, #110d0f);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 17px;
+  margin-bottom: 13px;
 }
-.switch{
-  appearance:none;width:43px;height:24px;background:#49343a;
-  border-radius:20px;position:relative;cursor:pointer;
-  transition:background .2s;flex-shrink:0
+
+h2 {
+  font-size: 17px;
+  margin: 0 0 8px;
 }
-.switch:before{
-  content:"";position:absolute;width:18px;height:18px;background:white;
-  left:3px;top:3px;border-radius:50%;transition:transform .2s
+
+.description {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 15px;
 }
-.switch:checked{background:var(--red)}
-.switch:checked:before{transform:translateX(19px)}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
-.stat{
-  background:#0d090a;border:1px solid #392027;
-  border-radius:12px;padding:13px 5px;text-align:center;min-width:0
+
+input[type="text"] {
+  width: 100%;
+  padding: 14px;
+  color: white;
+  background: #0b0809;
+  border: 1px solid #59303a;
+  border-radius: 10px;
+  outline: none;
 }
-.stat .value{font-size:23px;font-weight:900;color:var(--green);overflow-wrap:anywhere}
-.stat .unit{font-size:10px;color:var(--muted);margin-top:5px}
-.stat .name{font-size:11px;color:#ddd;margin-bottom:9px}
-.progress{height:5px;background:#392027;border-radius:10px;overflow:hidden;margin-top:13px}
-.progress div{height:100%;width:0;background:var(--red);transition:width .2s linear}
-footer{text-align:center;font-size:10px;color:#75676a;padding:12px}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.main-btn {
+  width: 100%;
+  padding: 13px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(100deg, #ff2545, #a90f2a);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.secondary-btn {
+  background: #28171d;
+  border: 1px solid #59303a;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #382129;
+  font-size: 12px;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-row span:first-child {
+  color: var(--muted);
+}
+
+.info-row span:last-child {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.status {
+  color: var(--green);
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 13px;
+}
+
+.metric {
+  text-align: center;
+  background: #1b1216;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 13px 5px;
+}
+
+.metric-label {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 7px;
+}
+
+.metric-value {
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.metric small {
+  display: block;
+  color: #94858a;
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.function-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 9px;
+  background: #21151a;
+  color: white;
+  border: 1px solid #4b2731;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.function-btn:last-child {
+  margin-bottom: 0;
+}
+
+.function-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #39131e;
+  font-size: 20px;
+}
+
+.function-info {
+  flex: 1;
+}
+
+.function-info strong {
+  display: block;
+  font-size: 14px;
+}
+
+.function-info small {
+  display: block;
+  color: var(--muted);
+  margin-top: 4px;
+  font-size: 11px;
+}
+
+.function-state {
+  font-size: 11px;
+  color: #ff9aaa;
+}
+
+.function-btn.active {
+  border-color: var(--green);
+}
+
+.function-btn.active .function-state {
+  color: var(--green);
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.action-grid button {
+  margin-top: 0;
+  font-size: 12px;
+  padding: 13px 7px;
+}
+
+.note {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-top: 12px;
+}
+
+#toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  background: #29151c;
+  border: 1px solid #713042;
+  padding: 11px 16px;
+  border-radius: 10px;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity .2s;
+  pointer-events: none;
+  width: max-content;
+  max-width: 90%;
+  text-align: center;
+}
+
+#toast.show {
+  opacity: 1;
+}
+
+.footer {
+  text-align: center;
+  color: #796a6f;
+  font-size: 10px;
+  margin-top: 18px;
+}
 </style>
 </head>
 
 <body>
-<header>
-  <div class="logo">FAMILY<span>-DEMON</span></div>
-  <div class="subtitle">PLAYER CONTROL PANEL · PRO</div>
+<div class="container">
+
+<header class="header">
+  <div class="logo">FD</div>
+  <h1>FAMILY-DEMON</h1>
+  <p>PLAYER PANEL</p>
 </header>
 
-<main>
+<!-- PAGE 1: KEY -->
+<section id="keyPage" class="card">
+  <h2>ยืนยันคีย์เข้าใช้งาน</h2>
+  <p class="description">
+    กรอกคีย์ของคุณ แล้วกดยืนยันเพื่อไปหน้าขออนุญาต
+  </p>
 
-<section id="loginPage" class="page">
-  <div class="card">
-    <h2>เข้าสู่ระบบ</h2>
-    <label for="keyInput">ACCESS KEY</label>
-    <input id="keyInput" placeholder="กรอกคีย์ของคุณ"
-      autocomplete="off" autocapitalize="characters">
-    <button id="loginBtn" class="btn">เข้าสู่ระบบ</button>
-    <div id="loginStatus" class="status hidden" style="margin-top:12px"></div>
-    <p>ระบบนี้ไม่ตรวจสอบคีย์กับเซิร์ฟเวอร์ คีย์ที่กรอกจึงไม่ได้รับการยืนยันว่าถูกต้องหรือยังไม่หมดอายุ</p>
-  </div>
+  <input
+    id="keyInput"
+    type="text"
+    placeholder="กรอกคีย์ของคุณ"
+    autocomplete="off"
+  >
+
+  <button class="main-btn" id="confirmKey">
+    ยืนยันคีย์
+  </button>
+
+  <p class="note">
+    คีย์ทดสอบในเครื่อง:
+    FDEM-123456 หรือ FDEM-ABCDEF
+    <br>
+    ระบบคีย์นี้ยังไม่ได้เชื่อมต่อ API แอดมิน
+  </p>
 </section>
 
-<section id="permissionPage" class="page hidden">
-  <div class="card">
-    <h2>สิทธิ์เข้าถึงโฟลเดอร์</h2>
-    <p>เลือกโฟลเดอร์ที่ต้องการให้เว็บเข้าถึง หากเบราว์เซอร์รองรับ ระบบจะเปิดหน้าต่างเลือกโฟลเดอร์ให้</p>
-    <div id="permissionStatus" class="status">ยังไม่ได้เลือกโฟลเดอร์</div>
-    <button id="chooseFolderBtn" class="btn">เลือกโฟลเดอร์ DATA</button>
-    <button id="continueBtn" class="btn green">ดำเนินการต่อ</button>
-    <button class="btn secondary logoutBtn">ออกจากระบบ</button>
+<!-- PAGE 2: PERMISSION -->
+<section id="permissionPage" class="card hidden">
+  <h2>ขออนุญาตเข้าใช้งาน</h2>
+
+  <p class="description">
+    ต้องผ่านขั้นตอนนี้ก่อนจึงจะเข้าสู่หน้าหลักได้
+  </p>
+
+  <div class="info-row">
+    <span>แพ็กเกจเกม</span>
+    <span>com.dts.freefireth</span>
   </div>
+
+  <p class="note">
+    หน้านี้เป็นการยืนยันในเว็บตัวอย่าง HTML
+    ไม่ใช่หน้าขอสิทธิ์ Android จริง
+  </p>
+
+  <label style="display:flex;gap:9px;font-size:12px;line-height:1.6;margin-top:15px">
+    <input type="checkbox" id="permissionCheck">
+    <span>
+      ยืนยันขั้นตอนเพื่อเข้าสู่หน้าหลัก
+      และรับทราบว่าหน้านี้ไม่ได้ให้สิทธิ์ Android จริง
+    </span>
+  </label>
+
+  <button class="main-btn" id="confirmPermission">
+    ยืนยันและเข้าหน้าหลัก
+  </button>
+
+  <button class="main-btn secondary-btn" id="backToKey">
+    กลับไปหน้าใส่คีย์
+  </button>
 </section>
 
-<section id="playerPage" class="page hidden">
+<!-- PAGE 3: MAIN -->
+<main id="mainPage" class="hidden">
 
-  <div class="card">
-    <h2>ข้อมูลบัญชี</h2>
-    <div class="row"><span>คีย์</span><span id="accountKey">—</span></div>
-    <div class="row"><span>สถานะ</span><span class="ok">เข้าใช้งานในเครื่อง</span></div>
-    <div class="row"><span>ระบบปฏิบัติการ</span><span id="osInfo">—</span></div>
-    <div class="row"><span>อุปกรณ์</span><span id="deviceInfo">—</span></div>
-    <div class="row"><span>เบราว์เซอร์</span><span id="browserInfo">—</span></div>
-    <div class="row"><span>สิทธิ์โฟลเดอร์</span><span id="folderInfo">ยังไม่เลือก</span></div>
-  </div>
-
-  <div class="card">
-    <h2>LIVE PERFORMANCE</h2>
-    <div class="stats">
-      <div class="stat">
-        <div class="name">FRAME RATE</div>
-        <div class="value" id="fpsValue">--</div>
-        <div class="unit">FPS · หน้าเว็บ</div>
-      </div>
-      <div class="stat">
-        <div class="name">PING</div>
-        <div class="value" id="pingValue">--</div>
-        <div class="unit">ms · เครือข่าย</div>
-      </div>
-      <div class="stat">
-        <div class="name">RESPONSE</div>
-        <div class="value" id="msValue">--</div>
-        <div class="unit">ms · ทดสอบ</div>
-      </div>
-    </div>
-    <p id="performanceNote">FPS คือความลื่นไหลของหน้าเว็บ ไม่ใช่ FPS ภายในเกม</p>
-    <button id="measureBtn" class="btn secondary">ทดสอบ Ping / MS</button>
-    <div id="measureStatus" class="status" style="margin-top:10px">รอทดสอบเครือข่าย</div>
-  </div>
-
-  <div class="card">
-    <h2>ตั้งค่าฟังก์ชัน</h2>
-
-    <div class="switchrow">
-      <span>ดูดหัว 90%</span>
-      <input class="switch featureSwitch" type="checkbox" aria-label="ดูดหัว 90%">
-    </div>
-    <div class="switchrow">
-      <span>กันแบน</span>
-      <input class="switch featureSwitch" type="checkbox" aria-label="กันแบน">
-    </div>
-    <div class="switchrow">
-      <span>กันดำ</span>
-      <input class="switch featureSwitch" type="checkbox" aria-label="กันดำ">
+  <!-- KEY / IP / DEVICE AT TOP -->
+  <section class="card">
+    <div class="status">
+      ● ข้อมูลระบบ
+      <span style="float:right">ACTIVE</span>
     </div>
 
-    <p>สวิตช์เหล่านี้เป็นตัวควบคุมสถานะบนหน้าเว็บ ไม่ได้แก้ไขข้อมูลหรือพฤติกรรมของเกมจริง</p>
+    <div class="info-row">
+      <span>ระบบคีย์</span>
+      <span id="shownKey">—</span>
+    </div>
 
-    <button id="singboxBtn" class="btn secondary">CONNECT SING-BOX</button>
-    <div id="singboxStatus" class="status" style="margin-top:10px">สถานะ Sing-box: ยังไม่ได้เปิด</div>
+    <div class="info-row">
+      <span>IP Address</span>
+      <span id="ipValue">กำลังตรวจสอบ...</span>
+    </div>
 
-    <button id="runBtn" class="btn">RUN</button>
-    <div id="runStatus" class="status hidden" style="margin-top:12px"></div>
-    <div class="progress"><div id="progressBar"></div></div>
+    <div class="info-row">
+      <span>อุปกรณ์</span>
+      <span id="deviceValue">กำลังอ่านข้อมูล...</span>
+    </div>
+  </section>
 
-    <button id="gameBtn" class="btn secondary">เปิด Free Fire</button>
-    <button id="refreshBtn" class="btn secondary">รีเฟรชข้อมูล</button>
-    <button class="btn secondary logoutBtn">ออกจากระบบ</button>
-  </div>
-</section>
+  <!-- FPS / MS / PING BELOW TOP INFO -->
+  <section class="metrics">
+    <div class="metric">
+      <div class="metric-label">FPS</div>
+      <div class="metric-value" id="fpsValue">--</div>
+      <small>หน้าเว็บ</small>
+    </div>
 
-<footer>FAMILY-DEMON · PLAYER PRO</footer>
+    <div class="metric">
+      <div class="metric-label">MS</div>
+      <div class="metric-value" id="msValue">--</div>
+      <small>เครือข่ายทดสอบ</small>
+    </div>
+
+    <div class="metric">
+      <div class="metric-label">PING</div>
+      <div class="metric-value" id="pingValue">--</div>
+      <small>ปลายทางทดสอบ</small>
+    </div>
+  </section>
+
+  <!-- INDIVIDUAL FUNCTIONS -->
+  <section class="card">
+    <div class="section-title">ฟังก์ชัน</div>
+
+    <button class="function-btn" data-feature="aim">
+      <span class="function-icon">🎯</span>
+      <span class="function-info">
+        <strong>ดูดหัว</strong>
+        <small>ฟังก์ชันแยก</small>
+      </span>
+      <span class="function-state">ปิด</span>
+    </button>
+
+    <button class="function-btn" data-feature="ban">
+      <span class="function-icon">🛡️</span>
+      <span class="function-info">
+        <strong>กันแบน</strong>
+        <small>ฟังก์ชันแยก</small>
+      </span>
+      <span class="function-state">ปิด</span>
+    </button>
+
+    <button class="function-btn" data-feature="black">
+      <span class="function-icon">⚫</span>
+      <span class="function-info">
+        <strong>กันดำ</strong>
+        <small>ฟังก์ชันแยก</small>
+      </span>
+      <span class="function-state">ปิด</span>
+    </button>
+
+    <p class="note">
+      ปุ่มทั้งสามเปลี่ยนสถานะบนหน้าเว็บเท่านั้น
+      ยังไม่ได้เชื่อมกับกลไกภายในเกมจริง
+    </p>
+  </section>
+
+  <!-- SING-BOX AND FREE FIRE -->
+  <section class="card">
+    <div class="section-title">เชื่อมต่อและเปิดเกม</div>
+
+    <div class="action-grid">
+      <button class="main-btn" id="openSfa">
+        เปิด Sing-box / SFA
+      </button>
+
+      <button class="main-btn secondary-btn" id="openGame">
+        เข้าเกม Free Fire
+      </button>
+    </div>
+
+    <p class="note">
+      การเปิด SFA ไม่ได้สั่งเชื่อม VPN อัตโนมัติ
+      และค่า FPS/Ping บนเว็บไม่ใช่ค่า FPS/Ping ของเกม
+    </p>
+  </section>
+
+  <button class="main-btn secondary-btn" id="changeKey">
+    ออกจากระบบ / เปลี่ยนคีย์
+  </button>
+
 </main>
 
+<div class="footer">FAMILY-DEMON • PLAYER</div>
+</div>
+
+<div id="toast"></div>
+
 <script>
-"use strict";
-
 const $ = id => document.getElementById(id);
+
+const validKeys = [
+  "FDEM-123456",
+  "FDEM-ABCDEF"
+];
+
 let currentKey = "";
-let folderHandle = null;
-let folderAuthorized = false;
-let fpsFrame = 0;
-let fpsStart = 0;
-let fpsRunning = false;
+let toastTimer;
 
-function showPage(id){
-  ["loginPage","permissionPage","playerPage"].forEach(page=>{
-    $(page).classList.toggle("hidden",page !== id);
+function toast(message) {
+  const el = $("toast");
+  el.textContent = message;
+  el.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(() => {
+    el.classList.remove("show");
+  }, 2200);
+}
+
+function showPage(pageId) {
+  ["keyPage", "permissionPage", "mainPage"].forEach(id => {
+    $(id).classList.toggle("hidden", id !== pageId);
   });
 }
 
-function message(id,text,type=""){
-  const el=$(id);
-  el.textContent=text;
-  el.className="status"+(type?" "+type:"");
-}
+/* PAGE 1: KEY CONFIRMATION */
+$("confirmKey").addEventListener("click", () => {
+  const key = $("keyInput").value.trim().toUpperCase();
 
-function login(){
-  const key=$("keyInput").value.trim().toUpperCase();
-  if(!key){
-    message("loginStatus","กรุณากรอกคีย์","bad");
-    $("loginStatus").classList.remove("hidden");
+  if (!key) {
+    toast("กรุณากรอกคีย์");
     return;
   }
 
-  currentKey=key;
-  $("accountKey").textContent=key;
-  $("loginStatus").classList.add("hidden");
-  collectDeviceInfo();
+  if (!validKeys.includes(key)) {
+    toast("คีย์ไม่ถูกต้อง");
+    return;
+  }
+
+  currentKey = key;
+  $("permissionCheck").checked = false;
+
   showPage("permissionPage");
-}
-
-$("loginBtn").addEventListener("click",login);
-$("keyInput").addEventListener("keydown",e=>{
-  if(e.key==="Enter")login();
 });
 
-function detectOS(){
-  const ua=navigator.userAgent;
-  if(/Android/i.test(ua))return "Android";
-  if(/iPhone|iPad|iPod/i.test(ua))return "iOS";
-  if(/Windows/i.test(ua))return "Windows";
-  if(/Mac OS/i.test(ua))return "macOS";
-  return "ไม่สามารถระบุได้";
-}
+/* PAGE 2: PERMISSION CONFIRMATION */
+$("backToKey").addEventListener("click", () => {
+  showPage("keyPage");
+});
 
-function detectBrowser(){
-  const ua=navigator.userAgent;
-  if(/Edg\//i.test(ua))return "Microsoft Edge";
-  if(/OPR\//i.test(ua))return "Opera";
-  if(/Chrome\//i.test(ua))return "Chrome";
-  if(/Firefox\//i.test(ua))return "Firefox";
-  if(/Safari\//i.test(ua))return "Safari";
-  return "ไม่สามารถระบุได้";
-}
-
-function detectDevice(){
-  const ua=navigator.userAgent;
-  if(/OPPO/i.test(ua))return "OPPO";
-  if(/Samsung/i.test(ua))return "Samsung";
-  if(/Xiaomi|Redmi|POCO/i.test(ua))return "Xiaomi / Redmi / POCO";
-  if(/vivo/i.test(ua))return "vivo";
-  if(/HUAWEI/i.test(ua))return "Huawei";
-  if(/iPhone/i.test(ua))return "iPhone";
-  if(/Android/i.test(ua))return "อุปกรณ์ Android";
-  return "อุปกรณ์ที่เชื่อมต่อ";
-}
-
-function collectDeviceInfo(){
-  $("osInfo").textContent=detectOS();
-  $("deviceInfo").textContent=detectDevice();
-  $("browserInfo").textContent=detectBrowser();
-  $("folderInfo").textContent=folderAuthorized?"เลือกแล้ว":"ยังไม่เลือก";
-}
-
-$("chooseFolderBtn").addEventListener("click",async()=>{
-  if(!window.showDirectoryPicker){
-    message(
-      "permissionStatus",
-      "เบราว์เซอร์นี้ไม่รองรับการเลือกโฟลเดอร์ผ่านเว็บ กรุณาใช้เบราว์เซอร์ที่รองรับ",
-      "bad"
-    );
+$("confirmPermission").addEventListener("click", () => {
+  if (!$("permissionCheck").checked) {
+    toast("กรุณายืนยันขั้นตอนก่อน");
     return;
   }
 
-  try{
-    const handle=await window.showDirectoryPicker({mode:"read"});
-    folderHandle=handle;
-    folderAuthorized=true;
-    $("folderInfo").textContent="เลือกแล้ว";
-    message(
-      "permissionStatus",
-      "เลือกโฟลเดอร์แล้ว: "+handle.name+
-      "\nสิทธิ์นี้ใช้ได้เฉพาะการเข้าถึงที่เบราว์เซอร์อนุญาต",
-      "ok"
-    );
-  }catch(error){
-    if(error.name!=="AbortError"){
-      message("permissionStatus","ไม่สามารถเลือกโฟลเดอร์ได้","bad");
-    }
-  }
-});
+  $("shownKey").textContent = currentKey;
 
-$("continueBtn").addEventListener("click",()=>{
-  showPage("playerPage");
-  collectDeviceInfo();
-  startFPS();
-});
+  showPage("mainPage");
 
-/* วัด FPS ของหน้าเว็บเท่านั้น */
-function startFPS(){
-  if(fpsRunning)return;
-  fpsRunning=true;
-  fpsFrame=0;
-  fpsStart=performance.now();
-
-  function frame(now){
-    if(!fpsRunning)return;
-    fpsFrame++;
-
-    const elapsed=now-fpsStart;
-    if(elapsed>=1000){
-      $("fpsValue").textContent=Math.round(fpsFrame*1000/elapsed);
-      fpsFrame=0;
-      fpsStart=now;
-    }
-
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-}
-
-/*
- * วัดเวลาในการตอบสนองของปลายทางทดสอบสาธารณะ
- * ไม่ใช่ Ping ของเซิร์ฟเวอร์ Free Fire
- */
-async function measureNetwork(){
-  const btn=$("measureBtn");
-  btn.disabled=true;
-  message("measureStatus","กำลังทดสอบเครือข่าย...");
-
-  try{
-    const samples=[];
-    const endpoint="https://www.gstatic.com/generate_204";
-
-    for(let i=0;i<3;i++){
-      const controller=new AbortController();
-      const timeout=setTimeout(()=>controller.abort(),5000);
-      const start=performance.now();
-
-      try{
-        await fetch(endpoint+"?t="+Date.now()+"-"+i,{
-          method:"GET",
-          mode:"no-cors",
-          cache:"no-store",
-          signal:controller.signal
-        });
-        samples.push(Math.round(performance.now()-start));
-      }finally{
-        clearTimeout(timeout);
-      }
-    }
-
-    if(!samples.length)throw new Error("ไม่มีผลการทดสอบ");
-
-    samples.sort((a,b)=>a-b);
-    const median=samples[Math.floor(samples.length/2)];
-
-    $("pingValue").textContent=median;
-    $("msValue").textContent=median;
-
-    message(
-      "measureStatus",
-      "ผลทดสอบการตอบสนองของเครือข่าย: "+median+
-      " ms\nค่านี้ไม่ใช่ Ping ของเซิร์ฟเวอร์เกม",
-      "ok"
-    );
-  }catch{
-    $("pingValue").textContent="--";
-    $("msValue").textContent="--";
-    message(
-      "measureStatus",
-      "ทดสอบไม่สำเร็จ ตรวจสอบอินเทอร์เน็ตแล้วลองอีกครั้ง",
-      "bad"
-    );
-  }finally{
-    btn.disabled=false;
-  }
-}
-
-$("measureBtn").addEventListener("click",measureNetwork);
-$("refreshBtn").addEventListener("click",()=>{
-  collectDeviceInfo();
+  loadDeviceInfo();
+  loadIP();
   measureNetwork();
+
+  toast("เข้าสู่หน้าหลักแล้ว");
 });
 
-/* เรียกเปิดแอป Sing-box เท่านั้น */
-$("singboxBtn").addEventListener("click",()=>{
-  message(
-    "singboxStatus",
-    "กำลังเรียกเปิด Sing-box หากไม่เปิด กรุณาเปิดแอปจากหน้าจอมือถือ"
-  );
-  window.location.href="intent://#Intent;package=io.nekohasekai.sfa;end";
-});
+/* DEVICE INFORMATION */
+function loadDeviceInfo() {
+  const ua = navigator.userAgent || "";
 
-/* RUN เป็นการแสดงความคืบหน้าของหน้าเว็บ */
-$("runBtn").addEventListener("click",()=>{
-  const btn=$("runBtn");
-  const status=$("runStatus");
-  const bar=$("progressBar");
+  let device = "ไม่ทราบอุปกรณ์";
 
-  btn.disabled=true;
-  status.classList.remove("hidden");
-  status.textContent="กำลังประมวลผลหน้าเว็บ...";
-  bar.style.width="0%";
+  if (/Android/i.test(ua)) {
+    device = "Android";
+  } else if (/iPhone|iPad/i.test(ua)) {
+    device = "iOS";
+  }
 
-  let progress=0;
-  const timer=setInterval(()=>{
-    progress+=10;
-    bar.style.width=progress+"%";
+  $("deviceValue").textContent =
+    device + " • " + (navigator.platform || "Browser");
+}
 
-    if(progress>=100){
-      clearInterval(timer);
-      btn.disabled=false;
-      status.textContent="ประมวลผลหน้าเว็บเสร็จสิ้น";
-    }
-  },150);
-});
+/* IP ADDRESS */
+async function loadIP() {
+  try {
+    const response = await fetch(
+      "https://api.ipify.org?format=json",
+      { cache: "no-store" }
+    );
 
-/* เรียกเปิด Free Fire */
-$("gameBtn").addEventListener("click",()=>{
-  window.location.href=
-    "intent://#Intent;package=com.dts.freefireth;end";
-});
+    if (!response.ok) throw new Error();
 
-/* สวิตช์เปลี่ยนสถานะบนหน้าเว็บเท่านั้น */
-document.querySelectorAll(".featureSwitch").forEach(toggle=>{
-  toggle.addEventListener("change",()=>{
-    toggle.setAttribute("aria-checked",String(toggle.checked));
+    const data = await response.json();
+
+    $("ipValue").textContent = data.ip || "ไม่พบ IP";
+  } catch {
+    $("ipValue").textContent = "ตรวจสอบไม่ได้";
+  }
+}
+
+/* NETWORK TEST - NOT GAME PING */
+async function measureNetwork() {
+  if ($("mainPage").classList.contains("hidden")) return;
+
+  const endpoint = "https://www.gstatic.com/generate_204";
+
+  try {
+    const start = performance.now();
+
+    await fetch(endpoint, {
+      mode: "no-cors",
+      cache: "no-store"
+    });
+
+    const ms = Math.round(performance.now() - start);
+
+    $("msValue").textContent = ms;
+    $("pingValue").textContent = ms;
+  } catch {
+    $("msValue").textContent = "--";
+    $("pingValue").textContent = "--";
+  }
+
+  setTimeout(measureNetwork, 5000);
+}
+
+/* WEBPAGE FPS - NOT GAME FPS */
+let frames = 0;
+let lastFrameTime = performance.now();
+
+function updateFPS(now) {
+  frames++;
+
+  if (now - lastFrameTime >= 1000) {
+    const fps = Math.round(
+      frames * 1000 / (now - lastFrameTime)
+    );
+
+    $("fpsValue").textContent = fps;
+
+    frames = 0;
+    lastFrameTime = now;
+  }
+
+  requestAnimationFrame(updateFPS);
+}
+
+requestAnimationFrame(updateFPS);
+
+/* EACH FUNCTION HAS ITS OWN BUTTON */
+document.querySelectorAll("[data-feature]").forEach(button => {
+  button.addEventListener("click", () => {
+    const active = button.classList.toggle("active");
+
+    button.querySelector(".function-state").textContent =
+      active ? "เปิดสถานะ" : "ปิด";
+
+    const names = {
+      aim: "ดูดหัว",
+      ban: "กันแบน",
+      black: "กันดำ"
+    };
+
+    toast(
+      names[button.dataset.feature] +
+      (active ? " เปิดสถานะแล้ว" : " ปิดสถานะแล้ว") +
+      " (ตัวอย่างหน้าเว็บ)"
+    );
   });
 });
 
-/* ออกจากระบบ */
-document.querySelectorAll(".logoutBtn").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    currentKey="";
-    folderHandle=null;
-    folderAuthorized=false;
-    $("keyInput").value="";
-    $("accountKey").textContent="—";
-    $("folderInfo").textContent="ยังไม่เลือก";
-    $("fpsValue").textContent="--";
-    $("pingValue").textContent="--";
-    $("msValue").textContent="--";
-    fpsRunning=false;
-    showPage("loginPage");
+/* OPEN ANDROID APPS */
+function launchApp(packageName, label) {
+  toast("กำลังเปิด " + label + "...");
+
+  const intent =
+    "intent://#Intent;" +
+    "action=android.intent.action.MAIN;" +
+    "category=android.intent.category.LAUNCHER;" +
+    "package=" + packageName +
+    ";end";
+
+  window.location.href = intent;
+}
+
+$("openSfa").addEventListener("click", () => {
+  launchApp("io.nekohasekai.sfa", "SFA");
+});
+
+$("openGame").addEventListener("click", () => {
+  launchApp("com.dts.freefireth", "Free Fire");
+});
+
+/* CHANGE KEY */
+$("changeKey").addEventListener("click", () => {
+  currentKey = "";
+  $("keyInput").value = "";
+  $("permissionCheck").checked = false;
+
+  document.querySelectorAll("[data-feature]").forEach(button => {
+    button.classList.remove("active");
+    button.querySelector(".function-state").textContent = "ปิด";
   });
+
+  showPage("keyPage");
 });
 </script>
 </body>
