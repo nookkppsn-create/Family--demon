@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#100607">
 <title>FAMILY-DEMON | ADMIN</title>
 
@@ -10,686 +10,729 @@
 :root{
   --bg:#0b0809;
   --panel:#171113;
-  --panel2:#211719;
   --red:#ff253f;
-  --text:#f6eeee;
-  --muted:#a99a9c;
-  --green:#39d98a;
-  --yellow:#ffca62;
-  --border:#382326;
+  --text:#fff;
+  --muted:#aa9da0;
+  --line:#352329;
+  --green:#31e981;
 }
+
 *{box-sizing:border-box}
+
 body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:system-ui,sans-serif
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
 }
-button,input,select{font:inherit}
-button{
-  cursor:pointer;border:0;border-radius:9px;padding:10px 13px;
-  background:var(--red);color:white;font-weight:750
+
+header{
+  padding:24px 16px;
+  text-align:center;
+  background:linear-gradient(135deg,#25070d,#100607);
+  border-bottom:1px solid var(--line);
 }
-button:active{transform:scale(.98)}
+
+.logo{
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:var(--red);
+  text-shadow:0 0 18px #ff253f66;
+}
+
+.sub{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:7px;
+  letter-spacing:3px;
+}
+
+main{
+  max-width:600px;
+  margin:auto;
+  padding:15px;
+}
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:17px;
+  margin-bottom:14px;
+}
+
+h2{
+  font-size:17px;
+  margin:0 0 15px;
+}
+
+label{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin:12px 0 7px;
+}
+
 input,select{
-  padding:11px;background:#0e0a0b;color:white;
-  border:1px solid var(--border);border-radius:9px;width:100%;min-width:0
+  width:100%;
+  padding:13px;
+  background:#0d090a;
+  border:1px solid var(--line);
+  border-radius:9px;
+  color:white;
+  outline:none;
+  font-size:14px;
 }
-.layout{display:flex;min-height:100vh}
-.sidebar{
-  width:215px;flex-shrink:0;background:#120d0f;padding:16px;
-  border-right:1px solid var(--border)
+
+input:focus,select:focus{
+  border-color:var(--red);
 }
-.logo{font-size:20px;font-weight:950;color:var(--red);margin:4px 0 5px}
-.sublogo{font-size:11px;color:var(--muted);margin-bottom:20px}
-.nav{
-  display:block;width:100%;margin:6px 0;text-align:left;
-  background:transparent;color:#ddd;border:1px solid transparent
+
+button{
+  cursor:pointer;
+  border:0;
+  border-radius:9px;
+  padding:12px;
+  color:white;
+  background:#302126;
+  font-weight:bold;
 }
-.nav.active,.nav:hover{background:#341319;border-color:#6d202d}
-.main{flex:1;min-width:0;padding:20px}
-.top{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:12px;flex-wrap:wrap;margin-bottom:20px
+
+button:active{
+  transform:scale(.98);
 }
-h1{font-size:23px;margin:0}
-h2{font-size:17px;margin:0 0 15px}
-h3{font-size:14px;margin:0 0 10px}
-p{line-height:1.6}
-.muted{color:var(--muted);font-size:12px}
-.demo{
-  color:var(--yellow);font-size:11px;border:1px solid #725522;
-  padding:7px 10px;border-radius:8px
+
+.primary{
+  background:var(--red);
+  color:#fff;
 }
+
+.full{
+  width:100%;
+  margin-top:12px;
+}
+
 .grid{
-  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:12px;margin-bottom:16px
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
 }
-.stat,.card{
-  background:var(--panel);border:1px solid var(--border);
-  border-radius:13px;padding:16px;margin-bottom:15px;min-width:0
+
+.stat{
+  background:#0d090a;
+  padding:14px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  font-size:13px;
 }
-.stat small{color:var(--muted)}
-.num{font-size:27px;font-weight:900;margin-top:7px;overflow-wrap:anywhere}
-.green{color:var(--green)}
-.red{color:var(--red)}
-.yellow{color:var(--yellow)}
-.form{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px
+
+.num{
+  font-size:25px;
+  color:var(--red);
+  font-weight:bold;
+  margin-top:8px;
 }
-.full{grid-column:1/-1}
-label{display:block;font-size:12px;color:#ddd;margin:5px 0 7px}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-.toolbar input{flex:1;min-width:140px}
-.toolbar select{width:auto;max-width:160px}
-.tablewrap{overflow-x:auto}
-table{border-collapse:collapse;width:100%;min-width:720px}
-th,td{
-  text-align:left;padding:11px 9px;border-bottom:1px solid var(--border);
-  font-size:12px;vertical-align:middle
+
+.muted{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.7;
+  overflow-wrap:anywhere;
 }
-th{color:var(--muted);font-weight:600}
+
+.item{
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+  overflow-wrap:anywhere;
+}
+
+.item:last-child{
+  border-bottom:0;
+}
+
 .badge{
-  display:inline-block;padding:5px 8px;border-radius:20px;
-  background:#342125;font-size:10px;white-space:nowrap
+  display:inline-block;
+  padding:5px 8px;
+  border-radius:6px;
+  font-size:11px;
+  background:#153522;
+  color:var(--green);
+  margin:7px 0;
 }
-.badge.active{background:#103c2a;color:var(--green)}
-.badge.suspended{background:#50151f;color:#ff8794}
-.badge.expired{background:#493719;color:var(--yellow)}
-.actions{display:flex;gap:5px;flex-wrap:wrap}
-.actions button{font-size:10px;padding:7px 9px}
-.secondary{background:#342125;border:1px solid #503038}
-.danger{background:#690e1c;border:1px solid #a51b31}
+
+.badge.off{
+  background:#3b171d;
+  color:#ff8794;
+}
+
+.row{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.row button{
+  flex:1;
+  min-width:75px;
+  padding:10px 6px;
+  font-size:11px;
+}
+
+.danger{
+  background:#651522;
+}
+
+.success{
+  background:#153522;
+  color:var(--green);
+}
+
+.hidden{
+  display:none!important;
+}
+
 .notice{
-  padding:12px;background:#211719;border:1px solid var(--border);
-  border-radius:9px;margin:12px 0;font-size:12px;overflow-wrap:anywhere
+  padding:12px;
+  background:#0d090a;
+  border:1px solid var(--line);
+  border-radius:9px;
+  margin-top:12px;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.6;
 }
-.hidden{display:none!important}
-.empty{text-align:center;color:var(--muted);padding:25px}
-.statline{
-  display:flex;justify-content:space-between;gap:12px;
-  padding:11px 0;border-bottom:1px solid var(--border);font-size:13px
-}
-.statline:last-child{border-bottom:0}
-.smallbtn{padding:7px 10px;font-size:11px}
-#toast{
-  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
-  background:#28191c;border:1px solid #70404a;color:white;
-  padding:12px 16px;border-radius:10px;z-index:99;
-  max-width:90%;font-size:12px;box-shadow:0 5px 25px #0008
-}
-.progress{
-  height:7px;background:#302124;border-radius:10px;overflow:hidden;margin-top:10px
-}
-.progress span{display:block;height:100%;background:var(--red);width:0}
-@media(max-width:850px){
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .sidebar{width:175px;padding:12px}
-  .main{padding:14px}
-}
-@media(max-width:560px){
-  .layout{display:block}
-  .sidebar{width:100%;border-right:0;border-bottom:1px solid var(--border);padding:12px}
-  .logo{margin-bottom:3px}
-  .sublogo{margin-bottom:9px}
-  .nav{display:inline-block;width:auto;margin:3px 1px;padding:9px;font-size:11px}
-  .main{padding:12px}
-  .form{grid-template-columns:1fr}
-  .full{grid-column:auto}
-  .stat,.card{padding:12px}
-  h1{font-size:20px}
-  .num{font-size:23px}
+
+footer{
+  text-align:center;
+  padding:22px;
+  color:#76666a;
+  font-size:11px;
 }
 </style>
 </head>
 
 <body>
-<div class="layout">
 
-<aside class="sidebar">
+<header>
   <div class="logo">FAMILY-DEMON</div>
-  <div class="sublogo">ADMIN CONTROL PANEL</div>
-
-  <button class="nav active" data-page="dashboard">📊 ภาพรวม</button>
-  <button class="nav" data-page="keys">🔑 จัดการคีย์</button>
-  <button class="nav" data-page="players">📱 ผู้เล่น</button>
-  <button class="nav" data-page="alerts">🔔 แจ้งเตือน</button>
-  <button class="nav" data-page="history">📜 ประวัติ</button>
-  <button class="nav" data-page="backup">💾 สำรองข้อมูล</button>
-  <button class="nav" data-page="settings">⚙️ ตั้งค่า</button>
-</aside>
-
-<main class="main">
-
-<header class="top">
-  <div>
-    <h1 id="title">ภาพรวมระบบ</h1>
-    <div class="muted">FAMILY-DEMON · ADMIN PANEL</div>
-  </div>
-  <span class="demo">LOCAL MODE · ไม่เชื่อมเซิร์ฟเวอร์</span>
+  <div class="sub">PRIVATE ADMIN CONTROL PANEL</div>
 </header>
 
-<div id="message" class="notice hidden"></div>
+<main>
 
-<!-- DASHBOARD -->
-<section id="page-dashboard">
-  <div class="grid">
-    <div class="stat"><small>คีย์ทั้งหมด</small><div class="num" id="total">0</div></div>
-    <div class="stat"><small>พร้อมใช้งาน</small><div class="num green" id="active">0</div></div>
-    <div class="stat"><small>ถูกระงับ</small><div class="num red" id="suspended">0</div></div>
-    <div class="stat"><small>หมดอายุ</small><div class="num yellow" id="expired">0</div></div>
-  </div>
+<!-- LOGIN -->
+<section id="loginSection" class="card">
+  <h2>🔐 ADMIN ACCESS</h2>
 
-  <div class="card">
-    <h2>FAMILY-DEMON CONTROL</h2>
-    <p class="muted">
-      ระบบจัดการคีย์แบบเก็บข้อมูลภายในเบราว์เซอร์
-      ไม่จำเป็นต้องตั้งค่าเซิร์ฟเวอร์
-    </p>
-    <button data-goto="keys">＋ สร้างและจัดการคีย์</button>
-  </div>
+  <label>รหัสผ่านผู้ดูแล</label>
 
-  <div class="card">
-    <h2>สรุปการใช้งาน</h2>
-    <div class="statline"><span>อุปกรณ์ที่บันทึกไว้</span><strong id="deviceCount">0</strong></div>
-    <div class="statline"><span>จำนวนผู้เล่นที่บันทึกไว้</span><strong id="playerCount">0</strong></div>
-    <div class="statline"><span>คีย์ใกล้หมดอายุภายใน 3 วัน</span><strong class="yellow" id="nearExpiry">0</strong></div>
-    <div class="statline"><span>กิจกรรมที่บันทึกไว้</span><strong id="historyCount">0</strong></div>
-  </div>
+  <input
+    id="adminPassword"
+    type="password"
+    placeholder="กรอกรหัสผ่าน"
+    autocomplete="current-password"
+  >
 
-  <div class="card">
-    <h2>คีย์ล่าสุด</h2>
-    <div id="recentKeys" class="muted">ยังไม่มีคีย์</div>
-  </div>
+  <button class="primary full" id="loginButton">
+    เข้าสู่ระบบ ADMIN
+  </button>
+
+  <p class="muted">
+    สำหรับแผงควบคุมผู้ดูแล FAMILY-DEMON
+  </p>
 </section>
 
-<!-- KEYS -->
-<section id="page-keys" class="hidden">
-  <div class="card">
-    <h2>สร้างคีย์ใหม่</h2>
+<!-- ADMIN PANEL -->
+<section id="adminPanel" class="hidden">
 
-    <form id="createForm" class="form">
-      <div>
-        <label for="duration">อายุคีย์หลังเปิดใช้งานครั้งแรก</label>
-        <select id="duration">
-          <option value="1">1 วัน</option>
-          <option value="3">3 วัน</option>
-          <option value="7" selected>7 วัน</option>
-          <option value="15">15 วัน</option>
-          <option value="30">30 วัน</option>
-          <option value="90">90 วัน</option>
-          <option value="365">365 วัน</option>
-        </select>
+  <div class="card">
+    <h2>📊 DASHBOARD</h2>
+
+    <div class="grid">
+      <div class="stat">
+        คีย์ทั้งหมด
+        <div class="num" id="totalKeys">0</div>
       </div>
 
-      <div>
-        <label for="limit">จำนวนอุปกรณ์สูงสุด</label>
-        <select id="limit">
-          <option value="1">1 เครื่อง</option>
-          <option value="2">2 เครื่อง</option>
-          <option value="3">3 เครื่อง</option>
-          <option value="4">4 เครื่อง</option>
-          <option value="5">5 เครื่อง</option>
-          <option value="6">6 เครื่อง</option>
-          <option value="7">7 เครื่อง</option>
-          <option value="8">8 เครื่อง</option>
-          <option value="9">9 เครื่อง</option>
-          <option value="10">10 เครื่อง</option>
-        </select>
+      <div class="stat">
+        คีย์ใช้งานได้
+        <div class="num" id="activeKeys">0</div>
       </div>
 
-      <div class="full">
-        <label for="note">ชื่อลูกค้า / หมายเหตุ</label>
-        <input id="note" maxlength="120" placeholder="เช่น ลูกค้า A">
+      <div class="stat">
+        คีย์ถูกระงับ
+        <div class="num" id="suspendedKeys">0</div>
       </div>
 
-      <div class="full">
-        <button type="submit">＋ สร้างคีย์อัตโนมัติ</button>
+      <div class="stat">
+        คีย์หมดอายุ
+        <div class="num" id="expiredKeys">0</div>
       </div>
-    </form>
-
-    <div id="created" class="notice hidden"></div>
-  </div>
-
-  <div class="card">
-    <h2>รายการคีย์</h2>
-
-    <div class="toolbar">
-      <input id="search" placeholder="ค้นหาคีย์หรือชื่อลูกค้า">
-      <select id="filter">
-        <option value="all">ทุกสถานะ</option>
-        <option value="active">พร้อมใช้งาน</option>
-        <option value="suspended">ถูกระงับ</option>
-        <option value="expired">หมดอายุ</option>
-      </select>
-      <button id="refresh" class="secondary" type="button">รีเฟรช</button>
-      <button id="export" class="secondary" type="button">ส่งออก CSV</button>
-    </div>
-
-    <div class="tablewrap">
-      <table>
-        <thead>
-          <tr>
-            <th>คีย์</th>
-            <th>สถานะ</th>
-            <th>วันหมดอายุ</th>
-            <th>อุปกรณ์</th>
-            <th>หมายเหตุ</th>
-            <th>จัดการ</th>
-          </tr>
-        </thead>
-        <tbody id="rows"></tbody>
-      </table>
     </div>
   </div>
-</section>
 
-<!-- PLAYERS -->
-<section id="page-players" class="hidden">
+  <!-- CREATE KEY -->
   <div class="card">
-    <h2>จัดการผู้เล่น</h2>
-    <p class="muted">
-      ส่วนนี้แสดงเฉพาะข้อมูลผู้เล่นที่ถูกบันทึกไว้ในเบราว์เซอร์นี้
-      ไม่ใช่รายชื่อผู้เล่นออนไลน์จากอุปกรณ์อื่น
-    </p>
+    <h2>➕ CREATE PRODUCT KEY</h2>
 
-    <div class="toolbar">
-      <input id="playerSearch" placeholder="ค้นหาคีย์หรืออุปกรณ์">
-      <button id="clearPlayers" class="danger" type="button">ล้างข้อมูลผู้เล่น</button>
-    </div>
+    <label>ระยะเวลาใช้งาน</label>
 
-    <div class="tablewrap">
-      <table>
-        <thead>
-          <tr>
-            <th>คีย์</th>
-            <th>อุปกรณ์</th>
-            <th>ระบบปฏิบัติการ</th>
-            <th>เข้าใช้ล่าสุด</th>
-            <th>จัดการ</th>
-          </tr>
-        </thead>
-        <tbody id="playerRows"></tbody>
-      </table>
+    <select id="duration">
+      <option value="1">1 วัน</option>
+      <option value="3">3 วัน</option>
+      <option value="7">7 วัน</option>
+      <option value="15">15 วัน</option>
+      <option value="30" selected>30 วัน</option>
+      <option value="90">90 วัน</option>
+      <option value="365">365 วัน</option>
+      <option value="0">ถาวร</option>
+    </select>
+
+    <label>จำกัดจำนวนอุปกรณ์</label>
+
+    <select id="devices">
+      <option value="1">1 เครื่อง</option>
+      <option value="2">2 เครื่อง</option>
+      <option value="3">3 เครื่อง</option>
+      <option value="5">5 เครื่อง</option>
+      <option value="10">10 เครื่อง</option>
+      <option value="30">30 เครื่อง</option>
+    </select>
+
+    <label>ชื่อลูกค้า (ไม่บังคับ)</label>
+
+    <input
+      id="customer"
+      type="text"
+      placeholder="กรอกชื่อลูกค้า"
+      maxlength="100"
+    >
+
+    <button class="primary full" id="createButton">
+      GENERATE KEY
+    </button>
+
+    <div id="createdResult" class="notice hidden">
+      <strong>สร้างคีย์สำเร็จ</strong>
+      <div id="newKey" style="margin-top:8px;overflow-wrap:anywhere"></div>
+      <button class="full" id="copyNewKey">คัดลอกคีย์</button>
     </div>
   </div>
-</section>
 
-<!-- ALERTS -->
-<section id="page-alerts" class="hidden">
+  <!-- KEY MANAGEMENT -->
   <div class="card">
-    <h2>แจ้งเตือน</h2>
-    <div id="alerts"></div>
-  </div>
-</section>
+    <h2>🗝️ KEY MANAGEMENT</h2>
 
-<!-- HISTORY -->
-<section id="page-history" class="hidden">
-  <div class="card">
-    <h2>ประวัติการจัดการ</h2>
-    <div class="toolbar">
-      <button id="clearHistory" class="danger" type="button">ล้างประวัติ</button>
+    <input
+      id="searchKey"
+      type="search"
+      placeholder="ค้นหาคีย์หรือชื่อลูกค้า..."
+    >
+
+    <div id="keyList" style="margin-top:12px">
+      <p class="muted">กำลังโหลดข้อมูล...</p>
     </div>
-    <div id="historyRows"></div>
   </div>
-</section>
 
-<!-- BACKUP -->
-<section id="page-backup" class="hidden">
+  <!-- DATA -->
   <div class="card">
-    <h2>สำรองข้อมูล</h2>
-    <p class="muted">
-      สำรองคีย์ ผู้เล่น การแจ้งเตือน ประวัติ และการตั้งค่า
-      เป็นไฟล์ JSON เพื่อใช้กู้คืนในภายหลัง
-    </p>
+    <h2>💾 DATA MANAGEMENT</h2>
 
-    <div class="toolbar">
-      <button id="backupJSON" type="button">⬇ สำรองข้อมูล JSON</button>
-      <button id="backupCSV" class="secondary" type="button">ส่งออกคีย์ CSV</button>
-    </div>
+    <button class="full" id="exportButton">
+      EXPORT KEY DATA
+    </button>
 
-    <label for="restoreFile">เลือกไฟล์ JSON ที่สำรองไว้</label>
-    <input id="restoreFile" type="file" accept=".json,application/json">
-
-    <button id="restore" class="secondary" type="button" style="margin-top:10px">
-      นำเข้าข้อมูลสำรอง
+    <button class="full danger" id="logoutButton">
+      ออกจากระบบ ADMIN
     </button>
 
     <div class="notice">
-      การนำเข้าข้อมูลจะเขียนทับข้อมูลเดิมในเบราว์เซอร์นี้
-      ควรสำรองข้อมูลปัจจุบันก่อน
-    </div>
-
-    <button id="clearAll" class="danger" type="button">ล้างข้อมูลทั้งหมด</button>
-  </div>
-</section>
-
-<!-- SETTINGS -->
-<section id="page-settings" class="hidden">
-  <div class="card">
-    <h2>ตั้งค่าระบบ</h2>
-
-    <label for="prefix">คำนำหน้าคีย์</label>
-    <input id="prefix" maxlength="12" value="DEMON">
-
-    <label for="keyLength">จำนวนตัวอักษรในแต่ละชุด</label>
-    <select id="keyLength">
-      <option value="4">4 ตัว</option>
-      <option value="5">5 ตัว</option>
-      <option value="6">6 ตัว</option>
-      <option value="8">8 ตัว</option>
-    </select>
-
-    <button id="saveSettings" style="margin-top:12px">บันทึกการตั้งค่า</button>
-
-    <div class="notice">
-      ข้อมูลทั้งหมดอยู่ในเบราว์เซอร์นี้
-      การล้างข้อมูลเว็บไซต์หรือเปลี่ยนอุปกรณ์อาจทำให้ข้อมูลหาย
-      ควรสำรองข้อมูลเป็นระยะ
+      <strong>ข้อจำกัดของเวอร์ชันนี้</strong><br>
+      ข้อมูลคีย์เก็บอยู่ในเบราว์เซอร์เครื่องนี้เท่านั้น
+      ยังไม่ซิงก์กับผู้เล่นหรืออุปกรณ์อื่น
+      และรหัสผ่านที่อยู่ใน HTML ไม่ใช่ระบบรักษาความปลอดภัยระดับเซิร์ฟเวอร์
     </div>
   </div>
+
 </section>
 
 </main>
-</div>
 
-<div id="toast" class="hidden"></div>
+<footer>
+  FAMILY-DEMON © 2026<br>
+  ADMIN CONTROL PANEL
+</footer>
 
 <script>
 "use strict";
 
-const STORE = "family_demon_admin_v2";
 const $ = id => document.getElementById(id);
 
-const defaults = {
-  keys: [],
-  players: [],
-  history: [],
-  alerts: [],
-  settings: {prefix:"DEMON", length:4}
-};
+const STORE = "family_demon_admin_keys_v2";
 
-let db = loadDB();
+/*
+ * รหัสนี้ใช้สำหรับทดสอบเท่านั้น
+ * ผู้ที่เปิดดู source code สามารถเห็นรหัสได้
+ * ห้ามใช้เป็นระบบรักษาความปลอดภัยสำหรับข้อมูลจริง
+ */
+const ADMIN_PASSWORD = "123456";
 
-function loadDB(){
+let keys = [];
+let adminUnlocked = false;
+let latestCreatedKey = "";
+
+function loadKeys(){
   try{
-    const saved = JSON.parse(localStorage.getItem(STORE) || "null");
-    if(saved && typeof saved === "object"){
-      return {
-        keys:Array.isArray(saved.keys) ? saved.keys : [],
-        players:Array.isArray(saved.players) ? saved.players : [],
-        history:Array.isArray(saved.history) ? saved.history : [],
-        alerts:Array.isArray(saved.alerts) ? saved.alerts : [],
-        settings:{...defaults.settings,...(saved.settings || {})}
-      };
-    }
-  }catch(e){}
-  return structuredClone(defaults);
+    const value = JSON.parse(localStorage.getItem(STORE) || "[]");
+    keys = Array.isArray(value) ? value : [];
+  }catch(error){
+    keys = [];
+  }
 }
 
-function saveDB(){
+function persistKeys(){
   try{
-    localStorage.setItem(STORE, JSON.stringify(db));
+    localStorage.setItem(STORE, JSON.stringify(keys));
+    renderKeys();
     return true;
-  }catch(e){
-    toast("บันทึกไม่ได้ พื้นที่จัดเก็บอาจเต็ม");
+  }catch(error){
+    alert("บันทึกข้อมูลไม่ได้ พื้นที่จัดเก็บอาจเต็มหรือถูกปิดใช้งาน");
     return false;
   }
 }
 
-let toastTimer;
-
-function toast(message){
-  const el = $("toast");
-  el.textContent = message;
-  el.classList.remove("hidden");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>el.classList.add("hidden"),2800);
-}
-
 function escapeHTML(value){
-  return String(value ?? "").replace(/[&<>"']/g, c => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  })[c]);
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[char]);
 }
 
-function makeId(){
-  if(crypto.randomUUID) return crypto.randomUUID();
-  return Date.now().toString(36)+Math.random().toString(36).slice(2);
-}
+function randomPart(){
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  const bytes = new Uint8Array(4);
 
-function logAction(action, detail=""){
-  db.history.unshift({
-    id:makeId(),
-    action,
-    detail,
-    time:Date.now()
-  });
-  db.history = db.history.slice(0,500);
-}
-
-function addAlert(message){
-  db.alerts.unshift({
-    id:makeId(),
-    message,
-    time:Date.now(),
-    read:false
-  });
-  db.alerts = db.alerts.slice(0,200);
-}
-
-function getStatus(k){
-  if(k.status === "suspended") return "suspended";
-  if(k.activatedAt && k.expiresAt && Date.now() >= k.expiresAt){
-    return "expired";
+  if(window.crypto && window.crypto.getRandomValues){
+    window.crypto.getRandomValues(bytes);
+  }else{
+    for(let i=0;i<4;i++){
+      bytes[i] = Math.floor(Math.random()*256);
+    }
   }
-  return "active";
+
+  return Array.from(bytes, byte => chars[byte % chars.length]).join("");
 }
 
-function statusText(s){
-  return {
-    active:"พร้อมใช้งาน",
-    suspended:"ถูกระงับ",
-    expired:"หมดอายุ"
-  }[s] || s;
-}
-
-function formatDate(time){
-  if(!time) return "ยังไม่เริ่มใช้งาน";
-  return new Date(time).toLocaleString("th-TH");
-}
-
-function remaining(k){
-  if(!k.activatedAt) return "ยังไม่เริ่ม";
-  const ms=(k.expiresAt || 0)-Date.now();
-  if(ms<=0) return "หมดอายุแล้ว";
-  const days=Math.floor(ms/86400000);
-  const hours=Math.floor((ms%86400000)/3600000);
-  if(days>0) return days+" วัน "+hours+" ชม.";
-  return hours+" ชม.";
-}
-
-function randomPart(length){
-  const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  const bytes=new Uint8Array(length);
-  crypto.getRandomValues(bytes);
-  return Array.from(bytes,b=>chars[b%chars.length]).join("");
-}
-
-function generateKey(){
-  const prefix=(db.settings.prefix || "DEMON")
-    .toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,12) || "DEMON";
-  const len=Number(db.settings.length) || 4;
+function generateUniqueKey(){
   let key;
+  let attempts = 0;
+
   do{
-    key=prefix+"-"+randomPart(len)+"-"+randomPart(len);
-  }while(db.keys.some(k=>k.key===key));
+    key = "FDEM-" + randomPart() + "-" +
+          randomPart() + "-" + randomPart();
+
+    attempts++;
+  }while(keys.some(item => item.key === key) && attempts < 100);
+
+  if(keys.some(item => item.key === key)){
+    throw new Error("สร้างคีย์ไม่สำเร็จ กรุณาลองใหม่");
+  }
+
   return key;
 }
 
-async function copyText(text){
-  try{
-    await navigator.clipboard.writeText(text);
-    toast("คัดลอกแล้ว");
-  }catch(e){
-    const input=document.createElement("textarea");
-    input.value=text;
-    input.style.position="fixed";
-    input.style.opacity="0";
-    document.body.appendChild(input);
-    input.select();
-    try{
-      document.execCommand("copy");
-      toast("คัดลอกแล้ว");
-    }catch(err){
-      toast("คัดลอกไม่สำเร็จ กรุณาคัดลอกข้อความเอง");
-    }
-    input.remove();
+function keyState(item){
+  if(item.suspended) return "SUSPENDED";
+
+  if(item.expires && Date.now() >= item.expires){
+    return "EXPIRED";
   }
+
+  return "ACTIVE";
 }
 
-function updateStats(){
-  $("total").textContent=db.keys.length;
-  $("active").textContent=db.keys.filter(k=>getStatus(k)==="active").length;
-  $("suspended").textContent=db.keys.filter(k=>getStatus(k)==="suspended").length;
-  $("expired").textContent=db.keys.filter(k=>getStatus(k)==="expired").length;
-  $("deviceCount").textContent=db.players.length;
-  $("playerCount").textContent=db.players.length;
-  $("historyCount").textContent=db.history.length;
+function loginAdmin(){
+  const password = $("adminPassword").value;
 
-  $("nearExpiry").textContent=db.keys.filter(k=>
-    getStatus(k)==="active" && k.expiresAt &&
-    k.expiresAt-Date.now()<=3*86400000
-  ).length;
+  if(password !== ADMIN_PASSWORD){
+    alert("รหัสผ่านไม่ถูกต้อง");
+    $("adminPassword").value = "";
+    return;
+  }
+
+  adminUnlocked = true;
+
+  $("loginSection").classList.add("hidden");
+  $("adminPanel").classList.remove("hidden");
+
+  $("adminPassword").value = "";
+
+  loadKeys();
+  renderKeys();
 }
 
-function button(label, cls, fn){
-  const b=document.createElement("button");
-  b.type="button";
-  b.className=cls || "secondary";
-  b.textContent=label;
-  b.addEventListener("click",fn);
-  return b;
+function logoutAdmin(){
+  adminUnlocked = false;
+
+  $("adminPanel").classList.add("hidden");
+  $("loginSection").classList.remove("hidden");
+
+  $("createdResult").classList.add("hidden");
+  $("adminPassword").value = "";
+}
+
+function createKey(){
+  if(!adminUnlocked){
+    alert("กรุณาเข้าสู่ระบบก่อน");
+    return;
+  }
+
+  const days = Number($("duration").value);
+  const devices = Number($("devices").value);
+  const customer = $("customer").value.trim();
+
+  if(!Number.isFinite(days) || days < 0){
+    alert("ระยะเวลาไม่ถูกต้อง");
+    return;
+  }
+
+  if(!Number.isInteger(devices) || devices < 1){
+    alert("จำนวนอุปกรณ์ไม่ถูกต้อง");
+    return;
+  }
+
+  try{
+    const key = generateUniqueKey();
+    const created = Date.now();
+
+    const item = {
+      id: key,
+      key: key,
+      days: days,
+      created: created,
+      expires: days === 0 ? 0 : created + days * 86400000,
+      devices: devices,
+      customer: customer,
+      suspended: false
+    };
+
+    keys.unshift(item);
+
+    if(!persistKeys()){
+      keys.shift();
+      return;
+    }
+
+    latestCreatedKey = key;
+
+    $("newKey").textContent = key;
+    $("createdResult").classList.remove("hidden");
+    $("customer").value = "";
+
+    alert("สร้างคีย์สำเร็จ");
+  }catch(error){
+    alert(error.message || "เกิดข้อผิดพลาด");
+  }
 }
 
 function renderKeys(){
-  const body=$("rows");
-  body.replaceChildren();
+  if(!adminUnlocked) return;
 
-  const q=$("search").value.trim().toLowerCase();
-  const filter=$("filter").value;
+  const query = $("searchKey").value.trim().toUpperCase();
 
-  const list=db.keys.filter(k=>{
-    const match=(k.key+" "+(k.note||"")).toLowerCase().includes(q);
-    return match && (filter==="all" || getStatus(k)===filter);
-  });
+  const filtered = keys.filter(item =>
+    String(item.key).toUpperCase().includes(query) ||
+    String(item.customer || "").toUpperCase().includes(query)
+  );
 
-  if(!list.length){
-    const r=body.insertRow();
-    const c=r.insertCell();
-    c.colSpan=6;
-    c.className="empty";
-    c.textContent="ไม่พบคีย์";
-    updateStats();
-    renderRecent();
+  $("totalKeys").textContent = keys.length;
+
+  $("activeKeys").textContent =
+    keys.filter(item => keyState(item) === "ACTIVE").length;
+
+  $("suspendedKeys").textContent =
+    keys.filter(item => keyState(item) === "SUSPENDED").length;
+
+  $("expiredKeys").textContent =
+    keys.filter(item => keyState(item) === "EXPIRED").length;
+
+  if(filtered.length === 0){
+    $("keyList").innerHTML =
+      '<p class="muted">' +
+      (keys.length ? "ไม่พบคีย์ที่ค้นหา" : "ยังไม่มีคีย์ กด GENERATE KEY เพื่อสร้าง") +
+      '</p>';
     return;
   }
 
-  list.forEach(k=>{
-    const r=body.insertRow();
-    r.insertCell().textContent=k.key;
+  $("keyList").innerHTML = filtered.map(item => {
+    const index = keys.findIndex(k => k.key === item.key);
+    const state = keyState(item);
 
-    const sc=r.insertCell();
-    const badge=document.createElement("span");
-    badge.className="badge "+getStatus(k);
-    badge.textContent=statusText(getStatus(k));
-    sc.appendChild(badge);
+    const expiry = item.expires
+      ? new Date(item.expires).toLocaleString("th-TH")
+      : "ไม่มีวันหมดอายุ";
 
-    const expiry = k.activatedAt
-      ? formatDate(k.expiresAt)+" · "+remaining(k)
-      : k.duration+" วันหลังใช้งานครั้งแรก";
-    r.insertCell().textContent=expiry;
+    const badgeClass = state === "ACTIVE" ? "" : "off";
 
-    const bound=db.players.filter(p=>p.keyId===k.id).length;
-    r.insertCell().textContent=bound+"/"+k.limit;
-    r.insertCell().textContent=k.note || "-";
+    return `
+      <div class="item">
+        <strong>${escapeHTML(item.key)}</strong><br>
 
-    const ac=r.insertCell();
-    const wrap=document.createElement("div");
-    wrap.className="actions";
+        <span class="badge ${badgeClass}">
+          ${state}
+        </span>
 
-    wrap.appendChild(button("คัดลอก","secondary",()=>copyText(k.key)));
+        <div class="muted">
+          ลูกค้า: ${escapeHTML(item.customer || "-")}<br>
+          ระยะเวลา: ${item.days === 0 ? "ถาวร" : escapeHTML(item.days) + " วัน"}<br>
+          อุปกรณ์สูงสุด: ${escapeHTML(item.devices)} เครื่อง<br>
+          สร้างเมื่อ: ${new Date(item.created).toLocaleString("th-TH")}<br>
+          หมดอายุ: ${expiry}
+        </div>
 
-    wrap.appendChild(button(
-      k.status==="suspended" ? "เปิดใช้งาน" : "ระงับ",
-      "secondary",
-      ()=>{
-        k.status=k.status==="suspended" ? "active" : "suspended";
-        logAction(k.status==="suspended"?"ระงับคีย์":"เปิดใช้งานคีย์",k.key);
-        addAlert((k.status==="suspended"?"ระงับ ":"เปิดใช้งาน ")+k.key);
-        saveDB();
-        renderAll();
-        toast("เปลี่ยนสถานะแล้ว");
-      }
-    ));
+        <div class="row">
+          <button data-action="copy" data-index="${index}">
+            คัดลอก
+          </button>
 
-    wrap.appendChild(button("เริ่มอายุ", "secondary",()=>{
-      if(k.activatedAt){
-        toast("คีย์นี้เริ่มนับอายุแล้ว");
-        return;
-      }
-      k.activatedAt=Date.now();
-      k.expiresAt=k.activatedAt+k.duration*86400000;
-      logAction("เริ่มนับอายุคีย์",k.key);
-      saveDB();
-      renderAll();
-      toast("เริ่มนับอายุคีย์แล้ว");
-    }));
+          <button class="${item.suspended ? "success" : "danger"}"
+            data-action="toggle" data-index="${index}">
+            ${item.suspended ? "เปิดใช้งาน" : "ระงับ"}
+          </button>
 
-    wrap.appendChild(button("ต่อ +7 วัน","secondary",()=>{
-      const now=Date.now();
-      const base=Math.max(now,k.expiresAt||now);
-      k.expiresAt=base+7*86400000;
-      k.activatedAt=k.activatedAt||now;
-      logAction("ต่ออายุ 7 วัน",k.key);
-      addAlert("ต่ออายุคีย์ "+k.key+" อีก 7 วัน");
-      saveDB();
-      renderAll();
-      toast("ต่ออายุแล้ว");
-    }));
-
-    wrap.appendChild(button("ลบ","danger",()=>{
-      if(!confirm("ยืนยันลบคีย์ "+k.key+" ?")) return;
-      db.keys=db.keys.filter(x=>x.id!==k.id);
-      logAction("ลบคีย์",k.key);
-      saveDB();
-      renderAll();
-      toast("ลบคีย์แล้ว");
-    }));
-
-    ac.appendChild(wrap);
-  });
-
-  updateStats();
-  renderRecent();
+          <button class="danger"
+            data-action="delete" data-index="${index}">
+            ลบ
+          </button>
+        </div>
+      </div>
+    `;
+  }).join("");
 }
 
-function renderRecent(){
-  const el=$("recentKeys");
-  el.replaceChildren();
+async function copyText(value){
+  try{
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(value);
+    }else{
+      const input = document.createElement("textarea");
+      input.value = value;
+      input.style.position = "fixed";
+      input.style.opacity = "0";
 
-  const list=db.keys.slice(0,5);
-  if(!list.length){
-    el.textContent="ยังไม่มีคีย์";
+      document.body.appendChild(input);
+      input.select();
+
+      const success = document.execCommand("copy");
+      input.remove();
+
+      if(!success) throw new Error("copy failed");
+    }
+
+    alert("คัดลอกคีย์แล้ว");
+  }catch(error){
+    prompt("คัดลอกคีย์ด้านล่าง", value);
+  }
+}
+
+function toggleKey(index){
+  const item = keys[index];
+
+  if(!item) return;
+
+  item.suspended = !item.suspended;
+
+  if(persistKeys()){
+    alert(item.suspended ? "ระงับคีย์แล้ว" : "เปิดใช้งานคีย์แล้ว");
+  }
+}
+
+function deleteKey(index){
+  const item = keys[index];
+
+  if(!item) return;
+
+  if(!confirm("ยืนยันลบคีย์ " + item.key + " ?")){
     return;
   }
 
-  list.forEach(k=>{
-    const row=document.createElement("div");
-    row.className="statline";
+  const oldKeys = [...keys];
+  keys.splice(index, 1);
 
-    const name=document.createElement("span");
-    name.textContent=k.key;
+  if(!persistKeys()){
+    keys = oldKeys;
+    renderKeys();
+    return;
+  }
 
-    const state=document.createElement("span");
-    state.className=getStatus(k)==="active"?"green":
-      getStatus(k)==="expired"?"yellow":"red";
-    state.textContent=statusTex
+  alert("ลบคีย์แล้ว");
+}
+
+function exportData(){
+  if(!adminUnlocked) return;
+
+  const blob = new Blob(
+    [JSON.stringify(keys, null, 2)],
+    {type:"application/json"}
+  );
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+
+  a.href = url;
+  a.download = "family-demon-keys.json";
+
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+$("loginButton").addEventListener("click", loginAdmin);
+
+$("adminPassword").addEventListener("keydown", event => {
+  if(event.key === "Enter") loginAdmin();
+});
+
+$("createButton").addEventListener("click", createKey);
+
+$("logoutButton").addEventListener("click", logoutAdmin);
+
+$("exportButton").addEventListener("click", exportData);
+
+$("searchKey").addEventListener("input", renderKeys);
+
+$("copyNewKey").addEventListener("click", () => {
+  if(latestCreatedKey) copyText(latestCreatedKey);
+});
+
+$("keyList").addEventListener("click", event => {
+  const button = event.target.closest("button[data-action]");
+
+  if(!button || !adminUnlocked) return;
+
+  const index = Number(button.dataset.index);
+  const action = button.dataset.action;
+
+  if(!Number.isInteger(index) || !keys[index]) return;
+
+  if(action === "copy"){
+    copyText(keys[index].key);
+  }else if(action === "toggle"){
+    toggleKey(index);
+  }else if(action === "delete"){
+    deleteKey(index);
+  }
+});
+
+loadKeys();
+</script>
+
+</body>
+</html>
