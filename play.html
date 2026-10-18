@@ -164,6 +164,7 @@ button:disabled {
   font-size: 12px;
   text-align: center;
   margin-top: 15px;
+  line-height: 1.6;
 }
 
 .download-item {
@@ -205,6 +206,7 @@ button:disabled {
     <!-- PAGE 1: KEY -->
     <section id="keyPage" class="page active">
       <h2>เข้าสู่ระบบ</h2>
+
       <div class="description">
         กรอกคีย์ของคุณเพื่อเข้าใช้งาน FAMILY MOD
       </div>
@@ -217,7 +219,9 @@ button:disabled {
           autocomplete="off"
           required
         >
-        <button class="primary" type="submit">ตรวจสอบคีย์</button>
+        <button class="primary" type="submit">
+          ตรวจสอบคีย์
+        </button>
       </form>
 
       <div id="keyMessage" class="message"></div>
@@ -229,7 +233,7 @@ button:disabled {
 
       <div class="description">
         กดปุ่มด้านล่างเพื่อเปิดบัญชี TikTok ของ FAMILY MOD
-        หลังจากกดเปิดลิงก์แล้ว ปุ่มถัดไปจึงจะใช้งานได้
+        แล้วกลับมากดปุ่มถัดไป
       </div>
 
       <a
@@ -238,10 +242,10 @@ button:disabled {
         href="https://www.tiktok.com/@family.mod8"
         target="_blank"
         rel="noopener noreferrer"
-      >กดติดตาม TikTok</a>
+      >เปิด TikTok FAMILY MOD</a>
 
       <div id="followMessage" class="message success">
-        คุณกดเปิดลิงก์ TikTok แล้ว สามารถกดถัดไปได้
+        เปิดลิงก์แล้ว สามารถกดถัดไปได้
       </div>
 
       <button id="continueButton" class="primary" disabled>
@@ -253,7 +257,8 @@ button:disabled {
       </button>
 
       <div class="status">
-        ระบบตรวจได้เฉพาะการกดเปิดลิงก์ ไม่สามารถยืนยันการติดตามจริงได้
+        ระบบตรวจได้เฉพาะการกดเปิดลิงก์
+        ไม่สามารถยืนยันการติดตามจริงได้
       </div>
     </section>
 
@@ -267,16 +272,18 @@ button:disabled {
 
       <div class="download-item">
         <div class="download-name">M1NX VIP</div>
+
         <div class="download-info">
           FAMILY MOD DOWNLOAD
         </div>
 
         <a
           class="action-link primary"
-          href="https://www.mediafire.com/file/hiom5p60djhsck9/M1NXsavadaVIP.apk/file?dkey=jngyjbvdzc9&r=1505"
+          href="https://download2297.mediafire.com/f1kyun25e88gbdGR0LJBOz4y9HX4C2TnCRAYKAxAvEZfiv_KYlTy1sncgzpafjjUjOIJnVRMfVmQka8osQ5jZQbVA1D8Uy0je_Y45y49-AZO7XoGiq5A72CKFGDp-o0lG0ItFLr4W6vfU2tG6PP3YjTD06-hpbDIPsh3-HCt6rNl5ts/hiom5p60djhsck9/M1NXsavadaVIP.apk"
           target="_blank"
           rel="noopener noreferrer"
-        >ดาวน์โหลด</a>
+          download
+        >ดาวน์โหลด M1NX VIP</a>
       </div>
 
       <button id="logoutButton" class="secondary">
@@ -290,21 +297,21 @@ button:disabled {
 </div>
 
 <script>
+"use strict";
+
 /*
-  ตั้งค่าไฟล์ข้อมูลคีย์:
-  วาง keys.json ไว้ในโฟลเดอร์เดียวกับ play.html
+  อ่านข้อมูลจาก Admin:
+  localStorage key = family_demon_admin_keys_v2
 
-  รูปแบบไฟล์ที่รองรับ:
-  - JSON Array: [{ "key": "...", "expires": ..., "suspended": false }]
-  - Object ที่มี property keys ซึ่งเป็น Array
+  รองรับข้อมูลคีย์ที่ Admin บันทึกไว้:
+  key, expires, suspended
 
-  expires รองรับ:
-  - Unix timestamp แบบ milliseconds
-  - วันที่ที่ JavaScript อ่านได้ เช่น ISO date string
-  - null หรือ 0 หมายถึงไม่มีวันหมดอายุ
+  หมายเหตุ:
+  ใช้ได้เฉพาะ Admin และ Player ที่เปิดบน
+  origin และ browser profile เดียวกัน
 */
 
-const KEY_DATA_URL = "./keys.json";
+const STORE = "family_demon_admin_keys_v2";
 
 const pages = {
   key: document.getElementById("keyPage"),
@@ -339,43 +346,45 @@ function normalizeKey(value) {
   return String(value || "").trim().toUpperCase();
 }
 
-async function loadKeyData() {
-  const response = await fetch(KEY_DATA_URL + "?t=" + Date.now(), {
-    cache: "no-store"
-  });
+function loadKeyData() {
+  const raw = localStorage.getItem(STORE);
 
-  if (!response.ok) {
-    throw new Error("ไม่พบไฟล์ข้อมูลคีย์");
+  if (!raw) {
+    throw new Error("NO_KEYS");
   }
 
-  const data = await response.json();
+  const data = JSON.parse(raw);
 
-  if (Array.isArray(data)) {
-    return data;
+  if (!Array.isArray(data)) {
+    throw new Error("INVALID_DATA");
   }
 
-  if (data && Array.isArray(data.keys)) {
-    return data.keys;
-  }
-
-  throw new Error("รูปแบบไฟล์ข้อมูลคีย์ไม่ถูกต้อง");
+  return data;
 }
 
 function getKeyStatus(item) {
-  if (item.suspended === true || item.suspended === "true") {
+  if (
+    item.suspended === true ||
+    item.suspended === "true"
+  ) {
     return "suspended";
   }
 
-  if (
-    String(item.status || "").toLowerCase() === "suspended" ||
-    String(item.status || "").toLowerCase() === "disabled"
-  ) {
+  const status = String(item.status || "").toLowerCase();
+
+  if (status === "suspended" || status === "disabled") {
     return "suspended";
   }
 
   const expiry = item.expires;
 
-  if (expiry !== undefined && expiry !== null && expiry !== "" && expiry !== 0 && expiry !== "0") {
+  if (
+    expiry !== undefined &&
+    expiry !== null &&
+    expiry !== "" &&
+    expiry !== 0 &&
+    expiry !== "0"
+  ) {
     let expiryTime;
 
     if (typeof expiry === "number") {
@@ -386,7 +395,10 @@ function getKeyStatus(item) {
       expiryTime = Date.parse(expiry);
     }
 
-    if (Number.isFinite(expiryTime) && Date.now() >= expiryTime) {
+    if (
+      Number.isFinite(expiryTime) &&
+      Date.now() >= expiryTime
+    ) {
       return "expired";
     }
   }
@@ -394,109 +406,150 @@ function getKeyStatus(item) {
   return "active";
 }
 
-document.getElementById("keyForm").addEventListener("submit", async function(event) {
-  event.preventDefault();
+document.getElementById("keyForm").addEventListener(
+  "submit",
+  function(event) {
+    event.preventDefault();
 
-  const input = normalizeKey(document.getElementById("keyInput").value);
-  const button = this.querySelector("button[type='submit']");
-
-  clearMessage("keyMessage");
-
-  if (!input) {
-    showMessage("keyMessage", "กรุณากรอกคีย์");
-    return;
-  }
-
-  button.disabled = true;
-  button.textContent = "กำลังตรวจสอบ...";
-
-  try {
-    const keys = await loadKeyData();
-
-    const found = keys.find(item =>
-      normalizeKey(item.key || item.code || item.licenseKey) === input
+    const input = normalizeKey(
+      document.getElementById("keyInput").value
     );
 
-    if (!found) {
-      showMessage("keyMessage", "คีย์ไม่ถูกต้อง กรุณาตรวจสอบคีย์อีกครั้ง");
+    const button = this.querySelector("button[type='submit']");
+
+    clearMessage("keyMessage");
+
+    if (!input) {
+      showMessage("keyMessage", "กรุณากรอกคีย์");
       return;
     }
 
-    const status = getKeyStatus(found);
+    button.disabled = true;
+    button.textContent = "กำลังตรวจสอบ...";
 
-    if (status === "suspended") {
-      showMessage("keyMessage", "คีย์นี้ถูกระงับการใช้งาน");
+    try {
+      const keys = loadKeyData();
+
+      const found = keys.find(item =>
+        normalizeKey(item.key || item.id || item.code) === input
+      );
+
+      if (!found) {
+        showMessage(
+          "keyMessage",
+          "คีย์ไม่ถูกต้อง กรุณาตรวจสอบคีย์อีกครั้ง"
+        );
+        return;
+      }
+
+      const status = getKeyStatus(found);
+
+      if (status === "suspended") {
+        showMessage("keyMessage", "คีย์นี้ถูกระงับการใช้งาน");
+        return;
+      }
+
+      if (status === "expired") {
+        showMessage("keyMessage", "คีย์นี้หมดอายุแล้ว");
+        return;
+      }
+
+      validKey = input;
+      tiktokOpened = false;
+
+      document.getElementById("continueButton").disabled = true;
+      clearMessage("followMessage");
+
+      showPage("tiktok");
+
+    } catch (error) {
+      console.error(error);
+
+      if (error.message === "NO_KEYS") {
+        showMessage(
+          "keyMessage",
+          "ไม่พบข้อมูลคีย์ กรุณาสร้างคีย์ใน Admin ก่อน"
+        );
+      } else {
+        showMessage(
+          "keyMessage",
+          "อ่านข้อมูลคีย์ไม่ได้ กรุณาตรวจสอบข้อมูลใน Admin"
+        );
+      }
+
+    } finally {
+      button.disabled = false;
+      button.textContent = "ตรวจสอบคีย์";
+    }
+  }
+);
+
+/* เปิดลิงก์ TikTok แล้วปลดล็อกปุ่มถัดไป */
+document.getElementById("tiktokButton").addEventListener(
+  "click",
+  function() {
+    if (!validKey) {
       return;
     }
 
-    if (status === "expired") {
-      showMessage("keyMessage", "คีย์นี้หมดอายุแล้ว");
-      return;
-    }
+    tiktokOpened = true;
 
-    validKey = input;
-    tiktokOpened = false;
-
-    document.getElementById("continueButton").disabled = true;
-    document.getElementById("followMessage").className = "message success";
-
-    showPage("tiktok");
-
-  } catch (error) {
-    console.error(error);
+    document.getElementById("continueButton").disabled = false;
 
     showMessage(
-      "keyMessage",
-      "โหลดข้อมูลคีย์ไม่สำเร็จ กรุณาตรวจสอบว่ามีไฟล์ keys.json อยู่ในโฟลเดอร์เดียวกับ play.html"
+      "followMessage",
+      "คุณกดเปิดลิงก์ TikTok แล้ว สามารถกดถัดไปได้",
+      "success"
     );
-
-  } finally {
-    button.disabled = false;
-    button.textContent = "ตรวจสอบคีย์";
   }
-});
+);
 
-/* ปลดล็อกปุ่มถัดไปหลังผู้ใช้กดเปิดลิงก์ TikTok */
-document.getElementById("tiktokButton").addEventListener("click", function() {
-  if (!validKey) {
-    return;
+/* ไปหน้าดาวน์โหลด */
+document.getElementById("continueButton").addEventListener(
+  "click",
+  function() {
+    if (!validKey || !tiktokOpened) {
+      return;
+    }
+
+    showPage("download");
   }
+);
 
-  tiktokOpened = true;
+/* กลับไปตรวจคีย์ใหม่ */
+document.getElementById("backButton").addEventListener(
+  "click",
+  function() {
+    validKey = null;
+    tiktokOpened = false;
 
-  document.getElementById("continueButton").disabled = false;
+    document.getElementById("keyInput").value = "";
 
-  showMessage(
-    "followMessage",
-    "คุณกดเปิดลิงก์ TikTok แล้ว สามารถกดถัดไปได้",
-    "success"
-  );
-});
+    clearMessage("keyMessage");
+    clearMessage("followMessage");
 
-document.getElementById("continueButton").addEventListener("click", function() {
-  if (!validKey || !tiktokOpened) {
-    return;
+    showPage("key");
   }
+);
 
-  showPage("download");
-});
+/* ออกจากระบบ */
+document.getElementById("logoutButton").addEventListener(
+  "click",
+  function() {
+    validKey = null;
+    tiktokOpened = false;
 
-document.getElementById("backButton").addEventListener("click", function() {
-  validKey = null;
-  tiktokOpened = false;
-  document.getElementById("keyInput").value = "";
-  clearMessage("keyMessage");
-  showPage("key");
-});
+    document.getElementById("keyInput").value = "";
 
-document.getElementById("logoutButton").addEventListener("click", function() {
-  validKey = null;
-  tiktokOpened = false;
-  document.getElementById("keyInput").value = "";
-  document.getElementById("continueButton").disabled = true;
-  clearMessage("keyMessage");
-  showPage("key");
-});
+    document.getElementById("continueButton").disabled = true;
+
+    clearMessage("keyMessage");
+    clearMessage("followMessage");
+
+    showPage("key");
+  }
+);
 </script>
+
 </body>
 </html>
