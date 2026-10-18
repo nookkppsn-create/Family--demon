@@ -2,19 +2,16 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="theme-color" content="#100607">
-<title>FAMILY-DEMON</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAMILY MOD</title>
 
 <style>
 :root {
-  --bg: #0b0809;
-  --panel: #191114;
-  --red: #ff2545;
-  --line: #47202a;
+  --bg: #080808;
+  --panel: #141414;
+  --red: #ff2638;
   --text: #ffffff;
-  --muted: #b9aeb1;
-  --green: #45e39a;
+  --muted: #a5a5a5;
 }
 
 * {
@@ -23,274 +20,196 @@
 
 body {
   margin: 0;
-  padding: 18px 14px 30px;
-  background: radial-gradient(ellipse at top, #35101a, var(--bg) 55%);
-  color: var(--text);
+  min-height: 100vh;
+  padding: 24px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at top, #351016 0%, transparent 55%),
+    var(--bg);
 }
 
 .container {
-  max-width: 500px;
-  margin: auto;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 22px;
+  width: 100%;
+  max-width: 390px;
 }
 
 .logo {
-  width: 60px;
-  height: 60px;
-  margin: auto;
-  display: grid;
-  place-items: center;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.logo-icon {
+  width: 76px;
+  height: 76px;
+  margin: auto auto 14px;
   border: 2px solid var(--red);
-  border-radius: 18px;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--red);
-  font-size: 25px;
+  font-size: 28px;
   font-weight: 900;
-  box-shadow: 0 0 25px #ff254530;
+  box-shadow: 0 0 30px #ff263825;
 }
 
-.header h1 {
-  font-size: 23px;
-  letter-spacing: 2px;
-  margin: 12px 0 4px;
+.logo h1 {
+  margin: 0;
+  font-size: 29px;
+  letter-spacing: 3px;
+  font-weight: 900;
 }
 
-.header p {
+.logo p {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 2px;
 }
 
 .card {
-  background: linear-gradient(145deg, #201419, #110d0f);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 17px;
-  margin-bottom: 13px;
+  background: rgba(20, 20, 20, 0.96);
+  border: 1px solid #292929;
+  border-radius: 18px;
+  padding: 23px;
+  box-shadow: 0 15px 45px #0008;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+  animation: appear .25s ease;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 h2 {
-  font-size: 17px;
   margin: 0 0 8px;
-}
-
-.description {
-  font-size: 12px;
-  line-height: 1.6;
-  color: var(--muted);
-  margin-bottom: 15px;
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: 14px;
-  color: white;
-  background: #0b0809;
-  border: 1px solid #59303a;
-  border-radius: 10px;
-  outline: none;
-}
-
-button {
-  cursor: pointer;
-  font-family: inherit;
-}
-
-.main-btn {
-  width: 100%;
-  padding: 13px;
-  margin-top: 12px;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(100deg, #ff2545, #a90f2a);
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.secondary-btn {
-  background: #28171d;
-  border: 1px solid #59303a;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.info-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 10px 0;
-  border-bottom: 1px solid #382129;
-  font-size: 12px;
-}
-
-.info-row:last-child {
-  border-bottom: none;
-}
-
-.info-row span:first-child {
-  color: var(--muted);
-}
-
-.info-row span:last-child {
-  text-align: right;
-  overflow-wrap: anywhere;
-}
-
-.status {
-  color: var(--green);
-  font-size: 12px;
-  margin-bottom: 8px;
-}
-
-.metrics {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 13px;
-}
-
-.metric {
-  text-align: center;
-  background: #1b1216;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 13px 5px;
-}
-
-.metric-label {
-  font-size: 11px;
-  color: var(--muted);
-  margin-bottom: 7px;
-}
-
-.metric-value {
-  font-size: 23px;
-  font-weight: bold;
-}
-
-.metric small {
-  display: block;
-  color: #94858a;
-  font-size: 10px;
-  margin-top: 4px;
-}
-
-.section-title {
-  font-size: 15px;
-  font-weight: bold;
-  margin-bottom: 12px;
-}
-
-.function-btn {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 9px;
-  background: #21151a;
-  color: white;
-  border: 1px solid #4b2731;
-  border-radius: 12px;
-  text-align: left;
-}
-
-.function-btn:last-child {
-  margin-bottom: 0;
-}
-
-.function-icon {
-  width: 40px;
-  height: 40px;
-  display: grid;
-  place-items: center;
-  border-radius: 10px;
-  background: #39131e;
   font-size: 20px;
 }
 
-.function-info {
-  flex: 1;
-}
-
-.function-info strong {
-  display: block;
-  font-size: 14px;
-}
-
-.function-info small {
-  display: block;
+.description {
+  margin: 0 0 22px;
   color: var(--muted);
-  margin-top: 4px;
-  font-size: 11px;
+  font-size: 13px;
+  line-height: 1.7;
 }
 
-.function-state {
-  font-size: 11px;
-  color: #ff9aaa;
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
 }
 
-.function-btn.active {
-  border-color: var(--green);
-}
-
-.function-btn.active .function-state {
-  color: var(--green);
-}
-
-.action-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 9px;
-}
-
-.action-grid button {
-  margin-top: 0;
-  font-size: 12px;
-  padding: 13px 7px;
-}
-
-.note {
-  font-size: 11px;
-  color: var(--muted);
-  line-height: 1.6;
-  margin-top: 12px;
-}
-
-#toast {
-  position: fixed;
-  left: 50%;
-  bottom: 22px;
-  transform: translateX(-50%);
-  background: #29151c;
-  border: 1px solid #713042;
-  padding: 11px 16px;
+input {
+  width: 100%;
+  padding: 14px;
+  background: #090909;
+  border: 1px solid #353535;
   border-radius: 10px;
-  font-size: 12px;
-  opacity: 0;
-  transition: opacity .2s;
-  pointer-events: none;
-  width: max-content;
-  max-width: 90%;
-  text-align: center;
+  color: white;
+  outline: none;
+  font-size: 14px;
+  margin-bottom: 14px;
 }
 
-#toast.show {
-  opacity: 1;
+input:focus {
+  border-color: var(--red);
+}
+
+button, .button {
+  width: 100%;
+  min-height: 46px;
+  padding: 13px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  border-radius: 10px;
+  background: var(--red);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button:active, .button:active {
+  transform: scale(.98);
+}
+
+.button.secondary {
+  margin-top: 10px;
+  background: #242424;
+  border: 1px solid #383838;
+}
+
+.button.tiktok {
+  background: #fff;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+.message {
+  display: none;
+  margin-top: 12px;
+  padding: 11px;
+  background: #301116;
+  border: 1px solid #6c2029;
+  border-radius: 9px;
+  color: #ff9da5;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.message.show {
+  display: block;
+}
+
+.vip-card {
+  padding: 20px;
+  border: 1px solid #3b2024;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #211013, #101010 75%);
+}
+
+.vip-label {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 6px;
+  background: #45151c;
+  color: #ff8993;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.vip-card h3 {
+  margin: 14px 0 6px;
+  font-size: 22px;
+}
+
+.vip-card p {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
 }
 
 .footer {
-  text-align: center;
-  color: #796a6f;
-  font-size: 10px;
   margin-top: 18px;
+  text-align: center;
+  color: #626262;
+  font-size: 11px;
 }
 </style>
 </head>
@@ -298,398 +217,168 @@ button {
 <body>
 <div class="container">
 
-<header class="header">
-  <div class="logo">FD</div>
-  <h1>FAMILY-DEMON</h1>
-  <p>PLAYER PANEL</p>
-</header>
+  <header class="logo">
+    <div class="logo-icon">FM</div>
+    <h1>FAMILY MOD</h1>
+    <p>MOD DOWNLOAD CENTER</p>
+  </header>
 
-<!-- PAGE 1: KEY -->
-<section id="keyPage" class="card">
-  <h2>ยืนยันคีย์เข้าใช้งาน</h2>
-  <p class="description">
-    กรอกคีย์ของคุณ แล้วกดยืนยันเพื่อไปหน้าขออนุญาต
-  </p>
+  <main class="card">
 
-  <input
-    id="keyInput"
-    type="text"
-    placeholder="กรอกคีย์ของคุณ"
-    autocomplete="off"
-  >
+    <!-- PAGE 1: KEY LOGIN -->
+    <section id="loginPage" class="page active">
+      <h2>เข้าสู่ระบบ</h2>
+      <p class="description">
+        กรอกคีย์เพื่อเข้าสู่ FAMILY MOD
+      </p>
 
-  <button class="main-btn" id="confirmKey">
-    ยืนยันคีย์
-  </button>
+      <form id="keyForm">
+        <label for="keyInput">Access Key</label>
+        <input
+          id="keyInput"
+          type="text"
+          placeholder="กรอกคีย์ของคุณ"
+          autocomplete="off"
+          required
+        >
+        <button type="submit">เข้าสู่ระบบ →</button>
+      </form>
 
-  <p class="note">
-    คีย์ทดสอบในเครื่อง:
-    FDEM-123456 หรือ FDEM-ABCDEF
-    <br>
-    ระบบคีย์นี้ยังไม่ได้เชื่อมต่อ API แอดมิน
-  </p>
-</section>
+      <div id="keyMessage" class="message"></div>
+    </section>
 
-<!-- PAGE 2: PERMISSION -->
-<section id="permissionPage" class="card hidden">
-  <h2>ขออนุญาตเข้าใช้งาน</h2>
+    <!-- PAGE 2: TIKTOK -->
+    <section id="tiktokPage" class="page">
+      <h2>ติดตาม TikTok</h2>
+      <p class="description">
+        กดปุ่มด้านล่างเพื่อเปิดโปรไฟล์ FAMILY MOD
+        จากนั้นกดติดตามใน TikTok แล้วกลับมาหน้านี้
+      </p>
 
-  <p class="description">
-    ต้องผ่านขั้นตอนนี้ก่อนจึงจะเข้าสู่หน้าหลักได้
-  </p>
+      <a
+        class="button tiktok"
+        href="https://www.tiktok.com/@family.mod8"
+        target="_blank"
+        rel="noopener noreferrer"
+        id="tiktokLink"
+      >
+        ♬ เปิด TikTok @family.mod8
+      </a>
 
-  <div class="info-row">
-    <span>แพ็กเกจเกม</span>
-    <span>com.dts.freefireth</span>
-  </div>
-
-  <p class="note">
-    หน้านี้เป็นการยืนยันในเว็บตัวอย่าง HTML
-    ไม่ใช่หน้าขอสิทธิ์ Android จริง
-  </p>
-
-  <label style="display:flex;gap:9px;font-size:12px;line-height:1.6;margin-top:15px">
-    <input type="checkbox" id="permissionCheck">
-    <span>
-      ยืนยันขั้นตอนเพื่อเข้าสู่หน้าหลัก
-      และรับทราบว่าหน้านี้ไม่ได้ให้สิทธิ์ Android จริง
-    </span>
-  </label>
-
-  <button class="main-btn" id="confirmPermission">
-    ยืนยันและเข้าหน้าหลัก
-  </button>
-
-  <button class="main-btn secondary-btn" id="backToKey">
-    กลับไปหน้าใส่คีย์
-  </button>
-</section>
-
-<!-- PAGE 3: MAIN -->
-<main id="mainPage" class="hidden">
-
-  <!-- KEY / IP / DEVICE AT TOP -->
-  <section class="card">
-    <div class="status">
-      ● ข้อมูลระบบ
-      <span style="float:right">ACTIVE</span>
-    </div>
-
-    <div class="info-row">
-      <span>ระบบคีย์</span>
-      <span id="shownKey">—</span>
-    </div>
-
-    <div class="info-row">
-      <span>IP Address</span>
-      <span id="ipValue">กำลังตรวจสอบ...</span>
-    </div>
-
-    <div class="info-row">
-      <span>อุปกรณ์</span>
-      <span id="deviceValue">กำลังอ่านข้อมูล...</span>
-    </div>
-  </section>
-
-  <!-- FPS / MS / PING BELOW TOP INFO -->
-  <section class="metrics">
-    <div class="metric">
-      <div class="metric-label">FPS</div>
-      <div class="metric-value" id="fpsValue">--</div>
-      <small>หน้าเว็บ</small>
-    </div>
-
-    <div class="metric">
-      <div class="metric-label">MS</div>
-      <div class="metric-value" id="msValue">--</div>
-      <small>เครือข่ายทดสอบ</small>
-    </div>
-
-    <div class="metric">
-      <div class="metric-label">PING</div>
-      <div class="metric-value" id="pingValue">--</div>
-      <small>ปลายทางทดสอบ</small>
-    </div>
-  </section>
-
-  <!-- INDIVIDUAL FUNCTIONS -->
-  <section class="card">
-    <div class="section-title">ฟังก์ชัน</div>
-
-    <button class="function-btn" data-feature="aim">
-      <span class="function-icon">🎯</span>
-      <span class="function-info">
-        <strong>ดูดหัว</strong>
-        <small>ฟังก์ชันแยก</small>
-      </span>
-      <span class="function-state">ปิด</span>
-    </button>
-
-    <button class="function-btn" data-feature="ban">
-      <span class="function-icon">🛡️</span>
-      <span class="function-info">
-        <strong>กันแบน</strong>
-        <small>ฟังก์ชันแยก</small>
-      </span>
-      <span class="function-state">ปิด</span>
-    </button>
-
-    <button class="function-btn" data-feature="black">
-      <span class="function-icon">⚫</span>
-      <span class="function-info">
-        <strong>กันดำ</strong>
-        <small>ฟังก์ชันแยก</small>
-      </span>
-      <span class="function-state">ปิด</span>
-    </button>
-
-    <p class="note">
-      ปุ่มทั้งสามเปลี่ยนสถานะบนหน้าเว็บเท่านั้น
-      ยังไม่ได้เชื่อมกับกลไกภายในเกมจริง
-    </p>
-  </section>
-
-  <!-- SING-BOX AND FREE FIRE -->
-  <section class="card">
-    <div class="section-title">เชื่อมต่อและเปิดเกม</div>
-
-    <div class="action-grid">
-      <button class="main-btn" id="openSfa">
-        เปิด Sing-box / SFA
+      <button type="button" id="continueButton">
+        ติดตามแล้ว — ไปต่อ
       </button>
 
-      <button class="main-btn secondary-btn" id="openGame">
-        เข้าเกม Free Fire
+      <button type="button" class="button secondary" id="backButton">
+        กลับไปหน้าคีย์
       </button>
-    </div>
 
-    <p class="note">
-      การเปิด SFA ไม่ได้สั่งเชื่อม VPN อัตโนมัติ
-      และค่า FPS/Ping บนเว็บไม่ใช่ค่า FPS/Ping ของเกม
-    </p>
-  </section>
+      <div id="followMessage" class="message">
+        ปุ่มนี้เป็นการยืนยันด้วยตนเอง
+        เว็บไซต์ไม่สามารถตรวจสอบได้ว่าคุณติดตามจริงหรือไม่
+      </div>
+    </section>
 
-  <button class="main-btn secondary-btn" id="changeKey">
-    ออกจากระบบ / เปลี่ยนคีย์
-  </button>
+    <!-- PAGE 3: DOWNLOAD -->
+    <section id="downloadPage" class="page">
+      <h2>ดาวน์โหลด</h2>
+      <p class="description">
+        เลือกดาวน์โหลดไฟล์ที่ต้องการ
+      </p>
 
-</main>
+      <div class="vip-card">
+        <span class="vip-label">VIP DOWNLOAD</span>
+        <h3>M1NX VIP</h3>
+        <p>
+          ไฟล์ดาวน์โหลด M1NX VIP<br>
+          โปรดตรวจสอบไฟล์ก่อนติดตั้ง
+        </p>
 
-<div class="footer">FAMILY-DEMON • PLAYER</div>
+        <a
+          class="button"
+          href="https://www.mediafire.com/file/hiom5p60djhsck9/M1NXsavadaVIP.apk/file?dkey=jngyjbvdzc9&r=1505"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ดาวน์โหลด M1NX VIP
+        </a>
+      </div>
+
+      <button type="button" class="button secondary" id="logoutButton">
+        ออกจากระบบ
+      </button>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    FAMILY MOD © 2026
+  </footer>
+
 </div>
 
-<div id="toast"></div>
-
 <script>
-const $ = id => document.getElementById(id);
+const pages = {
+  login: document.getElementById("loginPage"),
+  tiktok: document.getElementById("tiktokPage"),
+  download: document.getElementById("downloadPage")
+};
 
-const validKeys = [
-  "FDEM-123456",
-  "FDEM-ABCDEF"
-];
-
-let currentKey = "";
-let toastTimer;
-
-function toast(message) {
-  const el = $("toast");
-  el.textContent = message;
-  el.classList.add("show");
-
-  clearTimeout(toastTimer);
-
-  toastTimer = setTimeout(() => {
-    el.classList.remove("show");
-  }, 2200);
-}
-
-function showPage(pageId) {
-  ["keyPage", "permissionPage", "mainPage"].forEach(id => {
-    $(id).classList.toggle("hidden", id !== pageId);
-  });
-}
-
-/* PAGE 1: KEY CONFIRMATION */
-$("confirmKey").addEventListener("click", () => {
-  const key = $("keyInput").value.trim().toUpperCase();
-
-  if (!key) {
-    toast("กรุณากรอกคีย์");
-    return;
-  }
-
-  if (!validKeys.includes(key)) {
-    toast("คีย์ไม่ถูกต้อง");
-    return;
-  }
-
-  currentKey = key;
-  $("permissionCheck").checked = false;
-
-  showPage("permissionPage");
-});
-
-/* PAGE 2: PERMISSION CONFIRMATION */
-$("backToKey").addEventListener("click", () => {
-  showPage("keyPage");
-});
-
-$("confirmPermission").addEventListener("click", () => {
-  if (!$("permissionCheck").checked) {
-    toast("กรุณายืนยันขั้นตอนก่อน");
-    return;
-  }
-
-  $("shownKey").textContent = currentKey;
-
-  showPage("mainPage");
-
-  loadDeviceInfo();
-  loadIP();
-  measureNetwork();
-
-  toast("เข้าสู่หน้าหลักแล้ว");
-});
-
-/* DEVICE INFORMATION */
-function loadDeviceInfo() {
-  const ua = navigator.userAgent || "";
-
-  let device = "ไม่ทราบอุปกรณ์";
-
-  if (/Android/i.test(ua)) {
-    device = "Android";
-  } else if (/iPhone|iPad/i.test(ua)) {
-    device = "iOS";
-  }
-
-  $("deviceValue").textContent =
-    device + " • " + (navigator.platform || "Browser");
-}
-
-/* IP ADDRESS */
-async function loadIP() {
-  try {
-    const response = await fetch(
-      "https://api.ipify.org?format=json",
-      { cache: "no-store" }
-    );
-
-    if (!response.ok) throw new Error();
-
-    const data = await response.json();
-
-    $("ipValue").textContent = data.ip || "ไม่พบ IP";
-  } catch {
-    $("ipValue").textContent = "ตรวจสอบไม่ได้";
-  }
-}
-
-/* NETWORK TEST - NOT GAME PING */
-async function measureNetwork() {
-  if ($("mainPage").classList.contains("hidden")) return;
-
-  const endpoint = "https://www.gstatic.com/generate_204";
-
-  try {
-    const start = performance.now();
-
-    await fetch(endpoint, {
-      mode: "no-cors",
-      cache: "no-store"
-    });
-
-    const ms = Math.round(performance.now() - start);
-
-    $("msValue").textContent = ms;
-    $("pingValue").textContent = ms;
-  } catch {
-    $("msValue").textContent = "--";
-    $("pingValue").textContent = "--";
-  }
-
-  setTimeout(measureNetwork, 5000);
-}
-
-/* WEBPAGE FPS - NOT GAME FPS */
-let frames = 0;
-let lastFrameTime = performance.now();
-
-function updateFPS(now) {
-  frames++;
-
-  if (now - lastFrameTime >= 1000) {
-    const fps = Math.round(
-      frames * 1000 / (now - lastFrameTime)
-    );
-
-    $("fpsValue").textContent = fps;
-
-    frames = 0;
-    lastFrameTime = now;
-  }
-
-  requestAnimationFrame(updateFPS);
-}
-
-requestAnimationFrame(updateFPS);
-
-/* EACH FUNCTION HAS ITS OWN BUTTON */
-document.querySelectorAll("[data-feature]").forEach(button => {
-  button.addEventListener("click", () => {
-    const active = button.classList.toggle("active");
-
-    button.querySelector(".function-state").textContent =
-      active ? "เปิดสถานะ" : "ปิด";
-
-    const names = {
-      aim: "ดูดหัว",
-      ban: "กันแบน",
-      black: "กันดำ"
-    };
-
-    toast(
-      names[button.dataset.feature] +
-      (active ? " เปิดสถานะแล้ว" : " ปิดสถานะแล้ว") +
-      " (ตัวอย่างหน้าเว็บ)"
-    );
-  });
-});
-
-/* OPEN ANDROID APPS */
-function launchApp(packageName, label) {
-  toast("กำลังเปิด " + label + "...");
-
-  const intent =
-    "intent://#Intent;" +
-    "action=android.intent.action.MAIN;" +
-    "category=android.intent.category.LAUNCHER;" +
-    "package=" + packageName +
-    ";end";
-
-  window.location.href = intent;
-}
-
-$("openSfa").addEventListener("click", () => {
-  launchApp("io.nekohasekai.sfa", "SFA");
-});
-
-$("openGame").addEventListener("click", () => {
-  launchApp("com.dts.freefireth", "Free Fire");
-});
-
-/* CHANGE KEY */
-$("changeKey").addEventListener("click", () => {
-  currentKey = "";
-  $("keyInput").value = "";
-  $("permissionCheck").checked = false;
-
-  document.querySelectorAll("[data-feature]").forEach(button => {
-    button.classList.remove("active");
-    button.querySelector(".function-state").textContent = "ปิด";
+function showPage(name) {
+  Object.values(pages).forEach(page => {
+    page.classList.remove("active");
   });
 
-  showPage("keyPage");
+  pages[name].classList.add("active");
+}
+
+function showMessage(id, text) {
+  const box = document.getElementById(id);
+  box.textContent = text;
+  box.classList.add("show");
+}
+
+/*
+  DEMO ONLY:
+  เปลี่ยน DEMO-FAMILY-123 เป็นคีย์ทดสอบของคุณได้
+  การตรวจสอบใน JavaScript ไม่ปลอดภัยสำหรับระบบคีย์จริง
+  และผู้ใช้สามารถดูคีย์ได้จากซอร์สของหน้าเว็บ
+*/
+const DEMO_KEY = "DEMO-FAMILY-123";
+
+document.getElementById("keyForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const key = document.getElementById("keyInput").value.trim();
+  const message = document.getElementById("keyMessage");
+
+  message.classList.remove("show");
+
+  if (key === DEMO_KEY) {
+    showPage("tiktok");
+  } else {
+    showMessage(
+      "keyMessage",
+      "คีย์ไม่ถูกต้อง กรุณาตรวจสอบคีย์อีกครั้ง"
+    );
+  }
+});
+
+document.getElementById("continueButton").addEventListener("click", function() {
+  /*
+    ไม่สามารถยืนยันการติดตาม TikTok จริงได้
+    ปุ่มนี้ให้ผู้ใช้ยืนยันด้วยตนเองเท่านั้น
+  */
+  showPage("download");
+});
+
+document.getElementById("backButton").addEventListener("click", function() {
+  showPage("login");
+});
+
+document.getElementById("logoutButton").addEventListener("click", function() {
+  document.getElementById("keyInput").value = "";
+  showPage("login");
 });
 </script>
 </body>
