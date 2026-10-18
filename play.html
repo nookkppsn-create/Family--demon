@@ -9,9 +9,10 @@
 :root {
   --bg: #080808;
   --panel: #141414;
-  --red: #ff2638;
+  --red: #e50914;
   --text: #ffffff;
   --muted: #a5a5a5;
+  --border: #292929;
 }
 
 * {
@@ -21,61 +22,44 @@
 body {
   margin: 0;
   min-height: 100vh;
-  padding: 24px 16px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Arial, sans-serif;
-  color: var(--text);
-  background:
-    radial-gradient(ellipse at top, #351016 0%, transparent 55%),
-    var(--bg);
+  padding: 20px;
 }
 
 .container {
   width: 100%;
-  max-width: 390px;
+  max-width: 420px;
 }
 
 .logo {
   text-align: center;
-  margin-bottom: 25px;
-}
-
-.logo-icon {
-  width: 76px;
-  height: 76px;
-  margin: auto auto 14px;
-  border: 2px solid var(--red);
-  border-radius: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--red);
-  font-size: 28px;
+  font-size: 34px;
   font-weight: 900;
-  box-shadow: 0 0 30px #ff263825;
-}
-
-.logo h1 {
-  margin: 0;
-  font-size: 29px;
-  letter-spacing: 3px;
-  font-weight: 900;
-}
-
-.logo p {
-  color: var(--muted);
-  font-size: 12px;
   letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.logo span {
+  color: var(--red);
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 28px;
 }
 
 .card {
-  background: rgba(20, 20, 20, 0.96);
-  border: 1px solid #292929;
-  border-radius: 18px;
-  padding: 23px;
-  box-shadow: 0 15px 45px #0008;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
 }
 
 .page {
@@ -84,132 +68,128 @@ body {
 
 .page.active {
   display: block;
-  animation: appear .25s ease;
-}
-
-@keyframes appear {
-  from { opacity: 0; transform: translateY(7px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 h2 {
-  margin: 0 0 8px;
-  font-size: 20px;
+  margin: 0 0 10px;
+  font-size: 21px;
 }
 
 .description {
-  margin: 0 0 22px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.7;
-}
-
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 13px;
+  margin-bottom: 20px;
 }
 
 input {
   width: 100%;
   padding: 14px;
   background: #090909;
-  border: 1px solid #353535;
-  border-radius: 10px;
   color: white;
+  border: 1px solid #333;
+  border-radius: 9px;
   outline: none;
+  margin-bottom: 12px;
   font-size: 14px;
-  margin-bottom: 14px;
 }
 
 input:focus {
   border-color: var(--red);
 }
 
-button, .button {
+button,
+.action-link {
+  display: flex;
   width: 100%;
   min-height: 46px;
-  padding: 13px 15px;
-  display: flex;
   justify-content: center;
   align-items: center;
-  border: 0;
-  border-radius: 10px;
-  background: var(--red);
-  color: white;
+  padding: 13px;
+  border: none;
+  border-radius: 9px;
   font-size: 14px;
   font-weight: bold;
   text-decoration: none;
   cursor: pointer;
 }
 
-button:active, .button:active {
-  transform: scale(.98);
+.primary {
+  background: var(--red);
+  color: white;
 }
 
-.button.secondary {
-  margin-top: 10px;
+.secondary {
   background: #242424;
-  border: 1px solid #383838;
+  color: white;
+  margin-top: 10px;
 }
 
-.button.tiktok {
-  background: #fff;
-  color: #111;
-  margin-bottom: 12px;
+.tiktok {
+  background: #ffffff;
+  color: #111111;
+}
+
+button:disabled {
+  background: #333333;
+  color: #888888;
+  cursor: not-allowed;
 }
 
 .message {
   display: none;
-  margin-top: 12px;
   padding: 11px;
-  background: #301116;
-  border: 1px solid #6c2029;
-  border-radius: 9px;
-  color: #ff9da5;
-  font-size: 12px;
-  line-height: 1.6;
+  margin-top: 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .message.show {
   display: block;
 }
 
-.vip-card {
-  padding: 20px;
-  border: 1px solid #3b2024;
-  border-radius: 14px;
-  background: linear-gradient(145deg, #211013, #101010 75%);
+.error {
+  background: #351014;
+  color: #ff9da2;
 }
 
-.vip-label {
-  display: inline-block;
-  padding: 5px 9px;
-  border-radius: 6px;
-  background: #45151c;
-  color: #ff8993;
-  font-size: 10px;
+.success {
+  background: #12331f;
+  color: #a3f3bb;
+}
+
+.status {
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.download-item {
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 16px;
+}
+
+.download-name {
   font-weight: bold;
-  letter-spacing: 1px;
+  font-size: 17px;
+  margin-bottom: 7px;
 }
 
-.vip-card h3 {
-  margin: 14px 0 6px;
-  font-size: 22px;
-}
-
-.vip-card p {
-  margin: 0 0 20px;
+.download-info {
   color: var(--muted);
   font-size: 13px;
-  line-height: 1.6;
+  margin-bottom: 15px;
 }
 
 .footer {
-  margin-top: 18px;
+  color: #666;
   text-align: center;
-  color: #626262;
   font-size: 11px;
+  margin-top: 20px;
 }
 </style>
 </head>
@@ -217,23 +197,19 @@ button:active, .button:active {
 <body>
 <div class="container">
 
-  <header class="logo">
-    <div class="logo-icon">FM</div>
-    <h1>FAMILY MOD</h1>
-    <p>MOD DOWNLOAD CENTER</p>
-  </header>
+  <div class="logo">FAMILY <span>MOD</span></div>
+  <div class="subtitle">FAMILY MOD DOWNLOAD CENTER</div>
 
-  <main class="card">
+  <div class="card">
 
-    <!-- PAGE 1: KEY LOGIN -->
-    <section id="loginPage" class="page active">
+    <!-- PAGE 1: KEY -->
+    <section id="keyPage" class="page active">
       <h2>เข้าสู่ระบบ</h2>
-      <p class="description">
-        กรอกคีย์เพื่อเข้าสู่ FAMILY MOD
-      </p>
+      <div class="description">
+        กรอกคีย์ของคุณเพื่อเข้าใช้งาน FAMILY MOD
+      </div>
 
       <form id="keyForm">
-        <label for="keyInput">Access Key</label>
         <input
           id="keyInput"
           type="text"
@@ -241,7 +217,7 @@ button:active, .button:active {
           autocomplete="off"
           required
         >
-        <button type="submit">เข้าสู่ระบบ →</button>
+        <button class="primary" type="submit">ตรวจสอบคีย์</button>
       </form>
 
       <div id="keyMessage" class="message"></div>
@@ -249,80 +225,95 @@ button:active, .button:active {
 
     <!-- PAGE 2: TIKTOK -->
     <section id="tiktokPage" class="page">
-      <h2>ติดตาม TikTok</h2>
-      <p class="description">
-        กดปุ่มด้านล่างเพื่อเปิดโปรไฟล์ FAMILY MOD
-        จากนั้นกดติดตามใน TikTok แล้วกลับมาหน้านี้
-      </p>
+      <h2>ติดตาม TikTok ก่อนดำเนินการ</h2>
+
+      <div class="description">
+        กดปุ่มด้านล่างเพื่อเปิดบัญชี TikTok ของ FAMILY MOD
+        หลังจากกดเปิดลิงก์แล้ว ปุ่มถัดไปจึงจะใช้งานได้
+      </div>
 
       <a
-        class="button tiktok"
+        id="tiktokButton"
+        class="action-link tiktok"
         href="https://www.tiktok.com/@family.mod8"
         target="_blank"
         rel="noopener noreferrer"
-        id="tiktokLink"
-      >
-        ♬ เปิด TikTok @family.mod8
-      </a>
+      >กดติดตาม TikTok</a>
 
-      <button type="button" id="continueButton">
-        ติดตามแล้ว — ไปต่อ
+      <div id="followMessage" class="message success">
+        คุณกดเปิดลิงก์ TikTok แล้ว สามารถกดถัดไปได้
+      </div>
+
+      <button id="continueButton" class="primary" disabled>
+        ถัดไป
       </button>
 
-      <button type="button" class="button secondary" id="backButton">
-        กลับไปหน้าคีย์
+      <button id="backButton" class="secondary">
+        กลับ
       </button>
 
-      <div id="followMessage" class="message">
-        ปุ่มนี้เป็นการยืนยันด้วยตนเอง
-        เว็บไซต์ไม่สามารถตรวจสอบได้ว่าคุณติดตามจริงหรือไม่
+      <div class="status">
+        ระบบตรวจได้เฉพาะการกดเปิดลิงก์ ไม่สามารถยืนยันการติดตามจริงได้
       </div>
     </section>
 
     <!-- PAGE 3: DOWNLOAD -->
     <section id="downloadPage" class="page">
       <h2>ดาวน์โหลด</h2>
-      <p class="description">
-        เลือกดาวน์โหลดไฟล์ที่ต้องการ
-      </p>
 
-      <div class="vip-card">
-        <span class="vip-label">VIP DOWNLOAD</span>
-        <h3>M1NX VIP</h3>
-        <p>
-          ไฟล์ดาวน์โหลด M1NX VIP<br>
-          โปรดตรวจสอบไฟล์ก่อนติดตั้ง
-        </p>
+      <div class="description">
+        ยินดีต้อนรับสู่ FAMILY MOD
+      </div>
+
+      <div class="download-item">
+        <div class="download-name">M1NX VIP</div>
+        <div class="download-info">
+          FAMILY MOD DOWNLOAD
+        </div>
 
         <a
-          class="button"
+          class="action-link primary"
           href="https://www.mediafire.com/file/hiom5p60djhsck9/M1NXsavadaVIP.apk/file?dkey=jngyjbvdzc9&r=1505"
           target="_blank"
           rel="noopener noreferrer"
-        >
-          ดาวน์โหลด M1NX VIP
-        </a>
+        >ดาวน์โหลด</a>
       </div>
 
-      <button type="button" class="button secondary" id="logoutButton">
+      <button id="logoutButton" class="secondary">
         ออกจากระบบ
       </button>
     </section>
 
-  </main>
+  </div>
 
-  <footer class="footer">
-    FAMILY MOD © 2026
-  </footer>
-
+  <div class="footer">FAMILY MOD</div>
 </div>
 
 <script>
+/*
+  ตั้งค่าไฟล์ข้อมูลคีย์:
+  วาง keys.json ไว้ในโฟลเดอร์เดียวกับ play.html
+
+  รูปแบบไฟล์ที่รองรับ:
+  - JSON Array: [{ "key": "...", "expires": ..., "suspended": false }]
+  - Object ที่มี property keys ซึ่งเป็น Array
+
+  expires รองรับ:
+  - Unix timestamp แบบ milliseconds
+  - วันที่ที่ JavaScript อ่านได้ เช่น ISO date string
+  - null หรือ 0 หมายถึงไม่มีวันหมดอายุ
+*/
+
+const KEY_DATA_URL = "./keys.json";
+
 const pages = {
-  login: document.getElementById("loginPage"),
+  key: document.getElementById("keyPage"),
   tiktok: document.getElementById("tiktokPage"),
   download: document.getElementById("downloadPage")
 };
+
+let validKey = null;
+let tiktokOpened = false;
 
 function showPage(name) {
   Object.values(pages).forEach(page => {
@@ -332,53 +323,179 @@ function showPage(name) {
   pages[name].classList.add("active");
 }
 
-function showMessage(id, text) {
-  const box = document.getElementById(id);
-  box.textContent = text;
-  box.classList.add("show");
+function showMessage(id, text, type = "error") {
+  const element = document.getElementById(id);
+  element.textContent = text;
+  element.className = "message show " + type;
 }
 
-/*
-  DEMO ONLY:
-  เปลี่ยน DEMO-FAMILY-123 เป็นคีย์ทดสอบของคุณได้
-  การตรวจสอบใน JavaScript ไม่ปลอดภัยสำหรับระบบคีย์จริง
-  และผู้ใช้สามารถดูคีย์ได้จากซอร์สของหน้าเว็บ
-*/
-const DEMO_KEY = "DEMO-FAMILY-123";
+function clearMessage(id) {
+  const element = document.getElementById(id);
+  element.textContent = "";
+  element.className = "message";
+}
 
-document.getElementById("keyForm").addEventListener("submit", function(event) {
+function normalizeKey(value) {
+  return String(value || "").trim().toUpperCase();
+}
+
+async function loadKeyData() {
+  const response = await fetch(KEY_DATA_URL + "?t=" + Date.now(), {
+    cache: "no-store"
+  });
+
+  if (!response.ok) {
+    throw new Error("ไม่พบไฟล์ข้อมูลคีย์");
+  }
+
+  const data = await response.json();
+
+  if (Array.isArray(data)) {
+    return data;
+  }
+
+  if (data && Array.isArray(data.keys)) {
+    return data.keys;
+  }
+
+  throw new Error("รูปแบบไฟล์ข้อมูลคีย์ไม่ถูกต้อง");
+}
+
+function getKeyStatus(item) {
+  if (item.suspended === true || item.suspended === "true") {
+    return "suspended";
+  }
+
+  if (
+    String(item.status || "").toLowerCase() === "suspended" ||
+    String(item.status || "").toLowerCase() === "disabled"
+  ) {
+    return "suspended";
+  }
+
+  const expiry = item.expires;
+
+  if (expiry !== undefined && expiry !== null && expiry !== "" && expiry !== 0 && expiry !== "0") {
+    let expiryTime;
+
+    if (typeof expiry === "number") {
+      expiryTime = expiry;
+    } else if (/^\d+$/.test(String(expiry))) {
+      expiryTime = Number(expiry);
+    } else {
+      expiryTime = Date.parse(expiry);
+    }
+
+    if (Number.isFinite(expiryTime) && Date.now() >= expiryTime) {
+      return "expired";
+    }
+  }
+
+  return "active";
+}
+
+document.getElementById("keyForm").addEventListener("submit", async function(event) {
   event.preventDefault();
 
-  const key = document.getElementById("keyInput").value.trim();
-  const message = document.getElementById("keyMessage");
+  const input = normalizeKey(document.getElementById("keyInput").value);
+  const button = this.querySelector("button[type='submit']");
 
-  message.classList.remove("show");
+  clearMessage("keyMessage");
 
-  if (key === DEMO_KEY) {
+  if (!input) {
+    showMessage("keyMessage", "กรุณากรอกคีย์");
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "กำลังตรวจสอบ...";
+
+  try {
+    const keys = await loadKeyData();
+
+    const found = keys.find(item =>
+      normalizeKey(item.key || item.code || item.licenseKey) === input
+    );
+
+    if (!found) {
+      showMessage("keyMessage", "คีย์ไม่ถูกต้อง กรุณาตรวจสอบคีย์อีกครั้ง");
+      return;
+    }
+
+    const status = getKeyStatus(found);
+
+    if (status === "suspended") {
+      showMessage("keyMessage", "คีย์นี้ถูกระงับการใช้งาน");
+      return;
+    }
+
+    if (status === "expired") {
+      showMessage("keyMessage", "คีย์นี้หมดอายุแล้ว");
+      return;
+    }
+
+    validKey = input;
+    tiktokOpened = false;
+
+    document.getElementById("continueButton").disabled = true;
+    document.getElementById("followMessage").className = "message success";
+
     showPage("tiktok");
-  } else {
+
+  } catch (error) {
+    console.error(error);
+
     showMessage(
       "keyMessage",
-      "คีย์ไม่ถูกต้อง กรุณาตรวจสอบคีย์อีกครั้ง"
+      "โหลดข้อมูลคีย์ไม่สำเร็จ กรุณาตรวจสอบว่ามีไฟล์ keys.json อยู่ในโฟลเดอร์เดียวกับ play.html"
     );
+
+  } finally {
+    button.disabled = false;
+    button.textContent = "ตรวจสอบคีย์";
   }
 });
 
+/* ปลดล็อกปุ่มถัดไปหลังผู้ใช้กดเปิดลิงก์ TikTok */
+document.getElementById("tiktokButton").addEventListener("click", function() {
+  if (!validKey) {
+    return;
+  }
+
+  tiktokOpened = true;
+
+  document.getElementById("continueButton").disabled = false;
+
+  showMessage(
+    "followMessage",
+    "คุณกดเปิดลิงก์ TikTok แล้ว สามารถกดถัดไปได้",
+    "success"
+  );
+});
+
 document.getElementById("continueButton").addEventListener("click", function() {
-  /*
-    ไม่สามารถยืนยันการติดตาม TikTok จริงได้
-    ปุ่มนี้ให้ผู้ใช้ยืนยันด้วยตนเองเท่านั้น
-  */
+  if (!validKey || !tiktokOpened) {
+    return;
+  }
+
   showPage("download");
 });
 
 document.getElementById("backButton").addEventListener("click", function() {
-  showPage("login");
+  validKey = null;
+  tiktokOpened = false;
+  document.getElementById("keyInput").value = "";
+  clearMessage("keyMessage");
+  showPage("key");
 });
 
 document.getElementById("logoutButton").addEventListener("click", function() {
+  validKey = null;
+  tiktokOpened = false;
   document.getElementById("keyInput").value = "";
-  showPage("login");
+  document.getElementById("continueButton").disabled = true;
+  clearMessage("keyMessage");
+  showPage("key");
 });
 </script>
 </body>
